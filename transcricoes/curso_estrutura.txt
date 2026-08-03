@@ -1,0 +1,76 @@
+ESTRUTURA DO CURSO (jogo.html — 11 módulos, 60 lições)
+Cada lição tem: explicação do mecanismo, exemplos .NET, labs práticos (kind/kubectl),
+troubleshooting, quizzes. Conteúdo agnóstico de provider + AKS/GKE/EKS no Módulo 9.
+
+M0 Boas-vindas & Ambiente (3 lições)
+  m0l1 Como usar este curso | m0l2 Preparando o ambiente (Docker Desktop/WSL2, kubectl, kind 3 nodes,
+  minikube alternativa, version skew, troubleshooting, kubeconfig/contextos) | m0l3 Vídeos e fontes
+
+M1 Fundamentos (6 lições)
+  m1l1 Containers (imagem/container/registry, Dockerfile multi-stage, .dockerignore, USER non-root)
+  m1l2 Containers vs VMs (+microVMs/Firecracker) | m1l3 Por que K8s (CNCF, quando NÃO usar)
+  m1l4 Arquitetura (Control Plane, nodes, fluxo kubectl→apiserver→etcd→scheduler→kubelet, portas 6443/2379/10250,
+  quórum etcd/Raft, static pods) | m1l5 Modelo declarativo (apply vs create vs patch, server-side apply,
+  managedFields, 3-way merge, drift) | m1l6 Containers por dentro (namespaces, cgroups v2, overlayfs, OOM, pause)
+
+M2 Workloads (8 lições)
+  m2l1 Pods (pause, restartPolicy, fases, generateName, sidecar clássico) | m2l2 Deployments/ReplicaSet
+  (mecânica, revisionHistory, ownerReferences, selector imutável, FINALIZERS) | m2l3 Rollouts
+  (rolling update, maxSurge/maxUnavailable, conditions, ProgressDeadlineExceeded, pause/resume,
+  blue/green, canary) | m2l4 Services (tipos, kube-proxy iptables/IPVS, EndpointSlice, sessionAffinity,
+  externalTrafficPolicy, port-forward) | m2l5 Namespaces/Labels/Selectors (annotations, field selectors,
+  recommended labels) | m2l6 StatefulSet/DaemonSet/Jobs/CronJob (TTL, podFailurePolicy, concurrencyPolicy,
+  ReplicationController legado) | m2l7 Init containers/hooks (sidecar containers restartable 1.28+,
+  preStop, SIGTERM/SIGKILL, grace period, .NET graceful shutdown) | m2l8 CRI/containerd/crictl
+  (CRI, runc, imagePullPolicy, RUNTIMECLASS/Pod Overhead)
+
+M3 Configuração, Secrets & Storage (5 lições)
+  m3l1 ConfigMaps (env vs volume, immutable, checksum/rollout restart) | m3l2 Secrets (tipos, base64≠cripto,
+  1MiB, imagePullSecrets, env vs volume) | m3l3 Volumes/PV/PVC (emptyDir, hostPath, access modes, reclaim,
+  VOLUMES EFÊMEROS GENÉRICOS volumeClaimTemplate) | m3l4 StorageClass (WaitForFirstConsumer, expansion,
+  snapshots, CSI) | m3l5 Downward API/LimitRange/ResourceQuota (projected volumes, escopos de quota)
+
+M4 Redes, Ingress & Gateway API (7 lições)
+  m4l1 DNS (nomes, FQDN, dual-stack) | m4l2 Services a fundo (EndpointSlices, topology hints, headless,
+  internalTrafficPolicy, trafficDistribution) | m4l3 Ingress (pathType, annotations NGINX, cert-manager TLS)
+  m4l4 Gateway API (GatewayClass/Gateway/HTTPRoute, filtros, ReferenceGrant, weights) | m4l5 NetworkPolicies
+  (default-deny, egress, DNS, ipBlock) | m4l6 Service Mesh (Istio/Linkerd, mTLS, sidecar injection)
+  m4l7 DNS a fundo (search domains, ndots, dnsPolicy/dnsConfig)
+
+M5 Resiliência, Recursos & Scheduling (6 lições)
+  m5l1 Probes (liveness/readiness/startup, thresholds, gotchas, .NET health checks)
+  m5l2 Requests/limits/QoS (cgroups, throttling, OOM, ephemeral-storage, pidsLimit, .NET GC)
+  m5l3 Autoscaling (HPA algoritmo, stabilization, VPA, KEDA/ScaledJob, Cluster Autoscaler/Karpenter)
+  m5l4 Scheduling (nodeSelector/affinity, podAntiAffinity, taints/tolerations, topologySpread, PDB,
+  schedulingGates) | m5l5 Eviction/preemption/PriorityClass (sinais, graceful shutdown de node)
+  m5l6 Chaos (fault injection, Chaos Mesh/Litmus, drain/node death/OOM labs)
+
+M6 Empacotamento, CI/CD & Ferramentas (5 lições)
+  m6l1 Helm (chart, values precedence, template functions, hooks, checksum, OCI, testes)
+  m6l2 Kustomize (overlays, strategic merge, ConfigMapGenerator, transformers)
+  m6l3 CI/CD GitHub Actions .NET (tag por SHA, buildx cache, Trivy, SBOM, environments)
+  m6l4 GitOps ArgoCD (sync/prune/selfHeal, sync waves, app-of-apps, ApplicationSet, Flux vs ArgoCD)
+  m6l5 Ferramentas (k9s, Skaffold/Tilt, Telepresence, port-forward, kit Helm)
+
+M7 Observabilidade & Debugging (4 lições)
+  m7l1 Logs (estruturados JSON .NET, stdout, --previous, eventos) | m7l2 Métricas (Prometheus, tipos,
+  PromQL, recording rules, Alertmanager, kube-prometheus-stack) | m7l3 Tracing (OTel, spans, traceparent,
+  Collector, sampling) | m7l4 Debugging (CrashLoopBackOff, ImagePullBackOff, OOM, CreateContainerConfigError,
+  Terminating/finalizer, ephemeral containers, dotnet-trace/dump)
+
+M8 Segurança & Políticas (5 lições)
+  m8l1 RBAC (Role/ClusterRole, verbs, ServiceAccount, can-i) | m8l2 Secrets cloud (CSI driver, Key Vault/
+  Secret Manager/Secrets Manager, ESO, SOPS, Sealed Secrets) | m8l3 Hardening (securityContext, seccomp,
+  AppArmor, user namespaces hostUsers, Trivy, cosign, SBOM) | m8l4 Admission (webhooks, PSA warn/audit/
+  enforce, Kyverno) | m8l5 OIDC/identidade (JWT, JWKS, ServiceAccount tokens, CSR, workload identity)
+
+M9 Kubernetes Gerenciado (5 lições)
+  m9l1 Panorama AKS×GKE×EKS (preços, escolha) | m9l2 AKS (node pools, Azure CNI, workload identity,
+  upgrades) | m9l3 GKE (Autopilot vs Standard, Dataplane V2, GKE Gateway) | m9l4 EKS (eksctl, IRSA vs
+  Pod Identity, Karpenter, ALB Controller) | m9l5 Custos (right-sizing, spot, showback)
+
+M10 Avançado (6 lições)
+  m10l1 CRDs/Operators (schema, status, aggregation layer) | m10l2 Upgrades/drains (cordon/drain/uncordon,
+  surge, maintenance windows) | m10l3 Multi-cluster (hub-spoke, DR, ApplicationSet, GitOps frota)
+  m10l4 Projeto final (.NET pedidos + worker + Postgres, 9 fases) | m10l5 Operators na prática (Kubebuilder,
+  reconciler Go, KubeOps C#) | m10l6 CKAD (formato, estratégia, dry-run, simulados)

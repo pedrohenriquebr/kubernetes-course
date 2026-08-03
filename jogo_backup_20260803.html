@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K8s para Devs .NET — Curso Completo de Kubernetes (Iniciante → Avançado)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-600-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-700-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-800-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-600-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+<style>
+:root{
+  --bg:#0b1220; --bg2:#0d1730; --panel:#101f3a; --panel2:#0f1b33; --line:#1e3a5f;
+  --text:#e2e8f0; --muted:#94a3b8; --cyan:#22d3ee; --blue:#38bdf8; --violet:#a78bfa;
+  --green:#34d399; --amber:#fbbf24; --red:#f87171;
+  --mono:'JetBrains Mono',monospace; --sans:'Inter',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15.5px;line-height:1.7}
+::selection{background:rgba(34,211,238,.35)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#24466e;border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:#2f5a8c}
+
+.topbar{position:fixed;inset:0 0 auto 0;height:62px;z-index:60;display:flex;align-items:center;gap:14px;
+  padding:0 20px;background:rgba(11,18,32,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.logo svg{width:34px;height:34px}
+.logo b{font-weight:800;font-size:17px;letter-spacing:.2px}
+.logo b span{color:var(--cyan)}
+.logo small{display:block;font-size:10.5px;color:var(--muted);font-weight:600;letter-spacing:1.4px;text-transform:uppercase;margin-top:-3px}
+.top-search{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);
+  border-radius:10px;padding:7px 12px;width:min(340px,32vw);color:var(--muted);cursor:pointer;transition:.2s}
+.top-search:hover{border-color:var(--cyan)}
+.top-search kbd{font-family:var(--mono);font-size:10.5px;background:#16294a;border:1px solid var(--line);border-radius:5px;padding:2px 6px;color:var(--muted)}
+.progress-wrap{display:flex;align-items:center;gap:10px;min-width:150px}
+.progress-bar{flex:1;height:7px;background:#152a4d;border-radius:99px;overflow:hidden;min-width:90px}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:99px;transition:width .5s ease}
+.progress-txt{font-family:var(--mono);font-size:11.5px;color:var(--cyan);white-space:nowrap}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:9px;color:var(--text);width:38px;height:38px;cursor:pointer;font-size:17px}
+
+.layout{display:flex;padding-top:62px;min-height:100vh}
+#sidebar{width:330px;flex:0 0 330px;position:fixed;top:62px;bottom:0;left:0;overflow-y:auto;
+  background:var(--bg2);border-right:1px solid var(--line);padding:18px 14px 60px}
+#main{flex:1;margin-left:330px;padding:34px clamp(18px,4vw,56px) 90px}
+.content{max-width:940px;margin:0 auto;animation:fadeUp .45s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.side-home{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:linear-gradient(135deg,#123055,#0f2444);
+  border:1px solid var(--line);color:var(--text);border-radius:12px;padding:11px 14px;font-weight:700;cursor:pointer;margin-bottom:16px;font-size:14px}
+.side-home:hover{border-color:var(--cyan)}
+.mod{margin-bottom:8px}
+.mod-head{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);
+  color:var(--text);border-radius:12px;padding:10px 12px;cursor:pointer;transition:.2s}
+.mod-head:hover{border-color:#2f5a8c}
+.mod-num{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--cyan);background:#0c2038;border:1px solid #1d4ed8aa;
+  border-radius:7px;padding:3px 7px;white-space:nowrap}
+.mod-title{flex:1;font-size:13.2px;font-weight:700;line-height:1.35}
+.mod-count{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.mod-chev{transition:transform .25s;color:var(--muted);font-size:11px}
+.mod.open .mod-chev{transform:rotate(90deg)}
+.mod-body{display:none;padding:6px 4px 6px 12px;border-left:2px solid var(--line);margin:6px 0 4px 16px}
+.mod.open .mod-body{display:block}
+.les-link{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:9px;color:var(--muted);cursor:pointer;
+  font-size:13px;transition:.15s;text-decoration:none}
+.les-link:hover{background:#132848;color:var(--text)}
+.les-link.active{background:#0e3350;color:var(--cyan);font-weight:600}
+.les-check{width:17px;height:17px;flex:0 0 17px;border-radius:50%;border:1.6px solid #33507a;display:grid;place-items:center;
+  font-size:10px;color:transparent;transition:.2s}
+.les-link.done .les-check{background:var(--green);border-color:var(--green);color:#06281c}
+.les-link.done{color:#7d95b5}
+
+.hero{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);margin-bottom:26px}
+.hero img{width:100%;height:340px;object-fit:cover;display:block;filter:saturate(1.05)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,18,32,.15) 20%,rgba(11,18,32,.94) 88%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:30px}
+.hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--cyan);font-weight:600;text-transform:uppercase}
+.hero h1{font-size:clamp(26px,4vw,42px);font-weight:800;line-height:1.15;margin:8px 0 10px}
+.hero h1 span{background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:#c3d2e8;max-width:660px;font-size:15px}
+.hero-actions{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:11px;padding:11px 20px;font-weight:700;font-size:14px;
+  cursor:pointer;border:1px solid transparent;transition:.2s;text-decoration:none;font-family:var(--sans)}
+.btn-primary{background:linear-gradient(90deg,#0ea5e9,#22d3ee);color:#04121f}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,211,238,.3)}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.stat b{font-size:24px;font-weight:800;color:var(--cyan);font-family:var(--mono)}
+.stat span{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.sec-title{font-size:21px;font-weight:800;margin:34px 0 14px;display:flex;align-items:center;gap:10px}
+.sec-title::before{content:'';width:5px;height:22px;border-radius:4px;background:linear-gradient(180deg,var(--cyan),var(--violet))}
+.trail{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+.trail-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.trail-card:hover{transform:translateY(-3px);border-color:var(--cyan);box-shadow:0 10px 30px rgba(2,8,20,.5)}
+.trail-card .lvl{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;border-radius:6px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.lvl-ini{background:#052e22;color:var(--green);border:1px solid #14532d}
+.lvl-int{background:#2e2405;color:var(--amber);border:1px solid #713f12}
+.lvl-adv{background:#2a0a2e;color:#e879f9;border:1px solid #701a75}
+.trail-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.trail-card p{font-size:12.8px;color:var(--muted);line-height:1.55}
+.trail-card .tc-num{position:absolute;right:12px;top:8px;font-family:var(--mono);font-size:34px;font-weight:600;color:#173257}
+.video-card{display:flex;gap:14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px;transition:.2s;text-decoration:none;color:var(--text)}
+.video-card:hover{border-color:var(--red)}
+.video-ico{width:44px;height:44px;flex:0 0 44px;border-radius:12px;background:#3d0d13;border:1px solid #7f1d1d;display:grid;place-items:center;font-size:17px;color:#fca5a5}
+.video-card b{font-size:14px;display:block;line-height:1.4}
+.video-card small{color:var(--muted);font-size:12px}
+.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.src-card{background:#0e1c36;border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+.src-card b{font-size:13.5px;color:var(--cyan);display:block;margin-bottom:4px}
+.src-card small{color:var(--muted);font-size:12.5px;line-height:1.55;display:block}
+
+.crumb{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.crumb span{color:var(--cyan)}
+.lesson h1{font-size:clamp(23px,3vw,32px);font-weight:800;line-height:1.25;margin-bottom:6px}
+.lesson .meta{display:flex;gap:14px;align-items:center;color:var(--muted);font-size:12.5px;margin-bottom:22px;font-family:var(--mono)}
+.lesson h2{font-size:19px;font-weight:800;margin:30px 0 10px;color:#f1f5f9}
+.lesson h3{font-size:15.5px;font-weight:700;margin:22px 0 8px;color:#dbeafe}
+.lesson p{margin:10px 0;color:#cbd5e1}
+.lesson ul,.lesson ol{margin:10px 0 10px 22px;color:#cbd5e1}
+.lesson li{margin:5px 0}
+.lesson li::marker{color:var(--cyan)}
+.lesson strong{color:#f8fafc}
+.lesson em{color:var(--cyan);font-style:normal;font-weight:600}
+.lesson a{color:var(--blue)}
+.lesson img.fig{width:100%;border-radius:16px;border:1px solid var(--line);margin:16px 0 6px;display:block}
+.figcap{font-size:12px;color:var(--muted);text-align:center;margin-bottom:16px;font-family:var(--mono)}
+.callout{border-radius:13px;padding:14px 16px;margin:16px 0;font-size:14px;border:1px solid}
+.callout.note{background:#0a2b22;border-color:#14532d;color:#bbf7d0}
+.callout.note b{color:var(--green)}
+.callout.cloud{background:#0c1f3d;border-color:#1d4ed8;color:#bfdbfe}
+.callout.cloud b{color:var(--blue)}
+.callout.warn{background:#331507;border-color:#92400e;color:#fde68a}
+.callout.warn b{color:var(--amber)}
+.callout.doc{background:#1e1336;border-color:#6d28d9;color:#ddd6fe}
+.callout.doc b{color:var(--violet)}
+.callout.lab{background:#05262f;border-color:var(--cyan);color:#cffafe}
+.callout.lab b{color:var(--cyan)}
+.callout.tip{background:#2e2405;border-color:var(--amber);color:#fde68a}
+.callout.tip b{color:var(--amber)}
+.callout.deep{background:#140d2e;border-color:#8b5cf6;color:#e9d5ff}
+.callout.deep b{color:#c4b5fd}
+.callout.lab ol,.callout.lab ul{margin:8px 0 4px 20px;color:#cffafe}
+.callout.lab li{margin:5px 0}
+.callout.lab code,.callout.tip code,.callout.deep code{background:rgba(255,255,255,.07);border-color:transparent}
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin:16px 0}
+.terms div{background:#0e1c36;border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:11px;padding:10px 14px}
+.terms dt{font-family:var(--mono);font-size:12.5px;color:var(--cyan);font-weight:600;margin-bottom:2px}
+.terms dd{font-size:12.8px;color:#cbd5e1;margin:0}
+.callout p{margin:4px 0;color:inherit}
+table.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.3px;background:var(--panel);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.tbl th{background:#12294c;color:var(--cyan);text-align:left;padding:10px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+.tbl td{padding:10px 12px;border-top:1px solid var(--line);color:#cbd5e1;vertical-align:top}
+.tbl tr:hover td{background:#0f2444}
+.tbl code{font-family:var(--mono);font-size:12px;color:var(--amber)}
+
+.codeblock{margin:16px 0;border-radius:13px;overflow:hidden;border:1px solid var(--line);background:#0d1526}
+.cb-head{display:flex;justify-content:space-between;align-items:center;background:#122036;padding:7px 14px;border-bottom:1px solid var(--line)}
+.cb-head span{font-family:var(--mono);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--cyan);font-weight:600}
+.copy-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:7px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:var(--mono);transition:.15s}
+.copy-btn:hover{color:var(--cyan);border-color:var(--cyan)}
+.codeblock pre{margin:0!important;background:transparent!important;padding:14px 16px!important;font-size:12.8px!important;max-height:480px;overflow:auto}
+.codeblock code{font-family:var(--mono)!important;font-size:12.8px!important;line-height:1.65!important;text-shadow:none!important}
+p code,li code,td code{font-family:var(--mono);font-size:.88em;background:#132848;border:1px solid #1e3a5f;color:#7dd3fc;border-radius:6px;padding:1.5px 6px}
+
+.quiz{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--violet);border-radius:13px;padding:16px 18px;margin:20px 0}
+.quiz-q{font-weight:700;color:#f1f5f9;margin-bottom:12px;font-size:14.5px}
+.quiz-tag{font-family:var(--mono);font-size:10px;letter-spacing:1.6px;color:var(--violet);text-transform:uppercase;font-weight:600;display:block;margin-bottom:6px}
+.quiz-opt{display:block;width:100%;text-align:left;background:#0e1e3a;border:1px solid var(--line);color:#cbd5e1;border-radius:10px;
+  padding:10px 14px;margin:7px 0;cursor:pointer;font-size:13.5px;transition:.15s;font-family:var(--sans)}
+.quiz-opt:hover:not(:disabled){border-color:var(--violet);transform:translateX(3px)}
+.quiz-opt.correct{background:#052e22;border-color:var(--green);color:#a7f3d0}
+.quiz-opt.wrong{background:#3d0d13;border-color:var(--red);color:#fecaca}
+.quiz-opt:disabled{cursor:default;opacity:.92}
+.quiz-fb{font-size:13px;margin-top:8px;display:none;font-weight:600}
+.quiz.done .quiz-fb{display:block}
+.quiz-fb.ok{color:var(--green)} .quiz-fb.no{color:var(--red)}
+
+.ptabs{display:flex;gap:8px;margin:16px 0 0;flex-wrap:wrap}
+.ptab{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:10px 10px 0 0;padding:8px 18px;cursor:pointer;font-weight:700;font-size:13px;transition:.15s}
+.ptab.active{background:#0e2a4d;color:var(--cyan);border-color:var(--cyan);border-bottom-color:#0e2a4d}
+.ptab-panel{display:none;background:#0e1c36;border:1px solid var(--line);border-radius:0 12px 12px 12px;padding:16px;margin-top:-1px}
+.ptab-panel.active{display:block;animation:fadeUp .3s ease}
+.ptab-panel h4{color:var(--cyan);font-size:14px;margin-bottom:6px}
+.ptab-panel p{font-size:13.8px}
+
+.les-nav{display:flex;justify-content:space-between;gap:14px;margin-top:44px;flex-wrap:wrap}
+.nav-card{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 18px;cursor:pointer;transition:.2s;text-decoration:none;color:var(--text)}
+.nav-card:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.nav-card small{color:var(--muted);font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;display:block;margin-bottom:4px}
+.nav-card b{font-size:13.5px}
+.nav-card.next{text-align:right}
+.done-btn{display:inline-flex;align-items:center;gap:9px;margin-top:26px;border-radius:11px;padding:11px 22px;font-weight:700;font-size:14px;cursor:pointer;border:1px solid var(--green);background:#052e22;color:var(--green);transition:.2s}
+.done-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(52,211,153,.25)}
+.done-btn.is-done{background:var(--green);color:#052e22}
+
+#searchModal{position:fixed;inset:0;background:rgba(4,9,18,.78);backdrop-filter:blur(6px);z-index:100;display:none;align-items:flex-start;justify-content:center;padding:9vh 18px 18px}
+#searchModal.open{display:flex}
+.search-box{width:min(680px,100%);background:var(--bg2);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:fadeUp .25s ease}
+.search-box input{width:100%;background:transparent;border:none;outline:none;color:var(--text);font-size:16px;padding:18px 20px;font-family:var(--sans);border-bottom:1px solid var(--line)}
+.search-results{max-height:55vh;overflow:auto;padding:8px}
+.sr-item{display:block;padding:12px 16px;border-radius:11px;cursor:pointer;text-decoration:none;color:var(--text)}
+.sr-item:hover{background:#12294c}
+.sr-item b{font-size:14px;display:block}
+.sr-item small{color:var(--muted);font-family:var(--mono);font-size:11px}
+.sr-empty{padding:26px;text-align:center;color:var(--muted)}
+
+@media(max-width:1020px){
+  #sidebar{transform:translateX(-100%);transition:transform .3s ease;z-index:70;width:300px}
+  #sidebar.open{transform:none;box-shadow:30px 0 80px rgba(0,0,0,.5)}
+  #main{margin-left:0}
+  .burger{display:block}
+  .top-search{width:auto;flex:1}
+  .progress-wrap{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="menu">☰</button>
+  <div class="logo" id="logoHome">
+    <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#22d3ee" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#38bdf8"/><g stroke="#38bdf8" stroke-width="2"><path d="M16 3v6M16 23v6M3 16h6M23 16h6M6.8 6.8l4.3 4.3M20.9 20.9l4.3 4.3M25.2 6.8l-4.3 4.3M11.1 20.9l-4.3 4.3"/></g></svg>
+    <div><b>K8s<span>·Dev</span>Journey</b><small>Kubernetes para Devs .NET · v2 aprofundada</small></div>
+  </div>
+  <div class="top-search" id="openSearch">🔎 <span style="flex:1;font-size:13px">Buscar lição…</span><kbd>Ctrl K</kbd></div>
+  <div class="progress-wrap"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><span class="progress-txt" id="progressTxt">0%</span></div>
+</header>
+
+<div class="layout">
+  <aside id="sidebar"></aside>
+  <main id="main"></main>
+</div>
+
+<div id="searchModal">
+  <div class="search-box">
+    <input id="searchInput" placeholder="Buscar conceito, objeto, comando… (ex: statefulset, gateway api, eviction)" autocomplete="off">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- Prism: bundle COM clike/markup/css/javascript; componentes na sequência correta -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-docker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-powershell.min.js"></script>
+
+<script>
+/* ============================================================ HELPERS */
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const C = (lang, code) => '<div class="codeblock"><div class="cb-head"><span>'+lang+'</span><button class="copy-btn" type="button">copiar</button></div><pre class="language-'+lang+'"><code class="language-'+lang+'">'+esc(code)+'</code></pre></div>';
+const FIG = (src, cap) => '<img class="fig" src="'+src+'" alt="'+esc(cap)+'"><div class="figcap">'+cap+'</div>';
+const NOTE = h => '<div class="callout note"><b>💙 Nota .NET →</b> '+h+'</div>';
+const CLOUD = h => '<div class="callout cloud"><b>☁️ Nos providers →</b> '+h+'</div>';
+const WARN = h => '<div class="callout warn"><b>⚠️ Atenção →</b> '+h+'</div>';
+const DOC = h => '<div class="callout doc"><b>📘 Doc oficial →</b> '+h+'</div>';
+const QUIZ = (q, opts, correct, explain) => '<div class="quiz" data-correct="'+correct+'" data-explain="'+esc(explain)+'"><span class="quiz-tag">⚡ Quick check</span><p class="quiz-q">'+q+'</p>'+opts.map(function(o,i){return '<button class="quiz-opt" data-i="'+i+'" type="button">'+o+'</button>';}).join('')+'<p class="quiz-fb"></p></div>';
+const LAB = (t, html) => '<div class="callout lab"><b>🧪 Mão na massa — '+t+' →</b> '+html+'</div>';
+const TIP = h => '<div class="callout tip"><b>💡 Dica →</b> '+h+'</div>';
+const DEEP = h => '<div class="callout deep"><b>🔬 Aprofundamento →</b> '+h+'</div>';
+const TERMS = arr => '<div class="terms">'+arr.map(function(t){return '<div><dt>'+t[0]+'</dt><dd>'+t[1]+'</dd></div>';}).join('')+'</div>';
+
+const IMG = {
+  hero:'https://image.qwenlm.ai/public_source/3785727c-606f-4899-afd6-c314f0f6af5b/1aa9d97be-7a21-4db8-b7da-eaf64d58ce5c.png',
+  deploy:'https://image.qwenlm.ai/public_source/3785727c-606f-4899-afd6-c314f0f6af5b/15d34ddba-1079-417b-8531-7f7a2d125509.png',
+  ingress:'https://image.qwenlm.ai/public_source/3785727c-606f-4899-afd6-c314f0f6af5b/1ca88d9ef-f922-4179-97f0-b1b184e9c37d.png'
+};
+
+const ARCH_SVG = '<svg viewBox="0 0 940 470" style="width:100%;border-radius:16px;border:1px solid var(--line);background:#0d1730;margin:16px 0 6px" font-family="Inter,sans-serif">'+
+'<rect x="24" y="26" width="392" height="418" rx="18" fill="#101f3a" stroke="#38bdf8" stroke-width="2"/>'+
+'<text x="220" y="62" fill="#22d3ee" font-size="20" font-weight="800" text-anchor="middle">Control Plane</text>'+
+'<rect x="52" y="84" width="336" height="70" rx="12" fill="#0c2038" stroke="#22d3ee" stroke-width="1.6"/><text x="220" y="112" fill="#e2e8f0" font-size="16" font-weight="700" text-anchor="middle">kube-apiserver</text><text x="220" y="134" fill="#94a3b8" font-size="11.5" text-anchor="middle">a "porta de entrada" de toda operação (REST)</text>'+
+'<rect x="52" y="168" width="336" height="70" rx="12" fill="#0c2038" stroke="#22d3ee" stroke-width="1.6"/><text x="220" y="196" fill="#e2e8f0" font-size="16" font-weight="700" text-anchor="middle">etcd</text><text x="220" y="218" fill="#94a3b8" font-size="11.5" text-anchor="middle">banco chave-valor distribuído (estado do cluster)</text>'+
+'<rect x="52" y="252" width="336" height="70" rx="12" fill="#0c2038" stroke="#22d3ee" stroke-width="1.6"/><text x="220" y="280" fill="#e2e8f0" font-size="16" font-weight="700" text-anchor="middle">kube-scheduler</text><text x="220" y="302" fill="#94a3b8" font-size="11.5" text-anchor="middle">decide em qual node cada Pod vai rodar</text>'+
+'<rect x="52" y="336" width="336" height="70" rx="12" fill="#0c2038" stroke="#22d3ee" stroke-width="1.6"/><text x="220" y="364" fill="#e2e8f0" font-size="16" font-weight="700" text-anchor="middle">kube-controller-manager</text><text x="220" y="386" fill="#94a3b8" font-size="11.5" text-anchor="middle">loops de reconciliação (estado atual → desejado)</text>'+
+'<rect x="470" y="26" width="446" height="200" rx="18" fill="#101f3a" stroke="#a78bfa" stroke-width="2"/>'+
+'<text x="693" y="58" fill="#a78bfa" font-size="18" font-weight="800" text-anchor="middle">Worker Node 1</text>'+
+'<rect x="494" y="74" width="150" height="52" rx="10" fill="#0c2038" stroke="#22d3ee"/><text x="569" y="105" fill="#e2e8f0" font-size="14" font-weight="700" text-anchor="middle">kubelet</text>'+
+'<rect x="494" y="134" width="150" height="52" rx="10" fill="#0c2038" stroke="#22d3ee"/><text x="569" y="165" fill="#e2e8f0" font-size="14" font-weight="700" text-anchor="middle">kube-proxy</text>'+
+'<rect x="660" y="74" width="118" height="52" rx="10" fill="#0e3350" stroke="#34d399"/><text x="719" y="105" fill="#a7f3d0" font-size="13.5" font-weight="700" text-anchor="middle">Pod</text>'+
+'<rect x="790" y="74" width="104" height="52" rx="10" fill="#0e3350" stroke="#34d399"/><text x="842" y="105" fill="#a7f3d0" font-size="13.5" font-weight="700" text-anchor="middle">Pod</text>'+
+'<rect x="660" y="134" width="234" height="52" rx="10" fill="#0c2038" stroke="#22d3ee"/><text x="777" y="165" fill="#e2e8f0" font-size="13.5" font-weight="700" text-anchor="middle">container runtime</text>'+
+'<rect x="470" y="244" width="446" height="200" rx="18" fill="#101f3a" stroke="#a78bfa" stroke-width="2"/>'+
+'<text x="693" y="276" fill="#a78bfa" font-size="18" font-weight="800" text-anchor="middle">Worker Node 2</text>'+
+'<rect x="494" y="292" width="150" height="52" rx="10" fill="#0c2038" stroke="#22d3ee"/><text x="569" y="323" fill="#e2e8f0" font-size="14" font-weight="700" text-anchor="middle">kubelet</text>'+
+'<rect x="494" y="352" width="150" height="52" rx="10" fill="#0c2038" stroke="#22d3ee"/><text x="569" y="383" fill="#e2e8f0" font-size="14" font-weight="700" text-anchor="middle">kube-proxy</text>'+
+'<rect x="660" y="292" width="118" height="52" rx="10" fill="#0e3350" stroke="#34d399"/><text x="719" y="323" fill="#a7f3d0" font-size="13.5" font-weight="700" text-anchor="middle">Pod</text>'+
+'<rect x="790" y="292" width="104" height="52" rx="10" fill="#0e3350" stroke="#34d399"/><text x="842" y="323" fill="#a7f3d0" font-size="13.5" font-weight="700" text-anchor="middle">Pod</text>'+
+'<rect x="660" y="352" width="234" height="52" rx="10" fill="#0c2038" stroke="#22d3ee"/><text x="777" y="383" fill="#e2e8f0" font-size="13.5" font-weight="700" text-anchor="middle">container runtime</text>'+
+'<g stroke="#22d3ee" stroke-width="2.4" fill="none"><path d="M416 140 C 450 140 440 126 470 126" marker-end="url(#ar)"/><path d="M416 240 C 450 240 440 344 470 344" marker-end="url(#ar)"/></g>'+
+'<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#22d3ee"/></marker></defs>'+
+'</svg>';
+
+/* ============================================================ CURSO */
+const COURSE = [
+/* ================= MÓDULO 0 ================= */
+{id:'m0',num:'00',title:'Boas-vindas & Ambiente',level:'ini',lessons:[
+{id:'m0l1',title:'Como usar este curso',mins:6,body:
+'<p>Bem-vindo(a)! Este curso leva você <strong>do zero ao nível avançado</strong> em Kubernetes com o olhar de quem <strong>desenvolve software</strong>. Os conceitos são ensinados de forma <em>agnóstica de provider</em>: tudo que você aprender funciona no AKS (Azure), GKE (Google) e EKS (AWS); as diferenças entre eles são tratadas no Módulo 9.</p>'+
+'<h2>A jornada</h2>'+
+'<ul><li><strong>Módulos 0–2 (Iniciante):</strong> containers, arquitetura, modelo declarativo e TODOS os tipos de workload (Pod, Deployment, StatefulSet, DaemonSet, Jobs).</li>'+
+'<li><strong>Módulos 3–5 (Intermediário):</strong> configuração, storage, rede profunda (EndpointSlices, Gateway API), resiliência, autoscaling, eviction e scheduling.</li>'+
+'<li><strong>Módulos 6–8 (Intermediário+):</strong> Helm, Kustomize, CI/CD, GitOps, observabilidade, RBAC, admission control e supply chain.</li>'+
+'<li><strong>Módulos 9–10 (Avançado):</strong> AKS/GKE/EKS a fundo, upgrades e manutenção, CRDs/Operators e projeto final.</li></ul>'+
+'<h2>Como estudar</h2>'+
+'<ol><li><strong>Leia na ordem</strong> — cada lição assume a anterior.</li>'+
+'<li><strong>Execute tudo.</strong> Kubernetes só faz sentido com um cluster na frente. Use <code>kind</code> (Módulo 0, lição 2).</li>'+
+'<li>Responda os <em>quick checks</em> ao final das lições.</li>'+
+'<li>Use a busca (<kbd style="font-family:var(--mono)">Ctrl K</kbd>) para revisar conceitos.</li></ol>'+
+NOTE('Você verá caixas como esta ao longo do curso: pontes diretas entre o conceito agnóstico e o ecossistema .NET (ASP.NET Core, Workers, Azure.Identity, OpenTelemetry).')+
+'<div class="callout cloud"><b>☁️ Nos providers →</b> caixas como esta mostram como o conceito se materializa em AKS, GKE e EKS.</div>'+
+'<div class="callout doc"><b>📘 Doc oficial →</b> caixas como esta apontam para a seção correspondente da documentação oficial do Kubernetes, usada como fonte primária de validação deste curso.</div>'},
+{id:'m0l2',title:'Preparando o ambiente local',mins:10,body:
+'<p>Você precisa de três ferramentas: <strong>Docker</strong> (para buildar imagens), <strong>kubectl</strong> (o cliente do Kubernetes) e um <strong>cluster local</strong>. Para desenvolvedores, o <code>kind</code> (Kubernetes in Docker) é a opção mais leve — foi também a abordagem usada no curso do DevOps Directive para o ambiente local.</p>'+
+C('bash',`# 1) Docker Desktop (Windows/macOS) ou Docker Engine (Linux)
+#    https://docs.docker.com/get-docker/
+
+# 2) kubectl
+# Windows (winget):  winget install Kubernetes.kubectl
+# macOS:             brew install kubectl
+# Linux:             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+# 3) kind (cluster local dentro do Docker)
+# Windows: winget install Kubernetes.kind   |  macOS: brew install kind
+
+# 4) Criar um cluster local
+kind create cluster --name k8sjourney
+
+# 5) Conferir
+kubectl cluster-info
+kubectl get nodes
+kubectl get pods -n kube-system   # CoreDNS e componentes do sistema`)+
+'<p>Comandos essenciais do dia a dia:</p>'+
+C('bash',`kubectl get pods                 # lista Pods do namespace atual
+kubectl get pods -A              # de todos os namespaces
+kubectl get pods -o wide         # com node, IP, imagem...
+kubectl describe pod NOME        # eventos e detalhes (SEU MELHOR AMIGO p/ debug)
+kubectl logs NOME -f             # logs em tempo real (-c se houver +1 container)
+kubectl exec -it NOME -- sh      # "entrar" no container
+kubectl port-forward svc/NOME 8080:80   # acessar um Service localmente
+kubectl apply -f arquivo.yaml    # aplica manifest (cria/atualiza)
+kubectl delete -f arquivo.yaml   # remove os objetos do manifest
+kubectl explain deployment.spec.strategy   # documentação embutida!`)+
+NOTE('Todo o fluxo funciona igual no Windows: <code>docker build</code>, publish no registry e <code>kubectl apply</code>. O cluster não sabe (nem se importa) com a linguagem do seu app.'),
+},
+{id:'m0l3',title:'Vídeos de referência e fontes do conteúdo',mins:5,body:
+'<p>Parte da sequência didática deste curso foi construída a partir das transcrições/roteiros dos vídeos abaixo e validada contra a documentação oficial do Kubernetes e dos três grandes providers.</p>'+
+'<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2T86xAtR6Fo"><div class="video-ico">▶</div><div><b>Complete Kubernetes Course — From BEGINNER to PRO</b><small>DevOps Directive (EN) · 14 seções: história/motivação, arquitetura, setup, resource types, Helm, app demo, CRDs/operators, tooling, dev experience, debugging, multi-env, upgrades e CI/CD — cobrimos TODAS elas neste curso.</small></div></a>'+
+'<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UEoxMU_l2xs"><div class="video-ico">▶</div><div><b>Seu Primeiro Projeto Prático DevOps COMPLETO: Docker, AWS, Terraform e CI/CD!</b><small>Maria Lazara (PT-BR) · base prática dos Módulos 0 e 6: Docker hands-on e pipeline CI/CD de ponta a ponta.</small></div></a>'+
+'<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MTHGoGUFpvE"><div class="video-ico">▶</div><div><b>Vídeo de referência 3</b><small>Indicado como complemento. Obs.: consta como indisponível no YouTube no momento da publicação — link mantido como referência.</small></div></a>'+
+'<h2>Fontes de validação</h2>'+
+'<div class="src-grid">'+
+'<div class="src-card"><b>kubernetes.io/docs/concepts</b><small>Fonte primária: arquitetura, workloads, services/networking, storage, configuration, security, policies, scheduling/eviction e extensibility.</small></div>'+
+'<div class="src-card"><b>github.com/sidpalas/devops-directive-kubernetes-course</b><small>Repositório companheiro do curso do DevOps Directive; estrutura de 14 seções usada como checklist de cobertura.</small></div>'+
+'<div class="src-card"><b>Docs dos providers</b><small>learn.microsoft.com/azure/aks · cloud.google.com/kubernetes-engine · docs.aws.amazon.com/eks — pricing e integrações verificadas nas páginas oficiais de preço.</small></div>'+
+'</div>'}
+]},
+/* ================= MÓDULO 1 ================= */
+{id:'m1',num:'01',title:'Fundamentos: do Container ao Kubernetes',level:'ini',lessons:[
+{id:'m1l1',title:'O que são containers?',mins:9,body:
+'<p>Um <strong>container</strong> é um processo isolado que carrega consigo <em>tudo que precisa para rodar</em>: binários, bibliotecas, arquivos de configuração e dependências. O isolamento é feito por recursos do kernel Linux (<em>namespaces</em> para visão isolada de sistema e <em>cgroups</em> para limites de CPU/memória).</p>'+
+'<ul><li><strong>Imagem</strong> = o "molde" imutável (camadas de filesystem empilhadas).</li>'+
+'<li><strong>Container</strong> = a imagem <em>rodando</em> (instância da imagem).</li>'+
+'<li><strong>Registry</strong> = onde as imagens moram (Docker Hub, ACR, GAR, ECR, GHCR).</li></ul>'+
+'<p>Na prática .NET, a imagem nasce de um <strong>Dockerfile multi-stage</strong>: uma fase compila com o SDK, outra empacota só o runtime — imagem pequena e segura:</p>'+
+C('docker',`# Dockerfile de uma API ASP.NET Core 8
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY . .
+RUN dotnet restore
+RUN dotnet publish -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+USER 1000                      # nunca rodar como root
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "MinhaApi.dll"]`)+
+C('bash',`docker build -t meuregistry/minha-api:1.0.0 .
+docker run -p 8080:8080 meuregistry/minha-api:1.0.0`)+
+NOTE('A imagem <code>mcr.microsoft.com/dotnet/aspnet:8.0</code> já cria o usuário <code>app</code>. Imagens sem SDK e sem source reduzem superfície de ataque e aceleram o pull nos nodes — critério importante em Kubernetes.'),
+},
+{id:'m1l2',title:'Containers vs Máquinas Virtuais',mins:6,body:
+'<table class="tbl"><tr><th></th><th>Máquina Virtual</th><th>Container</th></tr>'+
+'<tr><td>Isolamento</td><td>Hardware (hipervisor)</td><td>SO (namespaces/cgroups)</td></tr>'+
+'<tr><td>Sistema operacional</td><td>Um SO completo <em>por</em> VM</td><td>Compartilha o kernel do host</td></tr>'+
+'<tr><td>Tamanho</td><td>GBs</td><td>MBs</td></tr>'+
+'<tr><td>Boot</td><td>Minutos</td><td>Milissegundos/segundos</td></tr>'+
+'<tr><td>Densidade</td><td>Poucas por host</td><td>Dezenas/centenas por host</td></tr></table>'+
+'<p>É exatamente essa leveza que torna o Kubernetes possível: criar e destruir instâncias em segundos, reagindo a falhas e picos. Uma VM leva minutos para subir — tarde demais para self-healing.</p>'+
+'<p>Curiosidade: nos clouds, os <em>worker nodes</em> do Kubernetes <strong>são</strong> VMs — containers rodam <em>dentro</em> de VMs. Os modelos se complementam: a VM isola o node; o container isola o app.</p>'},
+{id:'m1l3',title:'Por que Kubernetes existe?',mins:8,body:
+'<p>Imagine que sua API .NET viralizou. Com Docker "na mão" você precisa responder: em quantas máquinas rodo? Como distribuo as cópias? Como o load balancer descobre quem está vivo? Como faço deploy sem downtime? Como volto uma versão quebrada? <strong>Kubernetes é a resposta padronizada para essas perguntas.</strong></p>'+
+'<ul><li><strong>Orquestração:</strong> decide onde cada container roda e redistribui a carga.</li>'+
+'<li><strong>Self-healing:</strong> container morreu? Sobe outro. Node morreu? Reagenda os Pods.</li>'+
+'<li><strong>Scaling:</strong> réplicas sobem e descem por métricas (CPU, fila, HTTP).</li>'+
+'<li><strong>Rollouts seguros:</strong> atualizações graduais com rollback automático.</li>'+
+'<li><strong>Service discovery + DNS:</strong> serviços se encontram pelo nome.</li>'+
+'<li><strong>Secrets e config:</strong> configuração fora da imagem, por ambiente.</li></ul>'+
+'<p>Histórico rápido: nasceu no Google em 2014 (inspirado no <em>Borg</em>, orquestrador interno usado no Google por mais de uma década), foi doado à <strong>CNCF</strong> em 2016 e virou o padrão da indústria — por isso todos os grandes clouds oferecem "Kubernetes gerenciado".</p>'+
+CLOUD('Azure → <strong>AKS</strong>, Google → <strong>GKE</strong>, AWS → <strong>EKS</strong>. O núcleo (API, objetos, kubectl) é o mesmo projeto open source; o que muda é o "recheio" de integrações de cada nuvem (Módulo 9).'),
+},
+{id:'m1l4',title:'Arquitetura: Control Plane e Nodes',mins:12,body:
+'<p>Um cluster Kubernetes é dividido em dois "mundos": o <strong>Control Plane</strong> (o cérebro) e os <strong>Worker Nodes</strong> (os músculos, onde seus containers rodam).</p>'+
+ARCH_SVG+
+'<div class="figcap">Arquitetura de um cluster: Control Plane (decisão) × Worker Nodes (execução)</div>'+
+'<h3>Control Plane</h3>'+
+'<ul><li><strong>kube-apiserver:</strong> a única porta de entrada. Tudo (kubectl, controllers, kubelets) fala com a API REST. Autenticação, autorização e validação acontecem aqui.</li>'+
+'<li><strong>etcd:</strong> banco chave-valor distribuído e consistente. <em>Todo o estado do cluster</em> vive aqui. Se o etcd corrompe, o cluster "esquece" de si mesmo.</li>'+
+'<li><strong>kube-scheduler:</strong> observa Pods novos sem node atribuído e escolhe o node ideal (recursos livres, afinidades, taints, políticas).</li>'+
+'<li><strong>kube-controller-manager:</strong> roda os <em>controllers</em> (Node, Job, EndpointSlice, ServiceAccount…) em loops infinitos de reconciliação.</li>'+
+'<li><strong>cloud-controller-manager:</strong> (em clouds) integra com a API do provider: cria Load Balancers, gerencia rotas e o ciclo de vida de nodes.</li></ul>'+
+'<h3>Worker Nodes</h3>'+
+'<ul><li><strong>kubelet:</strong> o "agente" do node; garante que os containers descritos nos Pods estejam rodando e reporta status ao Control Plane.</li>'+
+'<li><strong>kube-proxy:</strong> mantém regras de rede (iptables/IPVS) que implementam os Services.</li>'+
+'<li><strong>container runtime:</strong> executa os containers (containerd e CRI-O são os mais comuns).</li></ul>'+
+'<p>Além disso, todo cluster precisa de <strong>add-ons</strong>: o <strong>CoreDNS</strong> é obrigatório na prática (DNS do cluster); ingress controllers, métricas e dashboards são opcionais, porém quase universais.</p>'+
+NOTE('Como dev, você quase nunca toca no Control Plane — em clusters gerenciados (AKS/GKE/EKS) ele é operado pelo provider. Mas entender o fluxo <em>kubectl → API Server → etcd → scheduler → kubelet</em> explica 90% dos comportamentos que você verá no <code>kubectl describe</code>.'),
+},
+{id:'m1l5',title:'O modelo declarativo e os controllers',mins:10,body:
+'<p>Aqui está a chave mental do Kubernetes: você <strong>não executa ações</strong>, você <strong>declara o estado desejado</strong> em YAML e aplica contra a API. A partir daí, os <em>controllers</em> trabalham em loop (<strong>reconciliation loop</strong>) comparando <em>estado atual</em> com <em>estado desejado</em> e agem para aproximá-los.</p>'+
+C('bash',`# Imperativo (evite no dia a dia):
+kubectl create deployment web --image=nginx
+
+# Declarativo (o jeito Kubernetes):
+kubectl apply -f deployment.yaml
+# "Eu desejo 3 réplicas da imagem X com estes recursos."
+# Se alguém deletar um Pod, o controller cria outro.
+# Se você mudar replicas para 5, ele escala. Etc.`)+
+'<p>Consequências práticas desse modelo:</p>'+
+'<ul><li><strong>Self-healing de graça:</strong> delete um Pod de um Deployment e observe outro nascer (<code>kubectl get pods -w</code>).</li>'+
+'<li><strong>Seus YAMLs são o source of truth</strong> — devem viver no Git (base do GitOps, Módulo 6).</li>'+
+'<li><strong>Idempotência:</strong> rodar <code>apply</code> várias vezes não duplica nada; só converge.</li></ul>'+
+QUIZ('Você aplicou um Deployment com replicas: 3. Um node inteiro cai, levando 1 Pod junto. O que acontece?',
+['Nada — o Deployment fica com 2 réplicas até você intervir.','O controller do Deployment cria um Pod substituto e o scheduler o agenda em outro node saudável.','O cluster inteiro reinicia para recuperar o estado.','O etcd restaura o container morto no mesmo node.'],1,
+'Correto! O controller percebe atual(2) ≠ desejado(3) e o scheduler agenda um Pod novo em node saudável. Self-healing por reconciliação.')+
+QUIZ('Qual componente guarda o estado do cluster?',
+['kube-proxy','kubelet','etcd','container runtime'],2,
+'Isso! O etcd é o banco distribuído que persiste todo o estado do cluster.')+
+DOC('Este módulo cobre as seções <em>Overview</em> e <em>Cluster Architecture</em> da documentação oficial (kubernetes.io/docs/concepts).')}
+]},
+/* ================= MÓDULO 2 ================= */
+{id:'m2',num:'02',title:'Workloads Completos',level:'ini',lessons:[
+{id:'m2l1',title:'Pods: a unidade mínima',mins:9,body:
+'<p>O <strong>Pod</strong> é a menor unidade agendável do Kubernetes: um ou mais containers que compartilham rede (mesmo IP, comunicação via <code>localhost</code>) e podem compartilhar volumes, tratados como uma unidade. Na prática, 99% dos Pods têm <strong>1 container</strong>; o padrão multi-container é o <em>sidecar</em> (ex.: agente de logs ao lado da sua API).</p>'+
+C('yaml',`apiVersion: v1
+kind: Pod
+metadata:
+  name: minha-api
+  labels:            # etiquetas chave=valor para seleção/organização
+    app: minha-api
+    tier: backend
+spec:
+  containers:
+  - name: api
+    image: meuregistry/minha-api:1.0.0
+    ports:
+    - containerPort: 8080`)+
+C('bash',`kubectl apply -f pod.yaml
+kubectl get pod minha-api
+kubectl delete pod minha-api`)+
+'<p>Cada Pod recebe um <strong>IP único dentro do cluster</strong>. Mas atenção ao conceito mais importante desta lição: <strong>Pods são efêmeros</strong>. Eles nascem, morrem e <em>nunca voltam</em> — outro Pod (com outro IP e outro nome) nasce no lugar. Por isso:</p>'+
+'<ul><li>Nunca aponte para o IP de um Pod → use <strong>Services</strong> (lição 4).</li>'+
+'<li>Nunca crie Pods "na mão" em produção → use <strong>Deployments</strong> (lição 2).</li>'+
+'<li>Estado que precisa sobreviver → <strong>Volumes externos</strong> (Módulo 3).</li></ul>'+
+'<p>Um Pod passa por fases: <code>Pending</code> (aceito, mas containers não criados/agendados ainda), <code>Running</code>, <code>Succeeded</code>/<code>Failed</code> (Pods de Job) e <code>Unknown</code> (kubelet sem resposta). O <code>restartPolicy</code> (<code>Always</code> por padrão; <code>OnFailure</code>/<code>Never</code> para Jobs) define como o kubelet trata containers que morrem.</p>'},
+{id:'m2l2',title:'Deployments e ReplicaSets',mins:11,body:
+'<p>Na vida real usamos o trio da figura abaixo: o <strong>Deployment</strong> (objeto de mais alto nível, que você versiona no Git) gerencia um <strong>ReplicaSet</strong> (que garante "N réplicas idênticas"), que por sua vez gerencia os <strong>Pods</strong>. O <strong>Service</strong> encontra esses Pods por <em>labels</em> e distribui o tráfego.</p>'+
+FIG(IMG.deploy,'Deployment → ReplicaSet → Pods, com o Service roteando por label (app=web)')+
+C('yaml',`apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minha-api
+spec:
+  replicas: 3                      # estado desejado
+  revisionHistoryLimit: 5          # ReplicaSets antigos guardados p/ rollback
+  selector:
+    matchLabels:
+      app: minha-api               # quais Pods "são meus"
+  template:                        # "receita" do Pod (é um Pod embutido!)
+    metadata:
+      labels:
+        app: minha-api
+    spec:
+      containers:
+      - name: api
+        image: meuregistry/minha-api:1.0.0
+        ports:
+        - containerPort: 8080`)+
+C('bash',`kubectl apply -f deployment.yaml
+kubectl get deploy,rs,pod -l app=minha-api
+kubectl scale deploy/minha-api --replicas=5
+kubectl set image deploy/minha-api api=meuregistry/minha-api:1.1.0`)+
+'<p>Detalhe de mecanismo: a cada mudança no template, o Deployment cria um <strong>ReplicaSet novo</strong> e mantém os antigos (até <code>revisionHistoryLimit</code>) — é isso que permite o rollback instantâneo.</p>'+
+NOTE('Repare no padrão: <code>spec.selector.matchLabels</code> do Deployment precisa "bater" com <code>template.metadata.labels</code>. Esse casamento de labels × selectors é o sistema nervoso do Kubernetes — Services, NetworkPolicies e HPA usam a mesma ideia.'),
+},
+{id:'m2l3',title:'Rollouts, rollbacks e estratégias',mins:9,body:
+'<p>Quando você muda a imagem (ou o template) de um Deployment, ele faz um <strong>rolling update</strong>: cria um ReplicaSet novo e migra os Pods gradualmente, sem downtime.</p>'+
+C('yaml',`spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1          # até 1 Pod "a mais" durante o rollout
+      maxUnavailable: 0    # nenhum Pod indisponível (zero downtime)`)+
+C('bash',`kubectl rollout status deploy/minha-api      # acompanha
+kubectl rollout history deploy/minha-api       # versões anteriores
+kubectl rollout undo deploy/minha-api          # VOLTA A VERSÃO (salva-vidas)
+kubectl rollout undo deploy/minha-api --to-revision=2
+kubectl rollout restart deploy/minha-api       # recria Pods (ex.: recarregar Secrets)`)+
+'<table class="tbl"><tr><th>Estratégia</th><th>Como funciona</th><th>Quando usar</th></tr>'+
+'<tr><td>RollingUpdate</td><td>troca gradual, velho e novo coexistem</td><td>padrão; APIs stateless</td></tr>'+
+'<tr><td>Recreate</td><td>derruba tudo, depois sobe o novo</td><td>apps que não aceitam 2 versões (lock de arquivo, migração única)</td></tr>'+
+'<tr><td>Blue/Green</td><td>duas versões completas; o Service "vira a chave"</td><td>rollback instantâneo crítico</td></tr>'+
+'<tr><td>Canary</td><td>% do tráfego vai para o novo primeiro</td><td>validar em produção com risco mínimo (via Gateway API/service mesh)</td></tr></table>'},
+{id:'m2l4',title:'Services: rede estável para Pods efêmeros',mins:11,body:
+'<p>Se Pods têm IP descartável, como outro serviço chama sua API? Com um <strong>Service</strong>: um IP virtual + nome DNS estável que distribui tráfego para o conjunto de Pods que casam com o <em>selector</em>.</p>'+
+C('yaml',`apiVersion: v1
+kind: Service
+metadata:
+  name: minha-api
+spec:
+  selector:
+    app: minha-api        # "aponta" para os Pods do Deployment
+  ports:
+  - port: 80              # porta do Service (dentro do cluster)
+    targetPort: 8080      # porta do container`)+
+'<table class="tbl"><tr><th>Tipo</th><th>Alcance</th><th>Uso típico</th></tr>'+
+'<tr><td><code>ClusterIP</code> (padrão)</td><td>só dentro do cluster</td><td>comunicação entre microsserviços</td></tr>'+
+'<tr><td><code>NodePort</code></td><td>IP do node + porta alta (faixa padrão 30000–32767)</td><td>dev/testes; evite em produção</td></tr>'+
+'<tr><td><code>LoadBalancer</code></td><td>exposto via LB do cloud</td><td>entrada de tráfego externo em clouds</td></tr>'+
+'<tr><td><code>ExternalName</code></td><td>alias DNS (CNAME) p/ fora do cluster</td><td>referenciar SaaS/bancos externos</td></tr></table>'+
+'<p>Dentro do cluster, qualquer Pod resolve <code>minha-api</code> (mesmo namespace) ou <code>minha-api.meu-ns.svc.cluster.local</code>. Em .NET:</p>'+
+C('csharp',`// Service discovery "de graça" via DNS do cluster
+var client = httpClientFactory.CreateClient("pedidos");
+// baseUrl configurado como: http://pedidos-api  (ClusterIP service)
+var resp = await client.GetAsync("/pedidos/42");`)+
+CLOUD('Em AKS/GKE/EKS, um Service do tipo <code>LoadBalancer</code> cria automaticamente um Azure Load Balancer / Google Cloud Load Balancer / AWS NLB de verdade, com IP público. É assim que sua API aparece para o mundo sem Ingress.')+
+'<p>Guarde para a lição "Services a fundo": <code>sessionAffinity</code>, <code>externalTrafficPolicy</code> e Services headless existem para casos específicos — e fazem diferença em produção.</p>'},
+{id:'m2l5',title:'Namespaces, Labels e Selectors',mins:8,body:
+'<p><strong>Namespaces</strong> são "clusters virtuais" dentro do cluster: isolam nomes, organizam times/ambientes e permitem cotas e RBAC por área (<code>dev</code>, <code>prod</code>, <code>pagamentos</code>…). Alguns namespaces existem por padrão: <code>default</code>, <code>kube-system</code> (componentes do sistema) e <code>kube-public</code>. <strong>Labels</strong> classificam objetos; <strong>selectors</strong> consultam essas classificações.</p>'+
+C('bash',`kubectl create namespace pagamentos
+kubectl apply -f deployment.yaml -n pagamentos
+kubectl get pods -n pagamentos
+kubectl get pods -l app=minha-api,tier=backend   # selector por labels
+kubectl get pods -l 'environment in (staging, production)'`)+
+C('yaml',`metadata:
+  namespace: pagamentos
+  labels:
+    app: minha-api
+    tier: backend
+    versao: "1.2"
+    equipe: checkout`)+
+WARN('Evite a tentação de criar "um namespace por developer" sem governança: cada namespace multiplica superfícies de rede, cotas e RBAC a manter. Comece com namespaces por ambiente ou por domínio de negócio.')+
+QUIZ('Por que NÃO devemos chamar outro microsserviço pelo IP do Pod dele?',
+['Porque IPs de Pods são efêmeros e mudam a cada recriação.','Porque Pods não têm IP.','Porque o DNS do cluster bloqueia IPs.','Porque o kube-proxy criptografa o IP.'],0,
+'Exato! Pods nascem e morrem; o Service dá um nome/IP estável na frente deles.')+
+QUIZ('Um Service descobre quais Pods atender usando…',
+['o nome do Deployment','selector contra as labels dos Pods','a porta 443','o namespace apenas'],1,
+'Isso! Selector × labels é o mecanismo universal de "encaixe" entre objetos.'),
+},
+{id:'m2l6',title:'StatefulSet, DaemonSet, Jobs e CronJobs',mins:13,body:
+'<p>Deployment não é o único workload. A documentação oficial lista cinco tipos principais; saber escolher entre eles é o que separa um curso completo de um superficial.</p>'+
+'<table class="tbl"><tr><th>Workload</th><th>Perfil</th><th>Exemplos</th></tr>'+
+'<tr><td>Deployment</td><td>stateless, réplicas intercambiáveis</td><td>APIs, frontends, workers sem estado</td></tr>'+
+'<tr><td>StatefulSet</td><td>stateful, identidade estável</td><td>bancos, brokers, sistemas distribuídos</td></tr>'+
+'<tr><td>DaemonSet</td><td>1 cópia por node</td><td>agentes de log/monitoring, CNI</td></tr>'+
+'<tr><td>Job</td><td>tarefa única até concluir</td><td>migrações, importações, batch</td></tr>'+
+'<tr><td>CronJob</td><td>Jobs agendados</td><td>relatórios noturnos, backups, limpeza</td></tr></table>'+
+'<h3>StatefulSet — identidade estável</h3>'+
+'<p>Cada réplica ganha nome fixo (<code>postgres-0</code>, <code>postgres-1</code>…), DNS estável e <em>seu próprio disco</em> via <code>volumeClaimTemplates</code>. A escala e o rollout são <strong>ordenados</strong> (0 → N). Exige um Service <em>headless</em>.</p>'+
+C('yaml',`apiVersion: apps/v1
+kind: StatefulSet
+metadata: { name: postgres }
+spec:
+  serviceName: postgres-headless
+  replicas: 3
+  selector: { matchLabels: { app: postgres } }
+  template:
+    metadata: { labels: { app: postgres } }
+    spec:
+      containers:
+      - name: pg
+        image: postgres:16
+        volumeMounts: [{ name: data, mountPath: /var/lib/postgresql/data }]
+  volumeClaimTemplates:          # um PVC por réplica, criado automaticamente
+  - metadata: { name: data }
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources: { requests: { storage: 10Gi } }`)+
+WARN('Como dev, prefira bancos <strong>gerenciados</strong> do cloud (Azure SQL, Cloud SQL, RDS) a rodar banco em StatefulSet. StatefulSet faz sentido quando o produto é literalmente o banco (operadores como CloudNativePG/Strimzi cuidam disso).')+
+'<h3>DaemonSet — um por node</h3>'+
+'<p>O DaemonSet garante que todos (ou alguns) nodes rodem uma cópia do Pod. É assim que rodam coletores de log (Fluent Bit), agentes de métricas (node-exporter) e os próprios componentes de rede (CNI).</p>'+
+'<h3>Job e CronJob</h3>'+
+C('yaml',`apiVersion: batch/v1
+kind: Job
+metadata: { name: migra-dados }
+spec:
+  completions: 1          # quantos Pods precisam terminar com sucesso
+  parallelism: 1
+  backoffLimit: 6         # tentativas antes de desistir (padrão: 6)
+  template:
+    spec:
+      restartPolicy: Never    # Jobs NUNCA usam Always
+      containers:
+      - name: migra
+        image: meuregistry/migrador:2.0.0
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata: { name: relatorio-noturno }
+spec:
+  schedule: "0 2 * * *"               # todo dia às 02:00
+  concurrencyPolicy: Forbid           # não sobrepõe execuções
+  successfulJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: rel
+            image: meuregistry/relatorios:1.0.0`)+
+NOTE('Migração de banco no deploy? O padrão .NET é um <strong>Job</strong> com <code>dotnet ef database update</code> (ou <code>DbInitializer</code> via <code>Host.CreateApplicationBuilder</code>) rodando <em>antes</em> do rollout do Deployment — ou como <em>init container</em> (próxima lição).')+
+QUIZ('Uma tarefa de processamento de folha de pagamento roda todo dia 5 às 22h e não pode se sobrepor. Qual workload?',
+['Deployment com replicas: 1','DaemonSet','CronJob com concurrencyPolicy: Forbid','StatefulSet'],2,
+'Perfeito! Agendamento + prevenção de sobreposição é exatamente o caso do CronJob com Forbid.'),
+},
+{id:'m2l7',title:'Init containers, hooks e ciclo de vida do Pod',mins:10,body:
+'<p><strong>Init containers</strong> rodam <em>em sequência até completar</em> antes dos containers principais. Casos clássicos: aguardar uma dependência, baixar configuração, rodar migração de banco.</p>'+
+C('yaml',`spec:
+  initContainers:
+  - name: espera-postgres
+    image: busybox:1.36
+    command: ['sh','-c','until nslookup postgres.pagamentos.svc.cluster.local; do sleep 2; done']
+  - name: migra-banco
+    image: meuregistry/minha-api:1.0.0
+    command: ['dotnet','MinhaApi.dll','--migrate-only']
+  containers:
+  - name: api
+    image: meuregistry/minha-api:1.0.0`)+
+'<p><strong>Lifecycle hooks</strong> executam nos limites de vida do container:</p>'+
+'<ul><li><code>postStart</code>: logo após o container criar (sem garantia de ordem com o entrypoint).</li>'+
+'<li><code>preStop</code>: <em>antes</em> do SIGTERM — o ponto-chave para graceful shutdown.</li></ul>'+
+'<p>Sequência de encerramento de um Pod: <code>preStop</code> → sinal <strong>SIGTERM</strong> → espera até <code>terminationGracePeriodSeconds</code> (padrão 30s) → <strong>SIGKILL</strong>.</p>'+
+C('yaml',`spec:
+  terminationGracePeriodSeconds: 45
+  containers:
+  - name: api
+    lifecycle:
+      preStop:
+        exec:
+          command: ["sh","-c","sleep 5"]   # drena conexões do LB/Service`)+
+NOTE('O Generic Host do ASP.NET Core já trata SIGTERM com <em>graceful shutdown</em> (para de aceitar requests e aguarda os em andamento). Para Workers (<code>BackgroundService</code>), implemente <code>StopAsync</code> corretamente e considere <code>services.Configure&lt;HostOptions&gt;(o =&gt; o.ShutdownTimeout = TimeSpan.FromSeconds(40));</code> para casar com o grace period.')}
+]},
+/* ================= MÓDULO 3 ================= */
+{id:'m3',num:'03',title:'Configuração, Secrets & Storage',level:'int',lessons:[
+{id:'m3l1',title:'ConfigMaps: configuração fora da imagem',mins:9,body:
+'<p>Imagem imutável + configuração variável por ambiente = <strong>ConfigMap</strong>. Ele injeta pares chave-valor como <em>variáveis de ambiente</em> ou como <em>arquivos</em> montados em volume. Limite de tamanho: <strong>1 MiB</strong> por ConfigMap.</p>'+
+C('yaml',`apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  Logging__LogLevel__Default: "Information"   # __ vira : na config do .NET
+  FeatureFlags__NovoCheckout: "true"`)+
+C('yaml',`spec:
+  containers:
+  - name: api
+    image: meuregistry/minha-api:1.0.0
+    envFrom:                 # injeta TUDO como env vars
+    - configMapRef:
+        name: api-config
+    env:                     # ou escolha uma a uma
+    - name: MEU_SETTING
+      valueFrom:
+        configMapKeyRef:
+          name: api-config
+          key: FeatureFlags__NovoCheckout
+    volumeMounts:            # OU como arquivo (ex.: appsettings.custom.json)
+    - name: cfg
+      mountPath: /app/config`)+
+NOTE('A configuração do ASP.NET Core lê variáveis de ambiente automaticamente — e <code>__</code> mapeia para <code>:</code> na hierarquia. Ou seja: <em>zero código</em>, seu <code>IConfiguration</code> simplesmente funciona no cluster.')+
+WARN('ConfigMap NÃO é para dados sensíveis — ele não é criptografado e aparece em <code>kubectl get -o yaml</code>. Para isso use Secrets (próxima lição). Dica: marque ConfigMaps críticos com <code>immutable: true</code> para evitar mudanças acidentais (exige recriar o objeto para alterar).')},
+{id:'m3l2',title:'Secrets: dados sensíveis',mins:10,body:
+'<p><strong>Secrets</strong> guardam dados sensíveis (connection strings, tokens, certificados). Por padrão são armazenados em base64 no etcd — <em>codificação, não criptografia</em>. Em produção: habilite <strong>encryption at rest</strong> no etcd e/ou use cofres externos (Módulo 8).</p>'+
+'<table class="tbl"><tr><th>Tipo de Secret</th><th>Uso</th></tr>'+
+'<tr><td><code>Opaque</code> (padrão)</td><td>dados arbitrários</td></tr>'+
+'<tr><td><code>kubernetes.io/tls</code></td><td>certificados (usado pelo Ingress)</td></tr>'+
+'<tr><td><code>kubernetes.io/dockerconfigjson</code></td><td>credenciais de registry privado (imagePullSecrets)</td></tr>'+
+'<tr><td><code>kubernetes.io/service-account-token</code></td><td>tokens de ServiceAccount (legado)</td></tr></table>'+
+C('bash',`# criar sem colocar a senha no histórico do shell:
+kubectl create secret generic api-secrets \\
+  --from-literal=ConnectionStrings__Default="Server=db;Password=***" \\
+  --from-literal=ApiKeyIntegracoes="super-secreta"
+
+kubectl create secret tls api-tls --cert=tls.crt --key=tls.key`)+
+C('yaml',`spec:
+  containers:
+  - name: api
+    envFrom:
+    - secretRef:
+        name: api-secrets    # ConnectionStrings__Default vira env var
+  # imagem em registry privado:
+  imagePullSecrets:
+  - name: registry-cred`)+
+NOTE('No .NET, env vars viram configuração automaticamente, então <code>builder.Configuration.GetConnectionString("Default")</code> funciona sem tocar em arquivo. Segredos grandes demais? Lembre do limite de 1 MiB por Secret — e evite versionar YAML de Secret no Git sem criptografia (SOPS/Sealed Secrets, Módulo 8).')},
+{id:'m3l3',title:'Volumes, PV e PVC',mins:11,body:
+'<p>Containers têm filesystem efêmero: arquivos somem com o Pod. Para persistir, o Kubernetes abstrai storage em três camadas:</p>'+
+'<ul><li><strong>Volume:</strong> diretório montado no Pod. Tipos comuns: <code>emptyDir</code> (temporário, some com o Pod), <code>configMap</code>/<code>secret</code> (arquivos de config), <code>persistentVolumeClaim</code> (disco).</li>'+
+'<li><strong>PersistentVolume (PV):</strong> o "disco" provisionado (Azure Disk, EBS, GCE PD, NFS…).</li>'+
+'<li><strong>PersistentVolumeClaim (PVC):</strong> o <em>pedido</em> de storage que o Pod referencia — o dev declara "quanto e como", o cluster resolve "onde".</li></ul>'+
+C('yaml',`apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uploads-pvc
+spec:
+  accessModes: ["ReadWriteOnce"]     # RWO: 1 node; RWX: vários; ROX: leitura p/ vários
+  resources:
+    requests:
+      storage: 10Gi`)+
+C('yaml',`spec:
+  containers:
+  - name: api
+    volumeMounts:
+    - name: uploads
+      mountPath: /app/uploads        # caminho dentro do container
+  volumes:
+  - name: uploads
+    persistentVolumeClaim:
+      claimName: uploads-pvc`)+
+NOTE('Em ASP.NET Core, aponte pastas de upload/temp para o mount path via configuração. Com múltiplas réplicas + disco <code>ReadWriteOnce</code>, os Pods precisam cair no mesmo node — para uploads compartilhados use storage <code>RWX</code> (Azure Files, EFS, Filestore).')},
+{id:'m3l4',title:'StorageClass: provisionamento dinâmico',mins:8,body:
+'<p>A <strong>StorageClass</strong> define <em>como</em> o storage é provisionado sob demanda (provisioner + parâmetros + política). Quando seu PVC é criado, o cluster cria o PV automaticamente. Ciclo de vida do PV: <strong>Provisioning</strong> (estático ou dinâmico) → <strong>Binding</strong> → <strong>Using</strong> → <strong>Reclaiming</strong> (<code>Delete</code> apaga o disco; <code>Retain</code> preserva).</p>'+
+'<table class="tbl"><tr><th>Cloud</th><th>Provisioners típicos</th><th>Classes comuns</th></tr>'+
+'<tr><td>AKS</td><td><code>disk.csi.azure.com</code>, <code>file.csi.azure.com</code></td><td><code>managed-csi</code>, <code>azurefile-csi</code> (RWX)</td></tr>'+
+'<tr><td>GKE</td><td><code>pd.csi.storage.gke.io</code></td><td><code>standard-rwo</code>, <code>premium-rwo</code></td></tr>'+
+'<tr><td>EKS</td><td><code>ebs.csi.aws.com</code>, <code>efs.csi.aws.com</code> (RWX)</td><td><code>gp2</code>/<code>gp3</code></td></tr></table>'+
+C('bash',`kubectl get storageclass            # o que existe no seu cluster
+kubectl get pvc,pv                  # claims e volumes vinculados
+kubectl describe pvc uploads-pvc    # por que não vinculou ainda?`)+
+'<p>Detalhe importante: <code>volumeBindingMode: WaitForFirstConsumer</code> faz o disco ser criado na zona onde o Pod realmente cair — essencial em clusters multi-zona. StorageClasses também suportam expansão (<code>allowVolumeExpansion: true</code>) e snapshots.</p>'},
+{id:'m3l5',title:'Downward API, LimitRange e ResourceQuota',mins:9,body:
+'<p><strong>Downward API</strong> expõe metadados do próprio Pod para o container (via env ou volume) — sem chamar a API do Kubernetes:</p>'+
+C('yaml',`spec:
+  containers:
+  - name: api
+    env:
+    - name: POD_NAME
+      valueFrom: { fieldRef: { fieldPath: metadata.name } }
+    - name: POD_NAMESPACE
+      valueFrom: { fieldRef: { fieldPath: metadata.namespace } }
+    - name: MEM_LIMIT
+      valueFrom: { resourceFieldRef: { resource: limits.memory } }`)+
+'<p><strong>LimitRange</strong> define padrões e limites por container/Pod no namespace; <strong>ResourceQuota</strong> impõe teto agregado no namespace. Juntos, são a governança multi-tenant do Kubernetes:</p>'+
+C('yaml',`apiVersion: v1
+kind: ResourceQuota
+metadata: { name: pagamentos-quota, namespace: pagamentos }
+spec:
+  hard:
+    requests.cpu: "20"
+    requests.memory: 40Gi
+    limits.memory: 64Gi
+    count/deployments.apps: "15"
+    count/secrets: "20"
+    persistentvolumeclaims: "10"
+---
+apiVersion: v1
+kind: LimitRange
+metadata: { name: limites, namespace: pagamentos }
+spec:
+  limits:
+  - type: Container
+    default: { cpu: "1", memory: 512Mi }           # limit se omitido
+    defaultRequest: { cpu: 250m, memory: 256Mi }   # request se omitido`)+
+WARN('Efeito prático para devs: se o namespace tem ResourceQuota, seu <code>kubectl apply</code> de um Deployment <strong>sem requests/limits</strong> pode ser rejeitado (a menos que um LimitRange preencha os valores). Declarar recursos sempre — você já vai fazer isso por resiliência anyway (Módulo 5).')}
+]},
+/* ================= MÓDULO 4 ================= */
+{id:'m4',num:'04',title:'Redes, Ingress & Gateway API',level:'int',lessons:[
+{id:'m4l1',title:'DNS e descoberta de serviços',mins:7,body:
+'<p>Cada cluster roda um DNS interno (CoreDNS). Todo Service ganha um nome: <code>&lt;service&gt;.&lt;namespace&gt;.svc.cluster.local</code>. Regras práticas:</p>'+
+'<ul><li>Mesmo namespace → <code>http://pedidos-api</code></li>'+
+'<li>Outro namespace → <code>http://pedidos-api.vendas</code> (ou FQDN completo)</li>'+
+'<li>Portas nomeadas geram registros SRV (<code>_http._tcp.pedidos-api.vendas.svc…</code>)</li></ul>'+
+C('bash',`# testando DNS de dentro do cluster:
+kubectl run dns-test --rm -it --image=busybox:1.36 --restart=Never -- \\
+  nslookup minha-api.meu-ns.svc.cluster.local`)+
+NOTE('Em .NET, combine com <code>IHttpClientFactory</code> + Polly: a URL base vem da configuração (<code>http://pedidos-api</code>) e muda por ambiente via ConfigMap — dev local usa localhost, cluster usa DNS interno.')},
+{id:'m4l2',title:'Services a fundo: EndpointSlices, headless e políticas de tráfego',mins:10,body:
+'<p>Por dentro do Service: o <strong>kube-proxy</strong> mantém regras (iptables ou IPVS) em cada node para encaminhar conexões do IP virtual para os backends. Os backends são registrados em <strong>EndpointSlices</strong> (até ~100 endpoints por slice — escala muito melhor que o antigo objeto Endpoints) e podem carregar <em>topology hints</em> para preferir backends na mesma zona.</p>'+
+'<h3>Service headless (clusterIP: None)</h3>'+
+'<p>Sem IP virtual: o DNS retorna <strong>diretamente os IPs dos Pods</strong>. É o par obrigatório dos StatefulSets (<code>postgres-0.postgres-headless…</code>) e útil quando o cliente quer escolher o backend (ex.: gRPC com balanceamento client-side).</p>'+
+C('yaml',`apiVersion: v1
+kind: Service
+metadata: { name: postgres-headless }
+spec:
+  clusterIP: None          # HEADLESS
+  selector: { app: postgres }
+  ports: [{ port: 5432 }]`)+
+'<h3>Ajustes de comportamento</h3>'+
+'<table class="tbl"><tr><th>Campo</th><th>Efeito</th><th>Quando usar</th></tr>'+
+'<tr><td><code>sessionAffinity: ClientIP</code></td><td>mesmo cliente sempre no mesmo backend</td><td>apps com sessão em memória (evite; prefira estado fora do app)</td></tr>'+
+'<tr><td><code>externalTrafficPolicy: Local</code></td><td>preserva IP de origem e evita salto extra</td><td>LoadBalancer/NodePort quando precisar do IP real do cliente</td></tr></table>'+
+NOTE('C# e gRPC: conexões HTTP/2 de longa duração "grudam" em um backend. Com Services comuns, use load balancing client-side (ou recicle conexões) — é um caso típico onde entender EndpointSlices salva horas de debugging.')},
+{id:'m4l3',title:'Ingress: HTTP/HTTPS na porta de entrada',mins:12,body:
+'<p>Um Service <code>LoadBalancer</code> por app = um load balancer pago por app. O <strong>Ingress</strong> resolve isso: <em>um</em> entrypoint HTTP(S) que roteia por host e caminho para vários Services — com TLS, redirects e rewrites.</p>'+
+FIG(IMG.ingress,'Ingress Controller roteando /api e /web para Services distintos')+
+C('yaml',`apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loja-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod   # TLS automático
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.loja.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: minha-api
+            port:
+              number: 80
+  tls:
+  - hosts: [api.loja.example.com]
+    secretName: api-loja-tls`)+
+'<p>O Ingress é só a <em>declaração</em>; quem executa é o <strong>Ingress Controller</strong> (NGINX, Traefik, ou os nativos de cada cloud). Anotações são específicas de cada controller — uma das limitações que motivou o Gateway API (próxima lição).</p>'+
+CLOUD('<strong>AKS:</strong> add-on <em>Application Gateway Ingress Controller (AGIC)</em> ou NGINX. <strong>GKE:</strong> Ingress nativo (GLBC + Cloud Armor/WAF) ou NGINX. <strong>EKS:</strong> <em>AWS Load Balancer Controller</em> (ALB) ou NGINX.')},
+{id:'m4l4',title:'Gateway API: o sucessor do Ingress',mins:10,body:
+'<p>O <strong>Gateway API</strong> é o sucessor oficial do Ingress (GA em 2023): mais expressivo, portável entre implementações e desenhado em torno de <em>papéis</em>: provedor de infraestrutura, operador de cluster e desenvolvedor de aplicação.</p>'+
+'<table class="tbl"><tr><th>Objeto</th><th>Dono</th><th>Papel</th></tr>'+
+'<tr><td><code>GatewayClass</code></td><td>infra</td><td>define a implementação (ex.: ALB, GKE Gateway, Istio, Envoy)</td></tr>'+
+'<tr><td><code>Gateway</code></td><td>operador</td><td>instância do gateway: listeners, portas, certificados</td></tr>'+
+'<tr><td><code>HTTPRoute</code></td><td>dev</td><td>regras de roteamento: hosts, paths, filtros, traffic split</td></tr></table>'+
+C('yaml',`apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata: { name: loja-gw }
+spec:
+  gatewayClassName: gke-l7-regional      # varia por implementação
+  listeners:
+  - name: https
+    port: 443
+    protocol: HTTPS
+    tls:
+      mode: Terminate
+      certificateRefs: [{ name: api-loja-tls }]
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata: { name: loja-routes }
+spec:
+  parentRefs: [{ name: loja-gw }]
+  hostnames: ["api.loja.example.com"]
+  rules:
+  - matches: [{ path: { type: PathPrefix, value: /v2 } }]
+    backendRefs:
+    - { name: minha-api-v2, port: 80, weight: 10 }   # canary nativo!
+    - { name: minha-api-v1, port: 80, weight: 90 }
+  - backendRefs: [{ name: minha-api, port: 80 }]`)+
+'<p>Ganhos concretos sobre Ingress: traffic splitting com <code>weight</code> (canary), filtros padronizados (redirect, rewrite, header modification), autorização por rota (<code>ReferenceGrant</code>) e sem depender de anotações proprietárias.</p>'+
+CLOUD('Suporte nativo crescente: <strong>GKE Gateway</strong> (Google), <strong>AKS</strong> com Application Gateway for Containers / AGIC Gateway API, <strong>EKS</strong> via AWS Load Balancer Controller e VPC Lattice; implementações portáveis: Istio, Cilium, NGINX Gateway Fabric, Envoy Gateway, Traefik.'),
+},
+{id:'m4l5',title:'NetworkPolicies: firewall entre Pods',mins:10,body:
+'<p>Por padrão, <strong>todo Pod fala com todo Pod</strong>. NetworkPolicy é o firewall declarativo que muda isso — essencial para zero-trust dentro do cluster.</p>'+
+C('yaml',`# 1) negar tudo por padrão no namespace pagamentos
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny
+  namespace: pagamentos
+spec:
+  podSelector: {}        # todos os Pods
+  policyTypes: [Ingress, Egress]
+---
+# 2) permitir apenas checkout -> api-pagamentos
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-checkout
+  namespace: pagamentos
+spec:
+  podSelector:
+    matchLabels: { app: api-pagamentos }
+  policyTypes: [Ingress]
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels: { app: checkout }
+    - namespaceSelector:
+        matchLabels: { kubernetes.io/metadata.name: ingress }
+    ports:
+    - port: 8080`)+
+'<p>As regras combinam <code>podSelector</code>, <code>namespaceSelector</code> e <code>ipBlock</code> (CIDR externo). Regras são aditivas: um Pod só é permitido por pelo menos uma política que o aceite.</p>'+
+WARN('NetworkPolicy só funciona se o CNI suportar. Nos clouds: AKS (Azure CNI + políticas/Calico), GKE (Dataplane V2 aplica nativamente), EKS (Calico/Network Policy add-on). Sem isso, o YAML aplica… nada.'),
+},
+{id:'m4l6',title:'Service Mesh (visão geral)',mins:8,body:
+'<p>Quando "rede" vira requisito de negócio — mTLS obrigatório, retries/circuit-breaker globais, canary por porcentagem, observabilidade de chamada a chamada — entra o <strong>service mesh</strong> (Istio, Linkerd): uma camada de proxies (<em>sidecars</em>) que intercepta o tráfego entre Pods.</p>'+
+'<ul><li><strong>O que dá:</strong> mTLS automático, traffic splitting, timeouts/retries declarativos, telemetria rica.</li>'+
+'<li><strong>O que cobra:</strong> complexidade operacional, latência extra, upgrades delicados.</li></ul>'+
+NOTE('Antes de pensar em mesh: HTTP clients com resiliência no .NET (Polly) + Gateway API bem configurado. Mesh se paga em dezenas de serviços, não em três.')}
+]},
+/* ================= MÓDULO 5 ================= */
+{id:'m5',num:'05',title:'Resiliência, Recursos & Scheduling',level:'int',lessons:[
+{id:'m5l1',title:'Probes: liveness, readiness, startup',mins:10,body:
+'<p>O Kubernetes pergunta ao seu app "você está bem?" de três formas. Sem probes, o cluster opera <em>cego</em>: não sabe reiniciar app travado nem tirar app não-pronto do tráfego.</p>'+
+'<table class="tbl"><tr><th>Probe</th><th>Pergunta</th><th>Ação se falhar</th></tr>'+
+'<tr><td><code>startupProbe</code></td><td>terminou de iniciar?</td><td>mata o Pod (protege boot lento; os outros probes pausam até ele passar)</td></tr>'+
+'<tr><td><code>livenessProbe</code></td><td>travou/deadlock?</td><td><strong>reinicia</strong> o container</td></tr>'+
+'<tr><td><code>readinessProbe</code></td><td>pronto p/ tráfego agora?</td><td>tira do Service (sem reiniciar)</td></tr></table>'+
+'<p>Mecanismos disponíveis: <code>httpGet</code>, <code>tcpSocket</code>, <code>exec</code> e <code>grpc</code>. Parâmetros: <code>initialDelaySeconds</code>, <code>periodSeconds</code>, <code>timeoutSeconds</code>, <code>failureThreshold</code>, <code>successThreshold</code>.</p>'+
+C('yaml',`    ports:
+    - containerPort: 8080
+    startupProbe:
+      httpGet: { path: /healthz/startup, port: 8080 }
+      failureThreshold: 30
+      periodSeconds: 2
+    livenessProbe:
+      httpGet: { path: /healthz/live, port: 8080 }
+      periodSeconds: 10
+      timeoutSeconds: 3
+    readinessProbe:
+      httpGet: { path: /healthz/ready, port: 8080 }
+      periodSeconds: 5`)+
+NOTE('ASP.NET Core: <code>builder.Services.AddHealthChecks()</code> + <code>app.MapHealthChecks("/healthz/live")</code> etc., com <code>HealthCheckRegistration</code> e predicados para separar live/ready. Regra de ouro: liveness NÃO checa dependências externas (senão você reinicia em cascata quando o banco oscila); readiness CHECA.')},
+{id:'m5l2',title:'Requests, limits e QoS',mins:10,body:
+'<p>Todo container de produção deve declarar <strong>requests</strong> (reserva — usada pelo scheduler para escolher o node) e <strong>limits</strong> (teto — acima disso, CPU é estrangulada; memória é <em>OOMKilled</em>).</p>'+
+C('yaml',`    resources:
+      requests:            # "preciso de pelo menos"
+        cpu: 250m          # 0.25 vCPU
+        memory: 256Mi
+      limits:              # "no máximo"
+        cpu: "1"
+        memory: 512Mi`)+
+'<p>A relação requests/limits define a <strong>classe de QoS</strong>:</p>'+
+'<table class="tbl"><tr><th>Classe</th><th>Condição</th><th>Sob pressão no node</th></tr>'+
+'<tr><td>Guaranteed</td><td>requests == limits em TODOS os containers (cpu e memória)</td><td>último a ser sacrificado</td></tr>'+
+'<tr><td>Burstable</td><td>algum request &lt; limit</td><td>sacrificável após BestEffort</td></tr>'+
+'<tr><td>BestEffort</td><td>sem requests/limits</td><td>primeiro a morrer</td></tr></table>'+
+WARN('No .NET, o GC respeita o limit de memória do container (cgroup). Limit apertado demais = OOMKill no pico de GC. Meça o working set com métricas (Módulo 7) e deixe folga (limit ≈ 1.5–2× o uso medido). Se o Pod aparece como <code>OOMKilled</code> em <code>kubectl describe</code>, essa é a causa.')},
+{id:'m5l3',title:'Autoscaling: HPA, VPA, KEDA e Cluster Autoscaler',mins:12,body:
+'<p><strong>HPA</strong> ajusta réplicas por métrica (requer <code>metrics-server</code> instalado); <strong>VPA</strong> ajusta requests/limits; <strong>Cluster Autoscaler/Karpenter</strong> ajusta o número de <em>nodes</em>.</p>'+
+C('yaml',`apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: minha-api-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: minha-api
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target: { type: Utilization, averageUtilization: 70 }
+  behavior:                     # anti-flapping
+    scaleDown:
+      stabilizationWindowSeconds: 300   # espera 5 min antes de reduzir
+      policies:
+      - { type: Pods, value: 1, periodSeconds: 60 }`)+
+'<p>Além de recursos, o HPA suporta métricas <em>custom</em> e <em>external</em> (via adapters) — ex.: profundidade de fila.</p>'+
+'<p>E o queridinho de devs .NET: <strong>KEDA</strong> — escala por <em>eventos</em> (fila Service Bus, SQS, RabbitMQ, Kafka, Prometheus…) e até <strong>zero</strong>. Para Jobs de batch existe o <code>ScaledJob</code>:</p>'+
+C('yaml',`apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata: { name: worker-sqs }
+spec:
+  scaleTargetRef: { name: meu-worker }
+  minReplicaCount: 0
+  maxReplicaCount: 20
+  triggers:
+  - type: aws-sqs-queue
+    metadata:
+      queueURL: https://sqs.us-east-1.amazonaws.com/123/pedidos
+      queueLength: "5"`)+
+CLOUD('KEDA é projeto CNCF criado pela Microsoft e vem como add-on nativo no AKS; no GKE/EKS você instala via Helm. Cluster Autoscaler existe nos três; na AWS o <em>Karpenter</em> (que provisiona nodes sob demanda em segundos) é muito comum no EKS.')},
+{id:'m5l4',title:'Scheduling: affinity, taints e PDB',mins:11,body:
+'<p>Quando "qualquer node serve" deixa de ser verdade:</p>'+
+'<ul><li><strong>nodeSelector / nodeAffinity:</strong> "rode só em nodes com SSD" ou "prefira a zona X".</li>'+
+'<li><strong>podAntiAffinity:</strong> "espalhe minhas réplicas em nodes/zonas diferentes" (alta disponibilidade).</li>'+
+'<li><strong>taints + tolerations:</strong> nodes dedicados (GPU, batch) que repelem Pods não autorizados.</li>'+
+'<li><strong>topologySpreadConstraints:</strong> distribuição uniforme entre zonas de disponibilidade.</li>'+
+'<li><strong>PodDisruptionBudget (PDB):</strong> "durante manutenção voluntária (drain/upgrade), nunca deixe menos de N réplicas".</li></ul>'+
+C('yaml',`apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: minha-api-pdb }
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels: { app: minha-api }`)+
+C('yaml',`    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels: { app: minha-api }
+            topologyKey: kubernetes.io/hostname`)+
+QUIZ('Sua API deve sobreviver a picos e manutenções: qual combinação faz sentido?',
+['limits altíssimos + BestEffort','probes + requests/limits + HPA + PDB','NodePort + replicas: 1','nenhum recurso, o cloud resolve'],1,
+'Perfeito! Resiliência é camadas: detecção (probes), reserva (requests/limits), escala (HPA) e proteção contra manutenção (PDB).')+
+QUIZ('Um Pod sem requests/limits recebe qual classe de QoS?',
+['Guaranteed','Burstable','BestEffort','Premium'],2,
+'Isso! Sem declarar nada = BestEffort = primeiro a ser sacrificado sob pressão.'),
+},
+{id:'m5l5',title:'Eviction, preemption e PriorityClass',mins:9,body:
+'<p>Entender <em>como e por que</em> Pods morrem sem você pedir é conhecimento avançado obrigatório:</p>'+
+'<ul><li><strong>Node-pressure eviction:</strong> quando um node fica sem memória/disco (sinais como <code>memory.available</code>), o <em>kubelet</em> evacua Pods — ordem: BestEffort → Burstable → Guaranteed (QoS de novo!). O Pod ganha status <code>Evicted</code>.</li>'+
+'<li><strong>API-initiated eviction:</strong> o que <code>kubectl drain</code> usa; respeita PDBs e grace periods.</li>'+
+'<li><strong>Preemption:</strong> um Pod de <strong>alta prioridade</strong> sem lugar pode <em>desalojar</em> Pods de menor prioridade para abrir espaço.</li></ul>'+
+C('yaml',`apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata: { name: alta-criticidade }
+value: 100000
+globalDefault: false
+description: "Workloads de pagamento — não devem ser preemptados"`)+
+NOTE('Consequências para seu código .NET: trate todo shutdown como "pode acontecer agora". Workers de fila: ack só após processar e com handlers idempotentes; APIs: graceful shutdown no SIGTERM (já vem no Generic Host); Jobs: <code>restartPolicy: OnFailure</code> e retries idempotentes. Nada de assumir que o Pod vai viver.')+
+QUIZ('O node está com memória quase esgotada. Qual Pod o kubelet evacua primeiro?',
+['Guaranteed de produção','Burstable com requests baixos','BestEffort sem requests/limits','O mais novo'],2,
+'Correto! BestEffort é a classe mais frágil e a primeira a ser evacuada sob pressão no node.')}
+]},
+/* ================= MÓDULO 6 ================= */
+{id:'m6',num:'06',title:'Empacotamento, CI/CD & Ferramentas',level:'int',lessons:[
+{id:'m6l1',title:'Helm: o gerenciador de pacotes',mins:10,body:
+'<p>Aplicação real = dezenas de YAMLs interligados. O <strong>Helm</strong> empacota tudo em um <em>chart</em> com valores parametrizáveis — e instala/atualiza/desinstala com um comando, mantendo histórico de releases.</p>'+
+C('bash',`helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install meu-postgres bitnami/postgresql --set auth.password=***
+
+# seu chart:
+helm install minha-api ./charts/minha-api -f values-dev.yaml
+helm upgrade minha-api ./charts/minha-api -f values-prod.yaml
+helm rollback minha-api 1
+helm list`)+
+'<p>Estrutura de um chart:</p>'+
+C('bash',`charts/minha-api/
+├── Chart.yaml          # nome, versão do chart
+├── values.yaml         # valores padrão
+├── values-prod.yaml    # overrides por ambiente
+└── templates/          # YAMLs com template Go
+    ├── deployment.yaml
+    ├── service.yaml
+    └── ingress.yaml`)+
+C('yaml',`# templates/deployment.yaml (trecho)
+spec:
+  replicas: {{ .Values.replicas }}
+  template:
+    spec:
+      containers:
+      - name: api
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        resources: {{- toYaml .Values.resources | nindent 10 }}`)+
+'<h3>Helm avançado</h3>'+
+'<ul><li><strong>Hooks:</strong> Jobs executados em pontos do ciclo (<code>pre-install</code>, <code>pre-upgrade</code> — perfeito para migração de banco no deploy, <code>post-delete</code>…).</li>'+
+'<li><strong>Dependências:</strong> um chart pode depender de outros (<code>dependencies</code> no Chart.yaml).</li>'+
+'<li><strong>OCI registries:</strong> charts podem viver em ACR/GAR/ECR junto das imagens (<code>helm push/pull oci://…</code>).</li></ul>'},
+{id:'m6l2',title:'Kustomize: overlays sem templates',mins:7,body:
+'<p>Alternativa nativa (embutida no kubectl): mantenha YAMLs puros numa <em>base</em> e aplique <em>patches</em> por ambiente via <strong>overlays</strong>.</p>'+
+C('bash',`k8s/
+├── base/                 # deployment, service, kustomization.yaml
+└── overlays/
+    ├── dev/              # patches: replicas 1, recursos menores
+    └── prod/             # patches: replicas 6, ingress TLS, HPA
+
+kubectl apply -k k8s/overlays/prod`)+
+C('yaml',`# overlays/prod/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+patches:
+- path: replica-patch.yaml
+labels:
+- pairs:
+    ambiente: prod`)+
+'<p>Regra prática: <strong>Helm</strong> brilha para software de prateleira (Postgres, Redis, Prometheus) e charts compartilhados; <strong>Kustomize</strong> brilha para os manifests do <em>seu</em> app — inclusive é o formato preferido do GitOps com ArgoCD/Flux.</p>'},
+{id:'m6l3',title:'CI/CD com GitHub Actions para .NET',mins:13,body:
+'<p>O pipeline clássico do dev K8s: <strong>CI</strong> testa e publica a imagem; <strong>CD</strong> aplica manifests/Helm no cluster. Exemplo completo para .NET + Azure (ACR + AKS) — a mesma estrutura vale para GAR+GKE e ECR+EKS:</p>'+
+C('yaml',`name: deploy-aks
+on:
+  push:
+    branches: [main]
+env:
+  REGISTRY: meuregistry.azurecr.io
+  IMAGE: minha-api
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with: { dotnet-version: 8.0.x }
+    - run: dotnet test -c Release
+    - run: dotnet publish -c Release -o out
+    - uses: azure/docker-login@v2
+      with:
+        login-server: \${{ env.REGISTRY }}
+        username: \${{ secrets.ACR_USER }}
+        password: \${{ secrets.ACR_PASS }}
+    - run: |
+        docker build -t \${{ env.REGISTRY }}/\${{ env.IMAGE }}:\${{ github.sha }} .
+        docker push \${{ env.REGISTRY }}/\${{ env.IMAGE }}:\${{ github.sha }}
+  deploy:
+    needs: build-push
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: azure/aks-set-context@v4
+      with:
+        cluster-name: prod-aks
+        resource-group: rg-prod
+    - run: |
+        helm upgrade --install minha-api ./charts/minha-api \\
+          --set image.tag=\${{ github.sha }} -n prod --create-namespace`)+
+NOTE('Tag por <code>github.sha</code> (imutável) + <code>helm upgrade</code> = rollout rastreável e rollback trivial. Evite a tag <code>latest</code> em produção: ela quebra a semântica do rolling update (o cluster não sabe que a imagem mudou).')},
+{id:'m6l4',title:'GitOps com ArgoCD',mins:9,body:
+'<p><strong>GitOps</strong> inverte o CD: em vez do pipeline "empurrar" para o cluster, um operador <em>dentro</em> do cluster (ArgoCD/Flux) observa o Git e <strong>puxa</strong> o estado desejado, detectando e corrigindo <em>drift</em> (alguém mudou algo na mão? o ArgoCD reverte ou alerta).</p>'+
+C('yaml',`apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: { name: minha-api-prod, namespace: argocd }
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/minha-org/k8s-manifests
+    path: overlays/prod
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+  syncPolicy:
+    automated: { prune: true, selfHeal: true }`)+
+'<p>Benefícios para times de dev: deploy = <strong>merge em PR</strong> (revisão + auditoria de graça), rollback = <strong>revert do commit</strong>, e o pipeline de CI para de guardar credenciais fortíssimas do cluster. Para vários ambientes, o padrão <em>app-of-apps</em> (um Application que aponta para outros) ou <code>ApplicationSet</code> escalam bem.</p>'},
+{id:'m6l5',title:'Ferramentas auxiliares & experiência de desenvolvedor',mins:10,body:
+'<p>Um cluster útil precisa de um kit instalado (via Helm, claro):</p>'+
+C('bash',`# métricas (pré-requisito do HPA)
+helm upgrade --install metrics-server metrics-server/metrics-server \\
+  --repo https://kubernetes-sigs.github.io/metrics-server/
+
+# ingress + TLS automático
+helm upgrade --install ingress-nginx ingress-nginx \\
+  --repo https://kubernetes.github.io/ingress-nginx
+helm upgrade --install cert-manager cert-manager \\
+  --repo https://charts.jetstack.io --set installCRDs=true
+
+# observabilidade completa
+helm upgrade --install kube-prom prometheus-community/kube-prometheus-stack \\
+  --repo https://prometheus-community.github.io/helm-charts`)+
+'<h3>Ferramentas de dev experience</h3>'+
+'<table class="tbl"><tr><th>Ferramenta</th><th>O que faz</th></tr>'+
+'<tr><td><code>k9s</code></td><td>TUI para navegar no cluster (logs, exec, describe sem sair do terminal)</td></tr>'+
+'<tr><td>Lens / OpenLens</td><td>GUI visual do cluster</td></tr>'+
+'<tr><td>Skaffold / Tilt</td><td>loop de dev: builda, aplica e reaplica automaticamente a cada mudança</td></tr>'+
+'<tr><td>Telepresence</td><td>roda sua app <em>local</em> "plugada" no cluster (service discovery e DNS reais)</td></tr></table>'+
+NOTE('Para .NET, o Telepresence é transformador: rode a API no Visual Studio/Rider <em>localmente</em> com breakpoint, enquanto ela conversa com os outros serviços e bancos que estão no cluster. Também vale <code>kubectl port-forward</code> para acesso rápido a DBs internos sem expô-los.')}
+]},
+/* ================= MÓDULO 7 ================= */
+{id:'m7',num:'07',title:'Observabilidade & Debugging',level:'adv',lessons:[
+{id:'m7l1',title:'Logs: do stdout ao cluster',mins:7,body:
+'<p>Regra nº1: seu app escreve logs no <strong>stdout/stderr</strong> (o ASP.NET Core já faz isso com o console logger). O kubelet captura e o <code>kubectl logs</code> exibe. Em produção, um agente (Fluent Bit/Vector como DaemonSet) coleta e envia para um backend.</p>'+
+C('bash',`kubectl logs deploy/minha-api -f --tail=200
+kubectl logs NOME_POD --previous        # logs do container ANTES do crash (ouro p/ debug)
+kubectl logs -l app=minha-api           # todos os Pods do selector`)+
+CLOUD('<strong>AKS:</strong> Container Insights (Log Analytics). <strong>GKE:</strong> Cloud Logging nativo. <strong>EKS:</strong> CloudWatch via Fluent Bit. Nos três, logs estruturados (JSON) do .NET chegam pesquisáveis por campo.')+
+NOTE('Use logs estruturados: <code>logger.LogInformation("Pedido {PedidoId} criado", id)</code> — os placeholders viram campos pesquisáveis no backend (não concatene strings).')},
+{id:'m7l2',title:'Métricas: Prometheus + Grafana',mins:10,body:
+'<p>O Prometheus "raspa" (scrape) endpoints HTTP de métricas e guarda séries temporais; o Grafana visualiza; o Alertmanager alerta. Métricas que todo dev deve conhecer: CPU, memória, latência HTTP, taxa de erro, saturação de fila.</p>'+
+C('yaml',`# o Prometheus descobre seu Pod via annotations:
+metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9464"`)+
+'<p>PromQL que salva vidas:</p>'+
+C('bash',`# p95 de latência por serviço
+histogram_quantile(0.95, sum(rate(http_server_request_duration_seconds_bucket[5m])) by (le, job))
+
+# taxa de erro 5xx
+sum(rate(http_server_request_duration_seconds_count{http_response_status_code=~"5.."}[5m]))
+  /
+sum(rate(http_server_request_duration_seconds_count[5m]))`)+
+NOTE('O .NET 8+ expõe métricas nativas no formato OpenTelemetry (<code>dotnet add package OpenTelemetry.Exporter.Prometheus.AspNetCore</code>): HTTP, GC, thread pool, exceptions — sem instrumentação manual.')},
+{id:'m7l3',title:'Distributed tracing com OpenTelemetry',mins:9,body:
+'<p>Em microsserviços, "a chamada está lenta" vira "QUAL chamada, em QUAL serviço?". O <strong>tracing</strong> conecta spans de uma requisição através de serviços via headers W3C (<code>traceparent</code>) — e o .NET é cidadão de primeira classe no OpenTelemetry:</p>'+
+C('csharp',`// Program.cs
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(r => r.AddService("minha-api"))
+    .WithTracing(t => t
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddOtlpExporter());          // env: OTEL_EXPORTER_OTLP_ENDPOINT
+
+builder.Services.AddOpenTelemetry()
+    .WithMetrics(m => m
+        .AddAspNetCoreInstrumentation()
+        .AddRuntimeInstrumentation()   // GC, heap, thread pool
+        .AddOtlpExporter());`)+
+C('yaml',`    env:
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: http://otel-collector.observability.svc:4317`)+
+CLOUD('Backends: AKS → Application Insights (via OTel) ou Jaeger; GKE → Cloud Trace; EKS → AWS X-Ray. Todos aceitam OTLP, o protocolo aberto — troque o backend sem trocar o código.')},
+{id:'m7l4',title:'Kit de debugging: do CrashLoop ao OOMKill',mins:11,body:
+'<p>O fluxo de debug que resolve 95% dos problemas: <code>kubectl get pods</code> (status) → <code>kubectl describe pod</code> (events!) → <code>kubectl logs --previous</code> (crash) → <code>kubectl exec</code>/<code>debug</code> (dentro do container).</p>'+
+'<table class="tbl"><tr><th>Sintoma</th><th>Causas prováveis</th><th>Investigação</th></tr>'+
+'<tr><td><code>CrashLoopBackOff</code></td><td>erro no start, probe de liveness mal configurado, variável de ambiente faltando</td><td><code>logs --previous</code>, describe (events)</td></tr>'+
+'<tr><td><code>ImagePullBackOff</code></td><td>tag errada, registry privado sem imagePullSecrets, nome errado</td><td>describe → eventos de pull</td></tr>'+
+'<tr><td><code>Pending</code></td><td>sem recursos (requests altos), taints sem toleration, PVC não vinculado</td><td>describe pod (eventos do scheduler)</td></tr>'+
+'<tr><td><code>OOMKilled</code></td><td>limit de memória baixo para o GC do .NET</td><td>describe (Last State), métricas de memória</td></tr>'+
+'<tr><td><code>Evicted</code></td><td>node sem memória/disco (lição de eviction!)</td><td><code>kubectl describe node</code></td></tr></table>'+
+C('bash',`kubectl get events -n prod --sort-by=.lastTimestamp | tail -20   # eventos recentes
+kubectl top pods -n prod        # uso real de CPU/memória (requer metrics-server)
+kubectl top nodes
+
+# container de debug "acoplado" ao Pod (ephemeral container):
+kubectl debug -it deploy/minha-api --image=mcr.microsoft.com/dotnet/sdk:8.0 \\
+  --target=api -- dotnet-trace collect -p 1 --format speedscope
+
+# ou um dump de memória p/ analisar no Visual Studio depois:
+kubectl debug -it deploy/minha-api --image=mcr.microsoft.com/dotnet/sdk:8.0 \\
+  --target=api -- dotnet-dump collect -p 1`)+
+NOTE('<code>--target</code> compartilha o namespace de processos do container principal. Se sua imagem final não tem shell (distroless), o <code>kubectl debug</code> com imagem de SDK é a saída — ou mantenha <code>dotnet-monitor</code> habilitado em ambientes internos.'),
+}
+]},
+/* ================= MÓDULO 8 ================= */
+{id:'m8',num:'08',title:'Segurança & Políticas',level:'adv',lessons:[
+{id:'m8l1',title:'RBAC: quem pode o quê',mins:10,body:
+'<p>O RBAC do Kubernetes responde: <em>qual identidade</em> (User/Group/<strong>ServiceAccount</strong>) pode <em>qual verbo</em> (get/list/create/delete…) sobre <em>qual recurso</em> em <em>qual namespace</em>. Fluxo de uma requisição na API: <strong>autenticação → autorização (RBAC) → admission control → etcd</strong>.</p>'+
+C('yaml',`apiVersion: v1
+kind: ServiceAccount
+metadata: { name: ci-deployer, namespace: prod }
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: { name: deployer, namespace: prod }
+rules:
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "update", "patch"]
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata: { name: ci-deployer-binding, namespace: prod }
+subjects:
+- kind: ServiceAccount
+  name: ci-deployer
+roleRef:
+  kind: Role
+  name: deployer
+  apiGroup: rbac.authorization.k8s.io`)+
+C('bash',`kubectl auth can-i update deployments -n prod \\
+  --as=system:serviceaccount:prod:ci-deployer
+# ClusterRoles prontos: cluster-admin, admin, edit, view`)+
+WARN('Princípio do menor privilégio SEMPRE: seu Pod não precisa falar com a API do cluster? Não dê permissões ao ServiceAccount (ou use <code>automountServiceAccountToken: false</code>).')},
+{id:'m8l2',title:'Secrets gerenciados pelos clouds',mins:11,body:
+'<p>Secrets nativos em base64 não sobrevivem a uma auditoria séria. Padrão de produção: secrets vivem em um <strong>cofre gerenciado</strong> e são injetados no Pod via CSI driver, com <strong>identidade do workload</strong> (sem senhas em arquivo!). Para clusters fora dos clouds: <strong>External Secrets Operator</strong>, <strong>SOPS</strong> (criptografa o YAML no Git) ou <strong>Sealed Secrets</strong>.</p>'+
+'<div class="ptabs">'+
+'<button class="ptab active" data-t="aks" type="button">AKS (Azure)</button>'+
+'<button class="ptab" data-t="gke" type="button">GKE (Google)</button>'+
+'<button class="ptab" data-t="eks" type="button">EKS (AWS)</button>'+
+'</div>'+
+'<div class="ptab-panel active" data-t="aks"><h4>Azure Key Vault + Workload Identity</h4><p>O <em>Secrets Store CSI Driver</em> monta o Key Vault como volume; o Pod se autentica via <strong>Workload Identity Federation</strong> (token do service account vira identidade Entra ID). No .NET, <code>DefaultAzureCredential</code> com os SDKs de Key Vault funciona sem connection string.</p></div>'+
+'<div class="ptab-panel" data-t="gke"><h4>Secret Manager + Workload Identity</h4><p>Workload Identity mapeia o ServiceAccount do K8s para uma <em>service account do IAM</em>; o app usa <code>Google.Cloud.SecretManager.V1</code> ou o CSI driver. Zero chaves JSON no repositório.</p></div>'+
+'<div class="ptab-panel" data-t="eks"><h4>Secrets Manager + IRSA / Pod Identity</h4><p><em>IAM Roles for Service Accounts (IRSA)</em> — ou o mais simples <em>EKS Pod Identity</em> — associa permissões IAM ao Pod; o SDK da AWS (<code>AWSSDK.SecretsManager</code>) ou o CSI Provider AWS faz o resto.</p></div>'},
+{id:'m8l3',title:'Hardening de Pods e supply chain',mins:9,body:
+'<p>Checklist de hardening que todo manifest de produção deveria passar (os <em>Pod Security Standards</em> definem os níveis <code>privileged</code> → <code>baseline</code> → <code>restricted</code>):</p>'+
+C('yaml',`    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      readOnlyRootFilesystem: true     # imagem imutável de verdade
+      allowPrivilegeEscalation: false
+      capabilities: { drop: ["ALL"] }
+      seccompProfile: { type: RuntimeDefault }`)+
+'<ul><li><strong>Scan de imagem</strong> no CI (Trivy/Grype) + registry que bloqueia vulnerabilidades críticas.</li>'+
+'<li><strong>Assinatura de imagem</strong> (cosign/Sigstore) + admissão que só aceita imagens assinadas.</li>'+
+'<li><strong>SBOM</strong> (inventário de dependências) gerado no build.</li>'+
+'<li><strong>Políticas de admissão</strong> (Kyverno/OPA Gatekeeper): "proibido latest", "proibido root", "resources obrigatórios".</li>'+
+'<li><strong>NetworkPolicies</strong> default-deny + RBAC mínimo.</li></ul>'+
+NOTE('A imagem oficial <code>mcr.microsoft.com/dotnet/aspnet</code> já roda como usuário não-root — meio caminho andado para o nível <em>restricted</em>.')},
+{id:'m8l4',title:'Admission control, webhooks e Pod Security Admission',mins:10,body:
+'<p>Entre a autorização e a gravação no etcd existe o <strong>admission control</strong>: uma cadeia de plugins e webhooks que <em>modifica</em> (mutating) e <em>valida</em> (validating) cada requisição. É aqui que políticas viram lei — não recomendação.</p>'+
+'<p>Fluxo completo: <strong>API → autenticação → RBAC → admission (mutating → validação de schema → validating) → etcd</strong>. Admissão nativa inclui ResourceQuota, LimitRanger, DefaultStorageClass, ServiceAccount e… o <strong>Pod Security Admission (PSA)</strong>, que substituiu o antigo PodSecurityPolicy.</p>'+
+C('yaml',`# aplicar nível "restricted" a um namespace inteiro, com 3 rótulos:
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pagamentos
+  labels:
+    pod-security.kubernetes.io/enforce: restricted      # REJEITA Pods fora do padrão
+    pod-security.kubernetes.io/audit: restricted         # registra violações
+    pod-security.kubernetes.io/warn: restricted          # avisa no apply`)+
+'<p>E com webhooks de política (Kyverno exemplo: bloquear imagens <code>:latest</code>):</p>'+
+C('yaml',`apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata: { name: no-latest }
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: require-tag
+    match: { resources: { kinds: ["Pod"] } }
+    validate:
+      message: "Tag ':latest' é proibida em produção"
+      pattern:
+        spec:
+          containers:
+          - image: "!*:latest"`)+
+QUIZ('Quais são os três modos de um label Pod Security Admission?',
+['allow, deny, audit','enforce, audit, warn','strict, relaxed, open','on, off, log'],1,
+'Isso! enforce (bloqueia), audit (registra) e warn (avisa) — permitindo migração gradual para o padrão restricted.')}
+]},
+/* ================= MÓDULO 9 ================= */
+{id:'m9',num:'09',title:'Kubernetes Gerenciado: AKS × GKE × EKS',level:'adv',lessons:[
+{id:'m9l1',title:'Panorama dos managed Kubernetes',mins:12,body:
+'<p>Nos três clouds, o <strong>Control Plane é gerenciado</strong> (patch, HA, backups do etcd por conta do provider) e você opera os <em>node pools</em> (ou nem isso, nos modos serverless). O que diferencia é o ecossistema em volta — valores verificados nas páginas oficiais de preço (sujeitos a mudança):</p>'+
+'<table class="tbl"><tr><th>Aspecto</th><th>AKS (Azure)</th><th>GKE (Google)</th><th>EKS (AWS)</th></tr>'+
+'<tr><td>Control plane</td><td>Free tier grátis (sem SLA); Standard ~US$ 73/mês (~US$ 0,10/h) com SLA; Premium com LTS</td><td>US$ 0,10/h por cluster (Standard); no Autopilot a taxa é incluída no preço por Pod</td><td>US$ 0,10/h por cluster</td></tr>'+
+'<tr><td>Modo serverless</td><td>Virtual nodes (ACI)</td><td><code>Autopilot</code> (cobra pelos requests dos Pods)</td><td><code>Fargate</code></td></tr>'+
+'<tr><td>CNI padrão</td><td>Azure CNI / kubenet</td><td>VPC-native (Dataplane V2 aplica NetPol)</td><td>VPC CNI (IPs da VNet por Pod)</td></tr>'+
+'<tr><td>Identidade p/ Pods</td><td>Workload Identity (Entra ID)</td><td>Workload Identity (IAM)</td><td>IRSA + EKS Pod Identity</td></tr>'+
+'<tr><td>Ingress/Gateway</td><td>App Gateway (AGIC), Gateway API</td><td>GKE Ingress + Gateway nativo + Cloud Armor</td><td>ALB Ingress Controller, VPC Lattice</td></tr>'+
+'<tr><td>Observabilidade</td><td>Container Insights</td><td>Cloud Monitoring/Logging nativo</td><td>CloudWatch Container Insights</td></tr>'+
+'<tr><td>Autoscaler de nodes</td><td>Cluster Autoscaler (+KEDA add-on)</td><td>Cluster Autoscaler</td><td>Karpenter (muito comum)</td></tr>'+
+'<tr><td>Windows nodes</td><td>⭐ excelente (herança .NET)</td><td>suportado</td><td>suportado</td></tr></table>'+
+NOTE('Para times .NET: o AKS tem a melhor experiência com Windows containers e a integração mais curta com Entra ID/Azure DevOps. Mas os CONCEITOS que você aprendeu são 100% portáveis — mudar de cloud é trocar anotações e provisionamento, não o modelo mental.')+
+QUIZ('O que é igual nos três providers?',
+['O preço do control plane','Os objetos da API (Pod, Deployment, Service…) e o kubectl','O CNI padrão','O Ingress controller nativo'],1,
+'Exato! Kubernetes é um padrão: a API e os objetos são os mesmos; o que muda são add-ons e integrações de cada nuvem.')},
+{id:'m9l2',title:'AKS na prática (Azure)',mins:12,body:
+C('bash',`az group create -n rg-prod -l brazilsouth
+az acr create -n meuregistry -g rg-prod --sku Standard
+az aks create -n prod-aks -g rg-prod \\
+  --node-count 3 --node-vm-size Standard_D4s_v5 \\
+  --enable-managed-identity --enable-workload-identity \\
+  --attach-acr meuregistry --enable-addons monitoring \\
+  --tier standard               # SLA de uptime (free tier = sem SLA)
+az aks get-credentials -n prod-aks -g rg-prod`)+
+'<h3>Workload Identity no seu código .NET</h3>'+
+C('yaml',`apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: minha-api
+  annotations:
+    azure/workload-client-id: 00000000-0000-0000-0000-000000000000`)+
+C('csharp',`// Sem connection string, sem segredo no cluster:
+builder.Configuration.AddAzureKeyVault(
+    new Uri("https://meu-kv.vault.azure.net/"),
+    new DefaultAzureCredential());   // resolve a Workload Identity do Pod`)+
+'<p>Detalhes que importam no AKS: <strong>Azure CNI</strong> dá IP real da VNet aos Pods (integração com redes corporativas); <em>node pools</em> separados por SO (Linux/Windows) e criticidade (system vs user); <strong>virtual nodes</strong> permitem estourar carga para containers serverless (ACI); <strong>KEDA add-on</strong> oficial para autoscaling por eventos.</p>'+
+NOTE('Sistemas legados .NET Framework? O AKS é a opção de primeira classe: node pools Windows Server com suporte a Windows containers, algo raro nos concorrentes.'),
+},
+{id:'m9l3',title:'GKE na prática (Google Cloud)',mins:10,body:
+C('bash',`gcloud container clusters create-auto prod-gke \\
+  --region southamerica-east1 \\
+  --workload-pool meu-projeto.svc.id.goog
+
+gcloud container clusters get-credentials prod-gke \\
+  --region southamerica-east1`)+
+'<p><strong>Autopilot</strong> é o modo "só me deixa desenvolver": o Google provisiona e dimensiona os nodes; você paga pelos <em>requests dos Pods</em> (vCPU, memória, storage), não por node — a taxa de gestão do cluster já está incluída. Perfeito para começar; para controle fino (GPU, kernel tuning, spot agressivo) use o modo <strong>Standard</strong> (US$ 0,10/h de gestão + custo dos nodes).</p>'+
+C('yaml',`# Workload Identity: ServiceAccount do K8s -> IAM do Google
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: minha-api
+  annotations:
+    iam.gke.io/gcp-service-account: minha-api@meu-projeto.iam.gserviceaccount.com`)+
+'<p>No GKE, o <strong>Dataplane V2</strong> aplica NetworkPolicies nativamente (com observabilidade de rede no console), o <strong>GKE Gateway</strong> implementa a Gateway API com balanceadores globais do Google, e o <strong>Config Sync/Fleet</strong> leva GitOps a múltiplos clusters.</p>'},
+{id:'m9l4',title:'EKS na prática (AWS)',mins:10,body:
+'<p>Na AWS, a forma menos dolorosa é o <code>eksctl</code>:</p>'+
+C('bash',`eksctl create cluster --name prod-eks \\
+  --region us-east-1 --nodegroup-name ng-app \\
+  --node-type m6i.xlarge --nodes 3 --asg-access
+
+# IRSA: role IAM amarrada ao ServiceAccount
+eksctl create iamserviceaccount --name minha-api \\
+  --namespace prod --cluster prod-eks \\
+  --role-name minha-api-sqs \\
+  --attach-policy-arn arn:aws:iam::aws:policy/AmazonSQSFullAccess`)+
+'<p><strong>IRSA vs EKS Pod Identity</strong> (o mecanismo mais novo): IRSA exige configurar o provedor OIDC e trust policies por cluster; Pod Identity desacopla roles de service accounts — você cria uma associação simples e ela vale para o cluster todo, sem trust policies — mais simples de escalar para muitos clusters. Os dois coexistem.</p>'+
+C('yaml',`apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: minha-api
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789:role/minha-api-sqs`)+
+'<p>Ecossistema típico do EKS: <strong>Karpenter</strong> (nodes sob medida em segundos, spot inteligente), <strong>AWS Load Balancer Controller</strong> (ALB para Ingress/Gateway API), <strong>EFS CSI</strong> para RWX. O .NET consome SQS/S3/Dynamo herdando as credenciais do Pod automaticamente.</p>'},
+{id:'m9l5',title:'Custos e otimização',mins:8,body:
+'<ul><li><strong>Right-size:</strong> VPA em modo <em>recommendation</em> + métricas reais; requests inflados = dinheiro queimado (e no Autopilot isso é literal: você paga pelo request).</li>'+
+'<li><strong>Spot/preemptible:</strong> node pools spot para workloads tolerantes a interrupção (workers, batch) com tolerations — até ~70–90% mais barato.</li>'+
+'<li><strong>Cluster Autoscaler/Karpenter:</strong> desliga capacity ocioso automaticamente.</li>'+
+'<li><strong>Quotas por namespace + showback:</strong> labels de equipe + ferramentas como <strong>OpenCost/Kubecost</strong> para ratear a conta.</li>'+
+'<li><strong>Autoscaling de Pods:</strong> HPA/KEDA reduz réplicas fora do pico (e KEDA zera workers ociosos).</li></ul>'+
+WARN('A pegadinha clássica de custo: requests muito maiores que o uso real + HPA sem Cluster Autoscaler = Pods "Pending" em cluster cheio. Autoscaling de Pods e de nodes precisam evoluir juntos.')}
+]},
+/* ================= MÓDULO 10 ================= */
+{id:'m10',num:'10',title:'Avançado: Operators, Upgrades & Projeto Final',level:'adv',lessons:[
+{id:'m10l1',title:'CRDs e Operators: estendendo o Kubernetes',mins:11,body:
+'<p>Lembra do modelo declarativo? <strong>CRDs (Custom Resource Definitions)</strong> deixam você inventar <em>novos objetos</em>, e um <strong>controller/Operator</strong> implementa o reconciliation loop deles. É assim que o ecossistema modela "coisas" fora do core:</p>'+
+C('yaml',`apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata: { name: backups.exemplo.com.br }
+spec:
+  group: exemplo.com.br
+  scope: Namespaced
+  names: { kind: Backup, plural: backups, singular: backup }
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              schedule: { type: string }`)+
+'<p>Exemplos famosos que você já usou neste curso sem saber: <em>cert-manager</em> (Certificate), <em>Prometheus Operator</em> (ServiceMonitor), <em>ArgoCD</em> (Application), <em>KEDA</em> (ScaledObject), <em>Kyverno</em> (Policy), <em>Strimzi</em> (Kafka).</p>'+
+'<p>Você raramente precisará <strong>escrever</strong> um Operator como dev de aplicação — mas saber <strong>ler</strong> CRDs destrava qualquer plataforma. E quando precisar, o caminho é <strong>Kubebuilder/controller-runtime</strong> (Go) ou o <em>KubeOps</em> (C#!), que geram o esqueleto do controller:</p>'+
+C('bash',`# esqueleto de um operator em Go com Kubebuilder
+kubebuilder init --domain exemplo.com.br --repo github.com/meu/backup-operator
+kubebuilder create api --group exemplo --version v1 --kind Backup`)+
+NOTE('Sim, existe ecossistema .NET para Operators (KubeOps, dotnet-operator-sdk). Para a maioria dos casos, porém, você vai CONSUMIR operators — e para isso basta saber <code>kubectl explain</code> + ler o CRD.'),
+},
+{id:'m10l2',title:'Upgrades, manutenção e drains',mins:10,body:
+'<p>Clusters precisam de patch constante (segurança!). Nos gerenciados, o fluxo padrão é: <strong>upgrade do Control Plane primeiro</strong> (via provider), depois <strong>node pools</strong> — normalmente com <em>surge nodes</em>: nodes novos entram, Pods migram, nodes antigos saem. Mantenha a política de <em>version skew</em>: kubelets podem ficar no máximo algumas versões menores atrás do API server; não deixe o cluster "derivar".</p>'+
+C('bash',`# operações de manutenção manual (mesma mecânica dos clouds):
+kubectl cordon node-3          # marca como não-agendável
+kubectl drain node-3 \\
+  --ignore-daemonsets \\
+  --delete-emptydir-data       # evacua Pods respeitando PDBs!
+kubectl uncordon node-3        # volta a aceitar Pods`)+
+'<p>O que garante zero downtime durante tudo isso (Módulo 5 de novo): Deployments com múltiplas réplicas espalhadas (anti-affinity/topology spread) + <strong>PDB</strong> + <strong>terminationGracePeriodSeconds</strong> adequado + <strong>preStop</strong> + probes corretos.</p>'+
+NOTE('Sua parte como dev no upgrade: o app precisa aceitar SIGTERM e drenar conexões (o ASP.NET Core já faz), processar Jobs idempotentemente e não depender de IP/hostname do Pod. Se o app não é "drenável", a manutenção do cluster vira janela de indisponibilidade.')+
+QUIZ('Durante um node drain, o que impede que TODAS as réplicas da sua API sejam evacuadas ao mesmo tempo?',
+['O kube-proxy','O PodDisruptionBudget','O ConfigMap','O HPA'],1,
+'Correto! O PDB é respeitado pelo drain (eviction via API) e garante o mínimo de disponibilidade durante manutenções voluntárias.'),
+},
+{id:'m10l3',title:'Multi-cluster e padrões avançados',mins:8,body:
+'<ul><li><strong>Por que multi-cluster?</strong> DR/região extra, isolamento de tenants, blast radius, follow-the-sun.</li>'+
+'<li><strong>Gerência de frota:</strong> Google Fleet/Anthos, Azure Arc/AKS Fleet, AWS EKS Anywhere.</li>'+
+'<li><strong>Deploy em frota:</strong> GitOps com ArgoCD "app-of-apps"/ApplicationSet ou Flux — o Git continua sendo a fonte da verdade de todos os clusters.</li>'+
+'<li><strong>Tráfego global:</strong> DNS geo + Global Load Balancers (Azure Front Door, Cloud LB global, Route53) apontando para o gateway de cada cluster.</li></ul>'+
+WARN('Multi-cluster multiplica custo e complexidade (identidade, rede, secrets, observabilidade por cluster). Comece com UM cluster bem operado; multi-cluster é resposta a requisito explícito de negócio/DR.')},
+{id:'m10l4',title:'Projeto final: microsserviços .NET de ponta a ponta',mins:15,body:
+'<p>Hora de juntar tudo. Arquitetura alvo: <strong>API de pedidos</strong> (.NET) + <strong>worker</strong> de fila + <strong>Postgres</strong>, com Ingress TLS, probes, HPA, PDB, secrets do cloud e CI/CD GitOps.</p>'+
+C('yaml',`# 1) namespace (com PSA) + config
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: loja
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+---
+apiVersion: v1
+kind: ConfigMap
+metadata: { name: pedidos-config, namespace: loja }
+data:
+  ASPNETCORE_ENVIRONMENT: Production
+  QueueSettings__NomeFila: "pedidos-novos"
+---
+# 2) Deployment da API com tudo que o curso ensinou
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: pedidos-api, namespace: loja }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: pedidos-api } }
+  template:
+    metadata:
+      labels: { app: pedidos-api }
+      annotations: { prometheus.io/scrape: "true", prometheus.io/port: "9464" }
+    spec:
+      serviceAccountName: pedidos-api
+      terminationGracePeriodSeconds: 45
+      containers:
+      - name: api
+        image: meuregistry/pedidos-api:1.4.0
+        ports: [{ containerPort: 8080 }]
+        envFrom: [{ configMapRef: { name: pedidos-config } }]
+        resources:
+          requests: { cpu: 250m, memory: 256Mi }
+          limits:   { cpu: "1",  memory: 512Mi }
+        startupProbe:  { httpGet: { path: /healthz/startup, port: 8080 }, failureThreshold: 30, periodSeconds: 2 }
+        livenessProbe: { httpGet: { path: /healthz/live,  port: 8080 }, periodSeconds: 10 }
+        readinessProbe:{ httpGet: { path: /healthz/ready, port: 8080 }, periodSeconds: 5 }
+        lifecycle:
+          preStop: { exec: { command: ["sh","-c","sleep 5"] } }
+        securityContext:
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities: { drop: ["ALL"] }
+---
+# 3) Service + Ingress + HPA + PDB
+apiVersion: v1
+kind: Service
+metadata: { name: pedidos-api, namespace: loja }
+spec:
+  selector: { app: pedidos-api }
+  ports: [{ port: 80, targetPort: 8080 }]
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: { name: loja, namespace: loja }
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.loja.example.com
+    http:
+      paths:
+      - { path: /, pathType: Prefix, backend: { service: { name: pedidos-api, port: { number: 80 } } } }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: { name: pedidos-api, namespace: loja }
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: pedidos-api }
+  minReplicas: 2
+  maxReplicas: 8
+  metrics:
+  - type: Resource
+    resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: { name: pedidos-api, namespace: loja }
+spec:
+  minAvailable: 1
+  selector: { matchLabels: { app: pedidos-api } }`)+
+'<h3>Checklist de entrega (valide-se!)</h3>'+
+'<ol><li>✅ Imagem multi-stage, não-root, sem <code>latest</code> (Módulos 1 e 8).</li>'+
+'<li>✅ Config via ConfigMap; segredos via cofre do cloud com workload identity (Módulos 3 e 8).</li>'+
+'<li>✅ Probes + resources + HPA + PDB + preStop/grace period (Módulos 2 e 5).</li>'+
+'<li>✅ Ingress com TLS; Service ClusterIP interno (Módulo 4).</li>'+
+'<li>✅ Logs estruturados + métricas OTel + tracing (Módulo 7).</li>'+
+'<li>✅ CI publica imagem por SHA; CD via GitOps (Módulo 6).</li>'+
+'<li>✅ NetworkPolicy default-deny + PSA no namespace (Módulos 4 e 8).</li>'+
+'<li>✅ Worker em KEDA com scale-to-zero quando a fila esvazia (Módulo 5).</li></ol>'+
+NOTE('Parabéns por chegar até aqui! 🎉 Você agora domina o modelo mental agnóstico do Kubernetes (cobrindo TODAS as áreas da documentação de conceitos oficial) e sabe traduzi-lo para AKS, GKE ou EKS. Próximo passo sugerido: certificação <strong>CKAD</strong> — especialmente alinhada ao perfil de dev que este curso construiu.')
+}]}
+];
+
+/* ============================================================ APP */
+const LS_KEY='k8sjourney_progress_v2';
+let done = new Set(JSON.parse(localStorage.getItem(LS_KEY)||'[]'));
+const FLAT = COURSE.flatMap(m=>m.lessons.map(l=>Object.assign({},l,{mod:m})));
+const totalLessons = FLAT.length;
+const $ = s=>document.querySelector(s);
+
+function saveProgress(){ localStorage.setItem(LS_KEY, JSON.stringify(Array.from(done))); }
+
+function renderSidebar(){
+  const sb=$('#sidebar');
+  sb.innerHTML = '<button class="side-home" id="sideHome">🏠 Visão geral do curso</button>' + COURSE.map(function(m){
+    const doneCount = m.lessons.filter(l=>done.has(l.id)).length;
+    return '<div class="mod" data-mod="'+m.id+'">'+
+      '<button class="mod-head" type="button">'+
+      '<span class="mod-num">M'+m.num+'</span>'+
+      '<span class="mod-title">'+m.title+'</span>'+
+      '<span class="mod-count">'+doneCount+'/'+m.lessons.length+'</span>'+
+      '<span class="mod-chev">▶</span>'+
+      '</button>'+
+      '<div class="mod-body">'+m.lessons.map(function(l){
+        return '<a class="les-link '+(done.has(l.id)?'done':'')+'" data-les="'+l.id+'" href="#/lesson/'+l.id+'">'+
+        '<span class="les-check">✓</span><span>'+l.title+'</span></a>';
+      }).join('')+'</div></div>';
+  }).join('');
+  sb.querySelectorAll('.mod-head').forEach(function(h){h.addEventListener('click',function(){h.parentElement.classList.toggle('open');});});
+  $('#sideHome').addEventListener('click',function(){location.hash='#/home';closeSide();});
+}
+
+function updateProgress(){
+  const pct = Math.round(done.size/totalLessons*100);
+  $('#progressFill').style.width=pct+'%';
+  $('#progressTxt').textContent=pct+'%';
+}
+
+function syncActive(){
+  document.querySelectorAll('.les-link').forEach(function(a){
+    a.classList.toggle('active', a.dataset.les===currentLesson);
+    a.classList.toggle('done', done.has(a.dataset.les));
+  });
+  const cur = FLAT.find(l=>l.id===currentLesson);
+  if(cur){
+    const modEl = document.querySelector('.mod[data-mod="'+cur.mod.id+'"]');
+    if(modEl) modEl.classList.add('open');
+    COURSE.forEach(function(m){
+      const el=document.querySelector('.mod[data-mod="'+m.id+'"] .mod-count');
+      if(el) el.textContent = m.lessons.filter(l=>done.has(l.id)).length + '/' + m.lessons.length;
+    });
+  }
+}
+
+function renderHome(){
+  currentLesson=null; syncActive();
+  const vids =
+  '<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2T86xAtR6Fo"><div class="video-ico">▶</div><div><b>Complete Kubernetes Course — From BEGINNER to PRO</b><small>DevOps Directive (EN) · fundamentos dos Módulos 1–5</small></div></a>'+
+  '<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UEoxMU_l2xs"><div class="video-ico">▶</div><div><b>Seu Primeiro Projeto Prático DevOps COMPLETO: Docker, AWS, Terraform e CI/CD!</b><small>Maria Lazara (PT-BR) · prática de Docker/CI-CD dos Módulos 0 e 6</small></div></a>'+
+  '<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MTHoGUFpvE"><div class="video-ico">▶</div><div><b>Vídeo de referência 3</b><small>Complemento do curso (indisponível no YouTube no momento da publicação)</small></div></a>';
+  $('#main').innerHTML = '<div class="content">'+
+    '<div class="hero"><img src="'+IMG.hero+'" alt="Nave de containers Kubernetes">'+
+    '<div class="hero-overlay"><span class="hero-tag">Curso completo · Iniciante → Avançado · v2 aprofundada</span>'+
+    '<h1>Kubernetes para <span>Devs .NET</span></h1>'+
+    '<p>Do primeiro Pod ao multi-cluster: workloads completos, resiliência, Gateway API, segurança, GitOps e um comparativo profundo AKS × GKE × EKS — validado contra a documentação oficial do Kubernetes e dos providers.</p>'+
+    '<div class="hero-actions"><button class="btn btn-primary" id="startBtn">🚀 Começar pelo Módulo 0</button>'+
+    '<button class="btn btn-ghost" id="projBtn">🎯 Ir ao projeto final</button></div></div></div>'+
+    '<div class="stats">'+
+    '<div class="stat"><b>'+COURSE.length+'</b><span>módulos completos</span></div>'+
+    '<div class="stat"><b>'+totalLessons+'</b><span>lições práticas</span></div>'+
+    '<div class="stat"><b>'+done.size+'</b><span>lições concluídas</span></div>'+
+    '<div class="stat"><b>3</b><span>clouds comparados (AKS·GKE·EKS)</span></div>'+
+    '</div>'+
+    '<h2 class="sec-title">Trilha de aprendizado</h2>'+
+    '<div class="trail">'+COURSE.map(function(m){
+      return '<div class="trail-card" data-first="'+m.lessons[0].id+'"><span class="tc-num">'+m.num+'</span>'+
+      '<span class="lvl lvl-'+m.level+'">'+(m.level==='ini'?'Iniciante':m.level==='int'?'Intermediário':'Avançado')+'</span>'+
+      '<h3>'+m.title+'</h3>'+
+      '<p>'+m.lessons.length+' lições · '+m.lessons.reduce(function(a,l){return a+l.mins;},0)+' min de leitura+prática</p></div>';
+    }).join('')+'</div>'+
+    '<h2 class="sec-title">Vídeos de referência (transcrições base)</h2>'+vids+
+    '<h2 class="sec-title">Validação de conteúdo</h2>'+
+    '<div class="src-grid">'+
+    '<div class="src-card"><b>📘 Documentação oficial do Kubernetes</b><small>Todas as áreas de kubernetes.io/docs/concepts cobertas: Architecture, Containers, Workloads, Services/Networking, Storage, Configuration, Security, Policies, Scheduling/Eviction, Cluster Admin e Extending.</small></div>'+
+    '<div class="src-card"><b>🎬 DevOps Directive — Beginner to Pro</b><small>As 14 seções do curso (incl. debugging, multi-env, upgrades e developer experience) estão mapeadas neste curso.</small></div>'+
+    '<div class="src-card"><b>🎬 Maria Lazara — Projeto DevOps</b><small>Base prática de Docker e CI/CD dos módulos iniciais.</small></div>'+
+    '<div class="src-card"><b>☁️ Docs oficiais dos providers</b><small>Pricing e integrações conferidos em: learn.microsoft.com/azure/aks · cloud.google.com/kubernetes-engine · eks.aws/docs.</small></div>'+
+    '</div></div>';
+  $('#startBtn').addEventListener('click',function(){location.hash='#/lesson/m0l1';});
+  $('#projBtn').addEventListener('click',function(){location.hash='#/lesson/m10l4';});
+  document.querySelectorAll('.trail-card').forEach(function(c){c.addEventListener('click',function(){location.hash='#/lesson/'+c.dataset.first;});});
+}
+
+let currentLesson=null;
+function renderLesson(id){
+  const idx = FLAT.findIndex(l=>l.id===id);
+  if(idx<0) return renderHome();
+  const l = FLAT[idx]; currentLesson=id;
+  const prev = FLAT[idx-1], next = FLAT[idx+1];
+  const isDone = done.has(id);
+  $('#main').innerHTML = '<div class="content lesson">'+
+    '<div class="crumb">Módulo '+l.mod.num+' <span>▸</span> '+l.mod.title+'</div>'+
+    '<h1>'+l.title+'</h1>'+
+    '<div class="meta"><span>⏱ ~'+l.mins+' min</span><span>·</span><span>'+(isDone?'✅ concluída':'📖 em andamento')+'</span></div>'+
+    l.body+
+    '<button class="done-btn '+(isDone?'is-done':'')+'" id="doneBtn">'+(isDone?'✓ Concluída — clicar p/ desmarcar':'Marcar como concluída ✓')+'</button>'+
+    '<div class="les-nav">'+
+    (prev?'<a class="nav-card" href="#/lesson/'+prev.id+'"><small>← Anterior</small><b>'+prev.title+'</b></a>':'<a class="nav-card" href="#/home"><small>← Início</small><b>Visão geral</b></a>')+
+    (next?'<a class="nav-card next" href="#/lesson/'+next.id+'"><small>Próxima →</small><b>'+next.title+'</b></a>':'<a class="nav-card next" href="#/home"><small>Fim 🎉</small><b>Voltar ao início</b></a>')+
+    '</div></div>';
+  $('#doneBtn').addEventListener('click',function(){ done.has(id)?done.delete(id):done.add(id); saveProgress(); renderSidebar(); updateProgress(); renderLesson(id); });
+  try{ if(window.Prism) Prism.highlightAllUnder($('#main')); }catch(e){}
+  syncActive();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function route(){
+  const h = location.hash;
+  if(h.indexOf('#/lesson/')===0) renderLesson(h.replace('#/lesson/',''));
+  else renderHome();
+}
+window.addEventListener('hashchange',route);
+
+$('#main').addEventListener('click',function(e){
+  const opt=e.target.closest('.quiz-opt');
+  if(opt){
+    const quiz=opt.closest('.quiz'); if(!quiz||quiz.classList.contains('done'))return;
+    const correct=+quiz.dataset.correct, i=+opt.dataset.i;
+    quiz.classList.add('done');
+    quiz.querySelectorAll('.quiz-opt').forEach(function(b){b.disabled=true; if(+b.dataset.i===correct)b.classList.add('correct');});
+    if(i!==correct) opt.classList.add('wrong');
+    const fb=quiz.querySelector('.quiz-fb');
+    fb.className='quiz-fb '+(i===correct?'ok':'no');
+    fb.textContent = i===correct ? '✅ '+quiz.dataset.explain : '❌ Não exatamente. '+quiz.dataset.explain;
+    return;
+  }
+  const tab=e.target.closest('.ptab');
+  if(tab){
+    const scope=tab.closest('.lesson');
+    tab.parentElement.querySelectorAll('.ptab').forEach(function(t){t.classList.toggle('active',t===tab);});
+    scope.querySelectorAll('.ptab-panel').forEach(function(p){p.classList.toggle('active',p.dataset.t===tab.dataset.t);});
+    return;
+  }
+  const cp=e.target.closest('.copy-btn');
+  if(cp){
+    const code=cp.closest('.codeblock').querySelector('code').innerText;
+    navigator.clipboard.writeText(code).then(function(){cp.textContent='copiado!';setTimeout(function(){cp.textContent='copiar';},1400);});
+  }
+});
+
+const INDEX = FLAT.map(function(l){
+  const div=document.createElement('div'); div.innerHTML=l.body;
+  return {id:l.id,title:l.title,mod:l.mod.title,text:(l.title+' '+l.mod.title+' '+div.textContent).toLowerCase()};
+});
+function openSearch(){$('#searchModal').classList.add('open');$('#searchInput').value='';$('#searchResults').innerHTML='';setTimeout(function(){$('#searchInput').focus();},50);}
+function closeSearch(){$('#searchModal').classList.remove('open');}
+$('#openSearch').addEventListener('click',openSearch);
+$('#searchModal').addEventListener('click',function(e){if(e.target.id==='searchModal')closeSearch();});
+document.addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch();}
+  if(e.key==='Escape')closeSearch();
+});
+$('#searchInput').addEventListener('input',function(e){
+  const q=e.target.value.trim().toLowerCase();
+  const res=$('#searchResults');
+  if(!q){res.innerHTML='<div class="sr-empty">Digite para buscar em todo o conteúdo do curso…</div>';return;}
+  const hits=INDEX.filter(function(x){return x.text.indexOf(q)>=0;}).slice(0,12);
+  res.innerHTML = hits.length? hits.map(function(h){return '<a class="sr-item" href="#/lesson/'+h.id+'"><b>'+h.title+'</b><small>'+h.mod+'</small></a>';}).join('') : '<div class="sr-empty">Nada encontrado 😕 tente "ingress", "hpa", "secrets", "aks"…</div>';
+  res.querySelectorAll('.sr-item').forEach(function(a){a.addEventListener('click',closeSearch);});
+});
+
+const closeSide=function(){$('#sidebar').classList.remove('open');};
+$('#burger').addEventListener('click',function(){$('#sidebar').classList.toggle('open');});
+$('#sidebar').addEventListener('click',function(e){if(e.target.closest('.les-link'))closeSide();});
+$('#logoHome').addEventListener('click',function(){location.hash='#/home';});
+
+renderSidebar(); updateProgress(); route();
+</script>
+</body>
+</html>

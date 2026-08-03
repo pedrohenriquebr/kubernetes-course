@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# logs e temporários
+*.log
+
+# ferramentas
+.playwright-mcp/
+.zcode/
+graphify-out/

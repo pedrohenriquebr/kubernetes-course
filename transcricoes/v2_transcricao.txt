@@ -1,0 +1,3932 @@
+Seja muito bem-vindo ao primeiro
+Seja muito bem-vindo ao primeiro
+Seja muito bem-vindo ao primeiro
+episódio do laboratório de voz. Você
+episódio do laboratório de voz. Você
+episódio do laboratório de voz. Você
+estuda, lê livros, assiste aulas, mas
+estuda, lê livros, assiste aulas, mas
+estuda, lê livros, assiste aulas, mas
+sente que falta algo concreto, né? Que a
+sente que falta algo concreto, né? Que a
+sente que falta algo concreto, né? Que a
+teoria ela não se conecta com a prática.
+teoria ela não se conecta com a prática.
+teoria ela não se conecta com a prática.
+Eu sei exatamente como é isso e foi
+Eu sei exatamente como é isso e foi
+Eu sei exatamente como é isso e foi
+justamente pensando nisso que eu criei
+justamente pensando nisso que eu criei
+justamente pensando nisso que eu criei
+essa série pra gente colocar a mão na
+essa série pra gente colocar a mão na
+essa série pra gente colocar a mão na
+massa de verdade. Eu sou a Maria,
+massa de verdade. Eu sou a Maria,
+massa de verdade. Eu sou a Maria,
+engenheira de VOPS e hoje eu vou te
+engenheira de VOPS e hoje eu vou te
+engenheira de VOPS e hoje eu vou te
+guiar por um guia prático de projetos
+guiar por um guia prático de projetos
+guiar por um guia prático de projetos
+DevOps, pensado para você dar os seus
+DevOps, pensado para você dar os seus
+DevOps, pensado para você dar os seus
+primeiros passos na carreira e melhor
+primeiros passos na carreira e melhor
+primeiros passos na carreira e melhor
+ainda, construir um projeto que você
+ainda, construir um projeto que você
+ainda, construir um projeto que você
+pode colocar no seu portfólio do GitHub.
+pode colocar no seu portfólio do GitHub.
+pode colocar no seu portfólio do GitHub.
+Hoje mesmo a gente vai começar do zero e
+Hoje mesmo a gente vai começar do zero e
+Hoje mesmo a gente vai começar do zero e
+evoluir até um fluxo totalmente
+evoluir até um fluxo totalmente
+evoluir até um fluxo totalmente
+automatizado. E o melhor é que essa
+automatizado. E o melhor é que essa
+automatizado. E o melhor é que essa
+série ela vai ser 100% gratuita para que
+série ela vai ser 100% gratuita para que
+série ela vai ser 100% gratuita para que
+qualquer pessoa possa acompanhar sem
+qualquer pessoa possa acompanhar sem
+qualquer pessoa possa acompanhar sem
+gastar nenhum centavo. Nesse vídeo a
+gastar nenhum centavo. Nesse vídeo a
+gastar nenhum centavo. Nesse vídeo a
+gente vai construir um projeto do zero
+gente vai construir um projeto do zero
+gente vai construir um projeto do zero
+em três fases. Primeiro, a gente vai
+em três fases. Primeiro, a gente vai
+em três fases. Primeiro, a gente vai
+containerizar e fazer o deploy manual de
+containerizar e fazer o deploy manual de
+containerizar e fazer o deploy manual de
+um site estático na AWS. Depois a gente
+um site estático na AWS. Depois a gente
+um site estático na AWS. Depois a gente
+vai automatizar toda a parte da
+vai automatizar toda a parte da
+vai automatizar toda a parte da
+infraestrutura com o Terraform. E para
+infraestrutura com o Terraform. E para
+infraestrutura com o Terraform. E para
+fechar com chave de ouro, a gente vai
+fechar com chave de ouro, a gente vai
+fechar com chave de ouro, a gente vai
+implementar uma automação completa com
+implementar uma automação completa com
+implementar uma automação completa com
+CD utilizando o GitHub Actions. Vai ser
+CD utilizando o GitHub Actions. Vai ser
+CD utilizando o GitHub Actions. Vai ser
+uma jornada do simples até algo mais
+uma jornada do simples até algo mais
+uma jornada do simples até algo mais
+avançado, mais elaborado, pensada para
+avançado, mais elaborado, pensada para
+avançado, mais elaborado, pensada para
+quem quer aprender de verdade e ganhar a
+quem quer aprender de verdade e ganhar a
+quem quer aprender de verdade e ganhar a
+experiência prática. Então já deixa seu
+experiência prática. Então já deixa seu
+experiência prática. Então já deixa seu
+like, se inscreve no canal e ativa o
+like, se inscreve no canal e ativa o
+like, se inscreve no canal e ativa o
+sininho para que você não perca nenhum
+sininho para que você não perca nenhum
+sininho para que você não perca nenhum
+episódio dessa série. E antes da gente
+episódio dessa série. E antes da gente
+episódio dessa série. E antes da gente
+começar, é muito importante que você
+começar, é muito importante que você
+começar, é muito importante que você
+tenha alguns conhecimentos básicos. Não
+tenha alguns conhecimentos básicos. Não
+tenha alguns conhecimentos básicos. Não
+precisa se preocupar porque você não
+precisa se preocupar porque você não
+precisa se preocupar porque você não
+precisa ser um expert, mas você precisa
+precisa ser um expert, mas você precisa
+precisa ser um expert, mas você precisa
+ter uma base para te ajudar a acompanhar
+ter uma base para te ajudar a acompanhar
+ter uma base para te ajudar a acompanhar
+essa aula. É importante que você saiba
+essa aula. É importante que você saiba
+essa aula. É importante que você saiba
+Linux, os comandos básicos do terminal,
+Linux, os comandos básicos do terminal,
+Linux, os comandos básicos do terminal,
+que você entenda, né, sobre Docker, o
+que você entenda, né, sobre Docker, o
+que você entenda, né, sobre Docker, o
+que que é um contêiner, uma imagem,
+que que é um contêiner, uma imagem,
+que que é um contêiner, uma imagem,
+Docker file, que você tenha
+Docker file, que você tenha
+Docker file, que você tenha
+conhecimentos básicos de Git para poder
+conhecimentos básicos de Git para poder
+conhecimentos básicos de Git para poder
+clonar os repositórios e que você saiba
+clonar os repositórios e que você saiba
+clonar os repositórios e que você saiba
+o que é a WS, tenha as noções básicas do
+o que é a WS, tenha as noções básicas do
+o que é a WS, tenha as noções básicas do
+que que é uma EC2, enfim. E pro seu
+que que é uma EC2, enfim. E pro seu
+que que é uma EC2, enfim. E pro seu
+ambiente de trabalho, certifique-se de
+ambiente de trabalho, certifique-se de
+ambiente de trabalho, certifique-se de
+ter a AWSCLI instalada e configurada,
+ter a AWSCLI instalada e configurada,
+ter a AWSCLI instalada e configurada,
+uma conta na AWS criada e o Docker já
+uma conta na AWS criada e o Docker já
+uma conta na AWS criada e o Docker já
+instalado na sua máquina. E por fim, um
+instalado na sua máquina. E por fim, um
+instalado na sua máquina. E por fim, um
+editor de código como VS Code, por
+editor de código como VS Code, por
+editor de código como VS Code, por
+exemplo, para que a gente consiga fazer
+exemplo, para que a gente consiga fazer
+exemplo, para que a gente consiga fazer
+esse laboratório. Se você já tem tudo
+esse laboratório. Se você já tem tudo
+esse laboratório. Se você já tem tudo
+isso pronto, então bora pro projeto.
+isso pronto, então bora pro projeto.
+isso pronto, então bora pro projeto.
+Então vamos lá, pessoal. Esse daqui é o
+Então vamos lá, pessoal. Esse daqui é o
+Então vamos lá, pessoal. Esse daqui é o
+nosso repositório, aonde vai estar todas
+nosso repositório, aonde vai estar todas
+nosso repositório, aonde vai estar todas
+as fases do projeto com a devida
+as fases do projeto com a devida
+as fases do projeto com a devida
+documentação. Então vocês podem ler com
+documentação. Então vocês podem ler com
+documentação. Então vocês podem ler com
+calma, entender do que que se trata e
+calma, entender do que que se trata e
+calma, entender do que que se trata e
+clicando dentro de cada fase aqui também
+clicando dentro de cada fase aqui também
+clicando dentro de cada fase aqui também
+tem toda uma documentação explicando o
+tem toda uma documentação explicando o
+tem toda uma documentação explicando o
+passo a passo que eu vou seguir aqui.
+passo a passo que eu vou seguir aqui.
+passo a passo que eu vou seguir aqui.
+Então, antes da gente de fato partir pra
+Então, antes da gente de fato partir pra
+Então, antes da gente de fato partir pra
+prática desse projeto, a gente precisa
+prática desse projeto, a gente precisa
+prática desse projeto, a gente precisa
+entender o seguinte, a gente precisa
+entender o seguinte, a gente precisa
+entender o seguinte, a gente precisa
+entender como que funciona o fluxo de
+entender como que funciona o fluxo de
+entender como que funciona o fluxo de
+desenvolvimento de um produto. Igual eu
+desenvolvimento de um produto. Igual eu
+desenvolvimento de um produto. Igual eu
+falei no meu vídeo sobre o dia a dia
+falei no meu vídeo sobre o dia a dia
+falei no meu vídeo sobre o dia a dia
+prático de um engenheiro de VOPS, a
+prático de um engenheiro de VOPS, a
+prático de um engenheiro de VOPS, a
+gente precisa entender do negócio como
+gente precisa entender do negócio como
+gente precisa entender do negócio como
+um todo, ou seja, nós precisamos ter uma
+um todo, ou seja, nós precisamos ter uma
+um todo, ou seja, nós precisamos ter uma
+visão ampla do que que a empresa vende,
+visão ampla do que que a empresa vende,
+visão ampla do que que a empresa vende,
+de quais são os objetivos estratégicos
+de quais são os objetivos estratégicos
+de quais são os objetivos estratégicos
+dessa empresa para que a gente consiga
+dessa empresa para que a gente consiga
+dessa empresa para que a gente consiga
+atender a demanda de uma forma mais
+atender a demanda de uma forma mais
+atender a demanda de uma forma mais
+eficiente. Então, eu desenhei aqui um
+eficiente. Então, eu desenhei aqui um
+eficiente. Então, eu desenhei aqui um
+fluxo e eu vou explicar para vocês sobre
+fluxo e eu vou explicar para vocês sobre
+fluxo e eu vou explicar para vocês sobre
+a nossa empresa fictícia. Então, a
+a nossa empresa fictícia. Então, a
+a nossa empresa fictícia. Então, a
+partir de agora, você é oficialmente o
+partir de agora, você é oficialmente o
+partir de agora, você é oficialmente o
+engenheiro DevOps Júnior e você foi
+engenheiro DevOps Júnior e você foi
+engenheiro DevOps Júnior e você foi
+contratado na empresa X. Uma empresa,
+contratado na empresa X. Uma empresa,
+contratado na empresa X. Uma empresa,
+ela geralmente desenvolve um produto
+ela geralmente desenvolve um produto
+ela geralmente desenvolve um produto
+para um determinado cliente. Ela atende
+para um determinado cliente. Ela atende
+para um determinado cliente. Ela atende
+uma demanda e o cliente ele paga por
+uma demanda e o cliente ele paga por
+uma demanda e o cliente ele paga por
+esse produto ou serviço. Esse é o
+esse produto ou serviço. Esse é o
+esse produto ou serviço. Esse é o
+objetivo principal de uma empresa.
+objetivo principal de uma empresa.
+objetivo principal de uma empresa.
+Então, pensando aqui, o nosso produto
+Então, pensando aqui, o nosso produto
+Então, pensando aqui, o nosso produto
+vai ser um website estático. Então, a
+vai ser um website estático. Então, a
+vai ser um website estático. Então, a
+nossa empresa, ela desenvolve sites. Eu
+nossa empresa, ela desenvolve sites. Eu
+nossa empresa, ela desenvolve sites. Eu
+pensei aqui numa aplicação bem simples,
+pensei aqui numa aplicação bem simples,
+pensei aqui numa aplicação bem simples,
+então vai ser um site estático, não vai
+então vai ser um site estático, não vai
+então vai ser um site estático, não vai
+ter conexão com banco de dados, nada
+ter conexão com banco de dados, nada
+ter conexão com banco de dados, nada
+disso, mas quem sabe mais pra frente aí
+disso, mas quem sabe mais pra frente aí
+disso, mas quem sabe mais pra frente aí
+a gente não continue este laboratório e,
+a gente não continue este laboratório e,
+a gente não continue este laboratório e,
+enfim, faça o deploy de aplicações mais
+enfim, faça o deploy de aplicações mais
+enfim, faça o deploy de aplicações mais
+complexas que vão se aproximar de fato
+complexas que vão se aproximar de fato
+complexas que vão se aproximar de fato
+do dia a dia prático. Mas como eu quis
+do dia a dia prático. Mas como eu quis
+do dia a dia prático. Mas como eu quis
+trazer algo aqui para pessoas
+trazer algo aqui para pessoas
+trazer algo aqui para pessoas
+iniciantes, vamos começar com o website
+iniciantes, vamos começar com o website
+iniciantes, vamos começar com o website
+estático. E aí, como que funciona, né?
+estático. E aí, como que funciona, né?
+estático. E aí, como que funciona, né?
+Uma empresa, ela olha a demanda do
+Uma empresa, ela olha a demanda do
+Uma empresa, ela olha a demanda do
+mercado e ela começa a desenvolver, a
+mercado e ela começa a desenvolver, a
+mercado e ela começa a desenvolver, a
+pensar no escopo do produto, né, que ela
+pensar no escopo do produto, né, que ela
+pensar no escopo do produto, né, que ela
+vai vender. E este produto, por
+vai vender. E este produto, por
+vai vender. E este produto, por
+consequência, ele se torna um projeto. E
+consequência, ele se torna um projeto. E
+consequência, ele se torna um projeto. E
+esse projeto ele vai ser dividido em
+esse projeto ele vai ser dividido em
+esse projeto ele vai ser dividido em
+fases, em etapas. E cada time vai ser
+fases, em etapas. E cada time vai ser
+fases, em etapas. E cada time vai ser
+responsável por uma etapa. Então aqui no
+responsável por uma etapa. Então aqui no
+responsável por uma etapa. Então aqui no
+meu desenho, por exemplo, na etapa um,
+meu desenho, por exemplo, na etapa um,
+meu desenho, por exemplo, na etapa um,
+os desenvolvedores, né, frontend,
+os desenvolvedores, né, frontend,
+os desenvolvedores, né, frontend,
+backend, enfim, eles vão construir a
+backend, enfim, eles vão construir a
+backend, enfim, eles vão construir a
+aplicação, eles vão construir o site,
+aplicação, eles vão construir o site,
+aplicação, eles vão construir o site,
+escrever o código HTML e CSS,
+escrever o código HTML e CSS,
+escrever o código HTML e CSS,
+JavaScript. Com esse site, né, já
+JavaScript. Com esse site, né, já
+JavaScript. Com esse site, né, já
+desenvolvido, o pessoal do time de, por
+desenvolvido, o pessoal do time de, por
+desenvolvido, o pessoal do time de, por
+exemplo, vai fazer os testes, as
+exemplo, vai fazer os testes, as
+exemplo, vai fazer os testes, as
+validações. O time de infraestrutura vai
+validações. O time de infraestrutura vai
+validações. O time de infraestrutura vai
+subir o ambiente aonde essa aplicação
+subir o ambiente aonde essa aplicação
+subir o ambiente aonde essa aplicação
+vai rodar. Aqui no meu caso, onde eu
+vai rodar. Aqui no meu caso, onde eu
+vai rodar. Aqui no meu caso, onde eu
+trabalho, eu também sou responsável pela
+trabalho, eu também sou responsável pela
+trabalho, eu também sou responsável pela
+infraestrutura. Então eu como devops, eu
+infraestrutura. Então eu como devops, eu
+infraestrutura. Então eu como devops, eu
+crio o ambiente essa aplicação ela vai
+crio o ambiente essa aplicação ela vai
+crio o ambiente essa aplicação ela vai
+estar funcionando. Aqui eu até
+estar funcionando. Aqui eu até
+estar funcionando. Aqui eu até
+dupliquei, isso aqui não precisa. E aí a
+dupliquei, isso aqui não precisa. E aí a
+dupliquei, isso aqui não precisa. E aí a
+gente de fato entrega esse projeto, esse
+gente de fato entrega esse projeto, esse
+gente de fato entrega esse projeto, esse
+produto pro nosso usuário final. E tem o
+produto pro nosso usuário final. E tem o
+produto pro nosso usuário final. E tem o
+time de operações que vai manter este
+time de operações que vai manter este
+time de operações que vai manter este
+site de pé, eh, vai monitorar, vai
+site de pé, eh, vai monitorar, vai
+site de pé, eh, vai monitorar, vai
+resolver incidentes caso dê algum
+resolver incidentes caso dê algum
+resolver incidentes caso dê algum
+problema em produção. Então, o time de
+problema em produção. Então, o time de
+problema em produção. Então, o time de
+operações fica responsável por manter. O
+operações fica responsável por manter. O
+operações fica responsável por manter. O
+time de desenvolvimento vai desenvolver,
+time de desenvolvimento vai desenvolver,
+time de desenvolvimento vai desenvolver,
+vai criar aplicação e o time de
+vai criar aplicação e o time de
+vai criar aplicação e o time de
+operações vai manter essa aplicação. E
+operações vai manter essa aplicação. E
+operações vai manter essa aplicação. E
+nós do time devols, nós vamos estar
+nós do time devols, nós vamos estar
+nós do time devols, nós vamos estar
+olhando para todo este processo de
+olhando para todo este processo de
+olhando para todo este processo de
+desenvolvimento do software, pensando
+desenvolvimento do software, pensando
+desenvolvimento do software, pensando
+numa forma de melhorar, simplificar e
+numa forma de melhorar, simplificar e
+numa forma de melhorar, simplificar e
+automatizar todo este processo. Aqui eu
+automatizar todo este processo. Aqui eu
+automatizar todo este processo. Aqui eu
+coloquei para vocês uma imagem do ciclo
+coloquei para vocês uma imagem do ciclo
+coloquei para vocês uma imagem do ciclo
+de vida do desenvolvimento do software,
+de vida do desenvolvimento do software,
+de vida do desenvolvimento do software,
+que a fase um consiste no planejamento.
+que a fase um consiste no planejamento.
+que a fase um consiste no planejamento.
+Depois a gente tem, né, a análise de
+Depois a gente tem, né, a análise de
+Depois a gente tem, né, a análise de
+requisitos, o design, a codificação e
+requisitos, o design, a codificação e
+requisitos, o design, a codificação e
+testagem, a implantação em si, que é a
+testagem, a implantação em si, que é a
+testagem, a implantação em si, que é a
+entrega, né, e a manutenção que é feita
+entrega, né, e a manutenção que é feita
+entrega, né, e a manutenção que é feita
+pelo time de operações. Eu recomendo
+pelo time de operações. Eu recomendo
+pelo time de operações. Eu recomendo
+fortemente que você estude sobre o ciclo
+fortemente que você estude sobre o ciclo
+fortemente que você estude sobre o ciclo
+de desenvolvimento de software, porque
+de desenvolvimento de software, porque
+de desenvolvimento de software, porque
+nós como DevOps sempre vamos estar
+nós como DevOps sempre vamos estar
+nós como DevOps sempre vamos estar
+olhando para essas etapas e pensando
+olhando para essas etapas e pensando
+olhando para essas etapas e pensando
+numa forma de melhorar todo este
+numa forma de melhorar todo este
+numa forma de melhorar todo este
+processo. E aqui, né, se você nunca viu,
+processo. E aqui, né, se você nunca viu,
+processo. E aqui, né, se você nunca viu,
+este daqui é o símbolo do DevOps, que é
+este daqui é o símbolo do DevOps, que é
+este daqui é o símbolo do DevOps, que é
+o infinito, aonde a gente tem todas
+o infinito, aonde a gente tem todas
+o infinito, aonde a gente tem todas
+essas etapas e o DevOps vai sempre estar
+essas etapas e o DevOps vai sempre estar
+essas etapas e o DevOps vai sempre estar
+olhando para todas essas etapas que eu
+olhando para todas essas etapas que eu
+olhando para todas essas etapas que eu
+expliquei. Então, vamos lá. Por que que
+expliquei. Então, vamos lá. Por que que
+expliquei. Então, vamos lá. Por que que
+a empresa ela contrata um engenheiro de
+a empresa ela contrata um engenheiro de
+a empresa ela contrata um engenheiro de
+vóps? Ela não contrata porque tá na
+vóps? Ela não contrata porque tá na
+vóps? Ela não contrata porque tá na
+moda, né? Enfim, ela contrata porque ela
+moda, né? Enfim, ela contrata porque ela
+moda, né? Enfim, ela contrata porque ela
+tem um objetivo e este objetivo é
+tem um objetivo e este objetivo é
+tem um objetivo e este objetivo é
+resolver problemas. Então, nós fomos
+resolver problemas. Então, nós fomos
+resolver problemas. Então, nós fomos
+contratados aqui na nossa empresa
+contratados aqui na nossa empresa
+contratados aqui na nossa empresa
+fictícia para resolver um um problema. O
+fictícia para resolver um um problema. O
+fictícia para resolver um um problema. O
+que que tá acontecendo hoje? O deploy do
+que que tá acontecendo hoje? O deploy do
+que que tá acontecendo hoje? O deploy do
+site pros nossos clientes, ele é feito
+site pros nossos clientes, ele é feito
+site pros nossos clientes, ele é feito
+totalmente de forma manual, ou seja, o
+totalmente de forma manual, ou seja, o
+totalmente de forma manual, ou seja, o
+desenvolvedor ele faz a aplicação, né, o
+desenvolvedor ele faz a aplicação, né, o
+desenvolvedor ele faz a aplicação, né, o
+site e depois esse site tá pronto, ele
+site e depois esse site tá pronto, ele
+site e depois esse site tá pronto, ele
+envia o código para o GitHub, né, que é
+envia o código para o GitHub, né, que é
+envia o código para o GitHub, né, que é
+onde a gente armazena os códigos. E aí a
+onde a gente armazena os códigos. E aí a
+onde a gente armazena os códigos. E aí a
+pessoa responsável por fazer o deploy
+pessoa responsável por fazer o deploy
+pessoa responsável por fazer o deploy
+dessa aplicação, ela entra de forma
+dessa aplicação, ela entra de forma
+dessa aplicação, ela entra de forma
+manual no servidor, aonde vai ficar
+manual no servidor, aonde vai ficar
+manual no servidor, aonde vai ficar
+hospedada essa aplicação. Então ela
+hospedada essa aplicação. Então ela
+hospedada essa aplicação. Então ela
+entra manualmente na máquina, ela
+entra manualmente na máquina, ela
+entra manualmente na máquina, ela
+instala o NJNEX. Então para quem não
+instala o NJNEX. Então para quem não
+instala o NJNEX. Então para quem não
+sabe, o NJNEX ele é um servidor web, né,
+sabe, o NJNEX ele é um servidor web, né,
+sabe, o NJNEX ele é um servidor web, né,
+que ele pode servir conteúdo estático,
+que ele pode servir conteúdo estático,
+que ele pode servir conteúdo estático,
+ou seja, quando a gente acessa a
+ou seja, quando a gente acessa a
+ou seja, quando a gente acessa a
+aplicação, tem o JNEX por trás. Então,
+aplicação, tem o JNEX por trás. Então,
+aplicação, tem o JNEX por trás. Então,
+voltando aqui pro nosso desenho, é, a
+voltando aqui pro nosso desenho, é, a
+voltando aqui pro nosso desenho, é, a
+pessoa que era responsável pelo deploy
+pessoa que era responsável pelo deploy
+pessoa que era responsável pelo deploy
+dessa aplicação, ela instalava o Injnex
+dessa aplicação, ela instalava o Injnex
+dessa aplicação, ela instalava o Injnex
+na mão dentro do servidor. Aí ela
+na mão dentro do servidor. Aí ela
+na mão dentro do servidor. Aí ela
+copiava os arquivos, né, que estava na
+copiava os arquivos, né, que estava na
+copiava os arquivos, né, que estava na
+máquina dela, do website para este
+máquina dela, do website para este
+máquina dela, do website para este
+servidor e ela iniciava o serviço. Só
+servidor e ela iniciava o serviço. Só
+servidor e ela iniciava o serviço. Só
+que o que que acontecia, eh, o que que
+que o que que acontecia, eh, o que que
+que o que que acontecia, eh, o que que
+acontecia, ou melhor, está acontecendo
+acontecia, ou melhor, está acontecendo
+acontecia, ou melhor, está acontecendo
+na nossa empresa fictícia de problemas
+na nossa empresa fictícia de problemas
+na nossa empresa fictícia de problemas
+para nós resolvermos. Não existe só este
+para nós resolvermos. Não existe só este
+para nós resolvermos. Não existe só este
+site rodando aqui nessa instância. A
+site rodando aqui nessa instância. A
+site rodando aqui nessa instância. A
+gente paga por essa instância, certo? A
+gente paga por essa instância, certo? A
+gente paga por essa instância, certo? A
+gente precisa aproveitar todos os
+gente precisa aproveitar todos os
+gente precisa aproveitar todos os
+recursos que essa instância fornece pra
+recursos que essa instância fornece pra
+recursos que essa instância fornece pra
+gente, pra gente conseguir rodar as
+gente, pra gente conseguir rodar as
+gente, pra gente conseguir rodar as
+nossas aplicações. Então, quando você
+nossas aplicações. Então, quando você
+nossas aplicações. Então, quando você
+for e trabalhar para uma empresa, é
+for e trabalhar para uma empresa, é
+for e trabalhar para uma empresa, é
+muito raro da gente ter um servidor
+muito raro da gente ter um servidor
+muito raro da gente ter um servidor
+exclusivo para uma aplicação específica,
+exclusivo para uma aplicação específica,
+exclusivo para uma aplicação específica,
+por exemplo, um site WordPress. É muito
+por exemplo, um site WordPress. É muito
+por exemplo, um site WordPress. É muito
+raro você ver isso. Geralmente na mesma
+raro você ver isso. Geralmente na mesma
+raro você ver isso. Geralmente na mesma
+instância vai ter um banco de dados, vai
+instância vai ter um banco de dados, vai
+instância vai ter um banco de dados, vai
+ter uma aplicação node, vai ter outros
+ter uma aplicação node, vai ter outros
+ter uma aplicação node, vai ter outros
+websites, enfim. Então, nesse caso
+websites, enfim. Então, nesse caso
+websites, enfim. Então, nesse caso
+específico aqui da nossa empresa, a
+específico aqui da nossa empresa, a
+específico aqui da nossa empresa, a
+gente tem vários aplicações rodando
+gente tem vários aplicações rodando
+gente tem vários aplicações rodando
+neste servidor, nesta máquina. E aí,
+neste servidor, nesta máquina. E aí,
+neste servidor, nesta máquina. E aí,
+quando a gente faz esse processo de
+quando a gente faz esse processo de
+quando a gente faz esse processo de
+forma manual e sem nenhum tipo de
+forma manual e sem nenhum tipo de
+forma manual e sem nenhum tipo de
+isolamento, geralmente os erros que dão
+isolamento, geralmente os erros que dão
+isolamento, geralmente os erros que dão
+é conflito de dependências, né? Então,
+é conflito de dependências, né? Então,
+é conflito de dependências, né? Então,
+às vezes eu vou instalar o Injnex e
+às vezes eu vou instalar o Injnex e
+às vezes eu vou instalar o Injnex e
+nessa máquina já poderia estar instalado
+nessa máquina já poderia estar instalado
+nessa máquina já poderia estar instalado
+um servidor Apach e aí a porta 80, que é
+um servidor Apach e aí a porta 80, que é
+um servidor Apach e aí a porta 80, que é
+a porta padrão, já estaria sendo
+a porta padrão, já estaria sendo
+a porta padrão, já estaria sendo
+utilizada por outro serviço e daria
+utilizada por outro serviço e daria
+utilizada por outro serviço e daria
+conflitos, né, conflitos com outras
+conflitos, né, conflitos com outras
+conflitos, né, conflitos com outras
+aplicações que estão presentes nessa
+aplicações que estão presentes nessa
+aplicações que estão presentes nessa
+máquina. Então, há uma falta de
+máquina. Então, há uma falta de
+máquina. Então, há uma falta de
+isolamento muito grande. Isso pode
+isolamento muito grande. Isso pode
+isolamento muito grande. Isso pode
+causar diversos problemas. Eh, um
+causar diversos problemas. Eh, um
+causar diversos problemas. Eh, um
+problema clássico é você entrar
+problema clássico é você entrar
+problema clássico é você entrar
+manualmente no servidor, editar algum
+manualmente no servidor, editar algum
+manualmente no servidor, editar algum
+arquivo de forma errada, apagar algum
+arquivo de forma errada, apagar algum
+arquivo de forma errada, apagar algum
+caminho e aí você acaba prejudicando
+caminho e aí você acaba prejudicando
+caminho e aí você acaba prejudicando
+outras aplicações, outros sites que
+outras aplicações, outros sites que
+outras aplicações, outros sites que
+estão rodando dentro dessa máquina.
+estão rodando dentro dessa máquina.
+estão rodando dentro dessa máquina.
+Outro problema também é a dificuldade da
+Outro problema também é a dificuldade da
+Outro problema também é a dificuldade da
+gente conseguir replicar esse ambiente.
+gente conseguir replicar esse ambiente.
+gente conseguir replicar esse ambiente.
+Então, por exemplo, a gente quer subir
+Então, por exemplo, a gente quer subir
+Então, por exemplo, a gente quer subir
+uma instância exatamente igual a essa
+uma instância exatamente igual a essa
+uma instância exatamente igual a essa
+para o ambiente de homologação. Como que
+para o ambiente de homologação. Como que
+para o ambiente de homologação. Como que
+a gente faz isso de forma manual, com
+a gente faz isso de forma manual, com
+a gente faz isso de forma manual, com
+tudo isso rodando? é muito complicado de
+tudo isso rodando? é muito complicado de
+tudo isso rodando? é muito complicado de
+fazer, muito custoso. Fora aqui pode
+fazer, muito custoso. Fora aqui pode
+fazer, muito custoso. Fora aqui pode
+haver versões diferentes. Então, na
+haver versões diferentes. Então, na
+haver versões diferentes. Então, na
+máquina do dev, às vezes ele tá rodando
+máquina do dev, às vezes ele tá rodando
+máquina do dev, às vezes ele tá rodando
+uma versão do Engine, que nesta máquina
+uma versão do Engine, que nesta máquina
+uma versão do Engine, que nesta máquina
+em específica é outra versão e isso dá
+em específica é outra versão e isso dá
+em específica é outra versão e isso dá
+também dá problemas. E aí quem sofre com
+também dá problemas. E aí quem sofre com
+também dá problemas. E aí quem sofre com
+tudo isso é o cliente final, é a empresa
+tudo isso é o cliente final, é a empresa
+tudo isso é o cliente final, é a empresa
+perdendo dinheiro, porque a gente demora
+perdendo dinheiro, porque a gente demora
+perdendo dinheiro, porque a gente demora
+para fazer o deploy dessa aplicação. Às
+para fazer o deploy dessa aplicação. Às
+para fazer o deploy dessa aplicação. Às
+vezes o cliente não vai conseguir
+vezes o cliente não vai conseguir
+vezes o cliente não vai conseguir
+acessar, vai ficar fora porque a gente
+acessar, vai ficar fora porque a gente
+acessar, vai ficar fora porque a gente
+errou. Tudo isso tá gerando prejuízo
+errou. Tudo isso tá gerando prejuízo
+errou. Tudo isso tá gerando prejuízo
+para a empresa.
+Então, a empresa ela contratou a gente
+Então, a empresa ela contratou a gente
+Então, a empresa ela contratou a gente
+para resolver esses problemas. E nós,
+para resolver esses problemas. E nós,
+para resolver esses problemas. E nós,
+como engenheiros de BOPs, nós sempre
+como engenheiros de BOPs, nós sempre
+como engenheiros de BOPs, nós sempre
+temos que pensar em como a gente vai
+temos que pensar em como a gente vai
+temos que pensar em como a gente vai
+reduzir o tempo de entrega do produto,
+reduzir o tempo de entrega do produto,
+reduzir o tempo de entrega do produto,
+como que a gente vai consumir menos
+como que a gente vai consumir menos
+como que a gente vai consumir menos
+recursos, né, e consequentemente menos
+recursos, né, e consequentemente menos
+recursos, né, e consequentemente menos
+dinheiro. Então você como engenheiro de
+dinheiro. Então você como engenheiro de
+dinheiro. Então você como engenheiro de
+Volop sempre tem que est olhando para
+Volop sempre tem que est olhando para
+Volop sempre tem que est olhando para
+isso, olhando para os objetivos do
+isso, olhando para os objetivos do
+isso, olhando para os objetivos do
+negócio. Então, depois de ter toda essa
+negócio. Então, depois de ter toda essa
+negócio. Então, depois de ter toda essa
+análise desse cenário, a gente vai
+análise desse cenário, a gente vai
+análise desse cenário, a gente vai
+começar a estruturar na nossa cabeça
+começar a estruturar na nossa cabeça
+começar a estruturar na nossa cabeça
+como que nós vamos resolver o problema
+como que nós vamos resolver o problema
+como que nós vamos resolver o problema
+de falta de isolamento que está tendo no
+de falta de isolamento que está tendo no
+de falta de isolamento que está tendo no
+nosso servidor, na nossa empresa atual.
+nosso servidor, na nossa empresa atual.
+nosso servidor, na nossa empresa atual.
+Chegou pra gente a demanda, vamos subir
+Chegou pra gente a demanda, vamos subir
+Chegou pra gente a demanda, vamos subir
+uma aplicação, vamos subir um website
+uma aplicação, vamos subir um website
+uma aplicação, vamos subir um website
+para o nosso cliente num servidor, só
+para o nosso cliente num servidor, só
+para o nosso cliente num servidor, só
+que de uma forma que esse servidor ele
+que de uma forma que esse servidor ele
+que de uma forma que esse servidor ele
+possa ser compartilhado e tenha
+possa ser compartilhado e tenha
+possa ser compartilhado e tenha
+isolamento entre as aplicações. Então,
+isolamento entre as aplicações. Então,
+isolamento entre as aplicações. Então,
+para isso, o nosso fluxo vai ser
+para isso, o nosso fluxo vai ser
+para isso, o nosso fluxo vai ser
+praticamente o mesmo. O desenvolvedor,
+praticamente o mesmo. O desenvolvedor,
+praticamente o mesmo. O desenvolvedor,
+ele vai entregar a app pronta pra gente
+ele vai entregar a app pronta pra gente
+ele vai entregar a app pronta pra gente
+no GitHub e nós, como DevOps vamos criar
+no GitHub e nós, como DevOps vamos criar
+no GitHub e nós, como DevOps vamos criar
+uma imagem desta aplicação. Nós vamos
+uma imagem desta aplicação. Nós vamos
+uma imagem desta aplicação. Nós vamos
+criar toda a infraestrutura para este
+criar toda a infraestrutura para este
+criar toda a infraestrutura para este
+projeto. No nosso caso aqui vai ser o
+projeto. No nosso caso aqui vai ser o
+projeto. No nosso caso aqui vai ser o
+ECR, que é onde nós vamos armazenar as
+ECR, que é onde nós vamos armazenar as
+ECR, que é onde nós vamos armazenar as
+nossas imagens. E nós vamos subir uma
+nossas imagens. E nós vamos subir uma
+nossas imagens. E nós vamos subir uma
+máquina, uma instância E S2, baixar a
+máquina, uma instância E S2, baixar a
+máquina, uma instância E S2, baixar a
+imagem que nós armazenamos no SR dentro
+imagem que nós armazenamos no SR dentro
+imagem que nós armazenamos no SR dentro
+da nossa S2. Nós vamos rodar este
+da nossa S2. Nós vamos rodar este
+da nossa S2. Nós vamos rodar este
+contêiner aqui no servidor e aí o nosso
+contêiner aqui no servidor e aí o nosso
+contêiner aqui no servidor e aí o nosso
+cliente vai conseguir acessar essa
+cliente vai conseguir acessar essa
+cliente vai conseguir acessar essa
+aplicação pelo navegador dele. Então
+aplicação pelo navegador dele. Então
+aplicação pelo navegador dele. Então
+vamos lá, bora pra prática. Então vamos
+vamos lá, bora pra prática. Então vamos
+vamos lá, bora pra prática. Então vamos
+lá pessoal, vou criar uma nova pasta
+lá pessoal, vou criar uma nova pasta
+lá pessoal, vou criar uma nova pasta
+aqui paraa gente começar a trabalhar no
+aqui paraa gente começar a trabalhar no
+aqui paraa gente começar a trabalhar no
+nosso projeto dentro de uma pasta que eu
+nosso projeto dentro de uma pasta que eu
+nosso projeto dentro de uma pasta que eu
+já tenho chamada projetos e a pasta vai
+já tenho chamada projetos e a pasta vai
+já tenho chamada projetos e a pasta vai
+chamar Lab. Eu vou entrar dentro dela e
+chamar Lab. Eu vou entrar dentro dela e
+chamar Lab. Eu vou entrar dentro dela e
+aí eu vou clonar o meu repositório.
+aí eu vou clonar o meu repositório.
+aí eu vou clonar o meu repositório.
+Então eu vou copiar o RL do repositório
+Então eu vou copiar o RL do repositório
+Então eu vou copiar o RL do repositório
+aqui e vou colar aqui, fazer o git
+aqui e vou colar aqui, fazer o git
+aqui e vou colar aqui, fazer o git
+clone. Beleza? Com repositório clonado,
+clone. Beleza? Com repositório clonado,
+clone. Beleza? Com repositório clonado,
+eu vou abrir o meu VS Code. Com meu
+eu vou abrir o meu VS Code. Com meu
+eu vou abrir o meu VS Code. Com meu
+Visual Studio Code aberto aqui, a gente
+Visual Studio Code aberto aqui, a gente
+Visual Studio Code aberto aqui, a gente
+já tem a estrutura das pastas e cada
+já tem a estrutura das pastas e cada
+já tem a estrutura das pastas e cada
+pasta, né, cada fase vai ter a
+pasta, né, cada fase vai ter a
+pasta, né, cada fase vai ter a
+referência e o arquivo do código e o
+referência e o arquivo do código e o
+referência e o arquivo do código e o
+readm
+readm
+readm
+instruções para você seguir esse
+instruções para você seguir esse
+instruções para você seguir esse
+laboratório. Pra gente não se confundir
+laboratório. Pra gente não se confundir
+laboratório. Pra gente não se confundir
+aqui, eu vou copiar a pasta website, que
+aqui, eu vou copiar a pasta website, que
+aqui, eu vou copiar a pasta website, que
+é onde de fato está a nossa aplicação, e
+é onde de fato está a nossa aplicação, e
+é onde de fato está a nossa aplicação, e
+vou colar aqui fora. Então vamos pensar
+vou colar aqui fora. Então vamos pensar
+vou colar aqui fora. Então vamos pensar
+como que funciona no dia a dia, né?
+como que funciona no dia a dia, né?
+como que funciona no dia a dia, né?
+chega pra gente a aplicação, é o o
+chega pra gente a aplicação, é o o
+chega pra gente a aplicação, é o o
+código dessa aplicação, como é o caso
+código dessa aplicação, como é o caso
+código dessa aplicação, como é o caso
+aqui do website, e nós vamos ser
+aqui do website, e nós vamos ser
+aqui do website, e nós vamos ser
+responsáveis por fazer o deploy desta
+responsáveis por fazer o deploy desta
+responsáveis por fazer o deploy desta
+aplicação. Qual que é a primeira coisa
+aplicação. Qual que é a primeira coisa
+aplicação. Qual que é a primeira coisa
+que a gente faz? Analisa a aplicação,
+que a gente faz? Analisa a aplicação,
+que a gente faz? Analisa a aplicação,
+entende o que ela é, para que que ela
+entende o que ela é, para que que ela
+entende o que ela é, para que que ela
+serve. Então, no nosso caso aqui, é um
+serve. Então, no nosso caso aqui, é um
+serve. Então, no nosso caso aqui, é um
+site estático que está desenvolvido em
+site estático que está desenvolvido em
+site estático que está desenvolvido em
+código HTML, que possui um JavaScript e
+código HTML, que possui um JavaScript e
+código HTML, que possui um JavaScript e
+também um estilo do CSS. Pra gente
+também um estilo do CSS. Pra gente
+também um estilo do CSS. Pra gente
+conseguir visualizar, né, a nossa
+conseguir visualizar, né, a nossa
+conseguir visualizar, né, a nossa
+aplicação, eu tenho uma extensão chamada
+aplicação, eu tenho uma extensão chamada
+aplicação, eu tenho uma extensão chamada
+Live Server. Então, se você vir aqui em
+Live Server. Então, se você vir aqui em
+Live Server. Então, se você vir aqui em
+extensões e pesquisar por Live Server, é
+extensões e pesquisar por Live Server, é
+extensões e pesquisar por Live Server, é
+esse daqui, tá? Você pode baixar. E aí,
+esse daqui, tá? Você pode baixar. E aí,
+esse daqui, tá? Você pode baixar. E aí,
+clicando com o botão direito no HTML, a
+clicando com o botão direito no HTML, a
+clicando com o botão direito no HTML, a
+gente consegue Open with Live Server. É
+gente consegue Open with Live Server. É
+gente consegue Open with Live Server. É
+só você clicar aqui em Open with Live
+só você clicar aqui em Open with Live
+só você clicar aqui em Open with Live
+Server que vai aparecer pra gente aqui o
+Server que vai aparecer pra gente aqui o
+Server que vai aparecer pra gente aqui o
+site. Então, esse aqui é o nosso site
+site. Então, esse aqui é o nosso site
+site. Então, esse aqui é o nosso site
+que a gente vai fazer o deploy, tá? bem
+que a gente vai fazer o deploy, tá? bem
+que a gente vai fazer o deploy, tá? bem
+basiquinho mesmo. E aí você consegue
+basiquinho mesmo. E aí você consegue
+basiquinho mesmo. E aí você consegue
+visualizar. Qual que é a primeira coisa
+visualizar. Qual que é a primeira coisa
+visualizar. Qual que é a primeira coisa
+que a gente vai fazer? A gente vai
+que a gente vai fazer? A gente vai
+que a gente vai fazer? A gente vai
+pensar numa forma de empacotar essa
+pensar numa forma de empacotar essa
+pensar numa forma de empacotar essa
+aplicação. Ou seja, nós vamos criar uma
+aplicação. Ou seja, nós vamos criar uma
+aplicação. Ou seja, nós vamos criar uma
+imagem para essa aplicação, pro nosso
+imagem para essa aplicação, pro nosso
+imagem para essa aplicação, pro nosso
+site estático. E a nossa imagem, ela vai
+site estático. E a nossa imagem, ela vai
+site estático. E a nossa imagem, ela vai
+se basear no enginex. Então, a gente
+se basear no enginex. Então, a gente
+se basear no enginex. Então, a gente
+sempre analisa o problema, o cenário, e
+sempre analisa o problema, o cenário, e
+sempre analisa o problema, o cenário, e
+aí paraa gente desenvolver uma solução,
+aí paraa gente desenvolver uma solução,
+aí paraa gente desenvolver uma solução,
+a gente precisa entender o que era feito
+a gente precisa entender o que era feito
+a gente precisa entender o que era feito
+antes e como que a gente pode adaptar
+antes e como que a gente pode adaptar
+antes e como que a gente pode adaptar
+esse processo para poder fazer de uma
+esse processo para poder fazer de uma
+esse processo para poder fazer de uma
+forma mais eficaz. Então, no processo
+forma mais eficaz. Então, no processo
+forma mais eficaz. Então, no processo
+antigo, o desenvolvedor, a pessoa, ela
+antigo, o desenvolvedor, a pessoa, ela
+antigo, o desenvolvedor, a pessoa, ela
+entrava manualmente na máquina até ir,
+entrava manualmente na máquina até ir,
+entrava manualmente na máquina até ir,
+OK? e ela instalava o JNEX na mão. Só
+OK? e ela instalava o JNEX na mão. Só
+OK? e ela instalava o JNEX na mão. Só
+que ao invés da gente instalar as coisas
+que ao invés da gente instalar as coisas
+que ao invés da gente instalar as coisas
+na mão, a gente vai utilizar o arquivo
+na mão, a gente vai utilizar o arquivo
+na mão, a gente vai utilizar o arquivo
+que a gente chama Docker File para poder
+que a gente chama Docker File para poder
+que a gente chama Docker File para poder
+criar a nossa imagem. E aí a gente vai
+criar a nossa imagem. E aí a gente vai
+criar a nossa imagem. E aí a gente vai
+se basear no Njx. Maria, não tô
+se basear no Njx. Maria, não tô
+se basear no Njx. Maria, não tô
+entendendo nada, sem problema, vamos com
+entendendo nada, sem problema, vamos com
+entendendo nada, sem problema, vamos com
+calma. Então aqui eu vou criar um novo
+calma. Então aqui eu vou criar um novo
+calma. Então aqui eu vou criar um novo
+arquivo chamado Docker File. Então né,
+arquivo chamado Docker File. Então né,
+arquivo chamado Docker File. Então né,
+ao invés da gente entrar na máquina e
+ao invés da gente entrar na máquina e
+ao invés da gente entrar na máquina e
+instalar tudo manualmente, nós vamos
+instalar tudo manualmente, nós vamos
+instalar tudo manualmente, nós vamos
+criar o que nós chamamos de Docker File.
+criar o que nós chamamos de Docker File.
+criar o que nós chamamos de Docker File.
+Mas o que que é um Docker File? Um
+Mas o que que é um Docker File? Um
+Mas o que que é um Docker File? Um
+Docker File é como se fosse uma receita
+Docker File é como se fosse uma receita
+Docker File é como se fosse uma receita
+de bolo pra sua aplicação. Nele vai
+de bolo pra sua aplicação. Nele vai
+de bolo pra sua aplicação. Nele vai
+conter todas as informações e instruções
+conter todas as informações e instruções
+conter todas as informações e instruções
+para você montar o ambiente aonde a sua
+para você montar o ambiente aonde a sua
+para você montar o ambiente aonde a sua
+aplicação ela vai rodar. Então primeiro
+aplicação ela vai rodar. Então primeiro
+aplicação ela vai rodar. Então primeiro
+a gente precisa pensar, nós vamos se
+a gente precisa pensar, nós vamos se
+a gente precisa pensar, nós vamos se
+basear no quê? No Engine Next. Então, a
+basear no quê? No Engine Next. Então, a
+basear no quê? No Engine Next. Então, a
+gente inicia sempre o Docker file com
+gente inicia sempre o Docker file com
+gente inicia sempre o Docker file com
+from e eu vou digitar enginear
+from e eu vou digitar enginear
+from e eu vou digitar enginear
+a versão do Alpine. O que que é isso? O
+a versão do Alpine. O que que é isso? O
+a versão do Alpine. O que que é isso? O
+Alpine é uma distribuição Linux
+Alpine é uma distribuição Linux
+Alpine é uma distribuição Linux
+minimalista e ela é perfeita para
+minimalista e ela é perfeita para
+minimalista e ela é perfeita para
+contêiners porque ela ocupa muito pouco
+contêiners porque ela ocupa muito pouco
+contêiners porque ela ocupa muito pouco
+espaço e ela é bem segura. E da onde que
+espaço e ela é bem segura. E da onde que
+espaço e ela é bem segura. E da onde que
+eu tô tirando isso daqui, né? A gente
+eu tô tirando isso daqui, né? A gente
+eu tô tirando isso daqui, né? A gente
+tem o que a gente chama de Docker Hub,
+tem o que a gente chama de Docker Hub,
+tem o que a gente chama de Docker Hub,
+que é onde ficam armazenadas todas as
+que é onde ficam armazenadas todas as
+que é onde ficam armazenadas todas as
+imagens do Docker, certo? Então, é um
+imagens do Docker, certo? Então, é um
+imagens do Docker, certo? Então, é um
+repositório comunitário onde as pessoas
+repositório comunitário onde as pessoas
+repositório comunitário onde as pessoas
+elas sobem as imagens aqui e a gente tem
+elas sobem as imagens aqui e a gente tem
+elas sobem as imagens aqui e a gente tem
+imagens oficiais, como por exemplo a
+imagens oficiais, como por exemplo a
+imagens oficiais, como por exemplo a
+imagem do NJ Next. Tem várias versões do
+imagem do NJ Next. Tem várias versões do
+imagem do NJ Next. Tem várias versões do
+NJ Next aqui e eu escolhi a versão
+NJ Next aqui e eu escolhi a versão
+NJ Next aqui e eu escolhi a versão
+Alpine, tá vendo? Se eu clicar aqui, ele
+Alpine, tá vendo? Se eu clicar aqui, ele
+Alpine, tá vendo? Se eu clicar aqui, ele
+mostra para mim todo o Docker File do
+mostra para mim todo o Docker File do
+mostra para mim todo o Docker File do
+Engine Next na versão Alpine. E aí a
+Engine Next na versão Alpine. E aí a
+Engine Next na versão Alpine. E aí a
+gente tem a imagem do Enginex. É que ele
+gente tem a imagem do Enginex. É que ele
+gente tem a imagem do Enginex. É que ele
+até mostra, né? Ele dá pra gente aqui
+até mostra, né? Ele dá pra gente aqui
+até mostra, né? Ele dá pra gente aqui
+toda a documentação falando como que eu
+toda a documentação falando como que eu
+toda a documentação falando como que eu
+posso criar uma imagem baseada no
+posso criar uma imagem baseada no
+posso criar uma imagem baseada no
+Enginex. Então aqui é o from Engine,
+Enginex. Então aqui é o from Engine,
+Enginex. Então aqui é o from Engine,
+dois pontos eu passo a tag. A tag é o
+dois pontos eu passo a tag. A tag é o
+dois pontos eu passo a tag. A tag é o
+Alpine no caso. E aí aqui a gente tem o
+Alpine no caso. E aí aqui a gente tem o
+Alpine no caso. E aí aqui a gente tem o
+nosso segundo comando, que é copy static
+nosso segundo comando, que é copy static
+nosso segundo comando, que é copy static
+HTML directory para este caminho aqui.
+HTML directory para este caminho aqui.
+HTML directory para este caminho aqui.
+Isso nada mais é do que o que o
+Isso nada mais é do que o que o
+Isso nada mais é do que o que o
+desenvolvedor, a pessoa quando ela fazia
+desenvolvedor, a pessoa quando ela fazia
+desenvolvedor, a pessoa quando ela fazia
+de forma manual, ela fazia na máquina.
+de forma manual, ela fazia na máquina.
+de forma manual, ela fazia na máquina.
+Então ela copiava os arquivos do site.
+Então ela copiava os arquivos do site.
+Então ela copiava os arquivos do site.
+Quando eu falo arquivos do site, eu tô
+Quando eu falo arquivos do site, eu tô
+Quando eu falo arquivos do site, eu tô
+falando do HTML, do CSS e do JavaScript.
+falando do HTML, do CSS e do JavaScript.
+falando do HTML, do CSS e do JavaScript.
+Ela copiava esse conjunto de arquivos
+Ela copiava esse conjunto de arquivos
+Ela copiava esse conjunto de arquivos
+para dentro deste pés, né, para dentro
+para dentro deste pés, né, para dentro
+para dentro deste pés, né, para dentro
+deste caminho barrausr share
+deste caminho barrausr share
+deste caminho barrausr share
+html, que é o caminho padrão, o caminho
+html, que é o caminho padrão, o caminho
+html, que é o caminho padrão, o caminho
+root do servidor em JNEX. Só que ao
+root do servidor em JNEX. Só que ao
+root do servidor em JNEX. Só que ao
+invés da gente copiar isso diretamente
+invés da gente copiar isso diretamente
+invés da gente copiar isso diretamente
+dentro lá da instância da máquina S2, a
+dentro lá da instância da máquina S2, a
+dentro lá da instância da máquina S2, a
+gente vai fazer isso no nosso arquivo
+gente vai fazer isso no nosso arquivo
+gente vai fazer isso no nosso arquivo
+Docker File, porque a gente vai copiar
+Docker File, porque a gente vai copiar
+Docker File, porque a gente vai copiar
+os arquivos que está dentro de website,
+os arquivos que está dentro de website,
+os arquivos que está dentro de website,
+né, dentro da nossa pasta para dentro do
+né, dentro da nossa pasta para dentro do
+né, dentro da nossa pasta para dentro do
+contêiner neste PEF. Então, eu não sei
+contêiner neste PEF. Então, eu não sei
+contêiner neste PEF. Então, eu não sei
+se você tá reparando, mas a gente tá
+se você tá reparando, mas a gente tá
+se você tá reparando, mas a gente tá
+meio que melhorando o processo que já
+meio que melhorando o processo que já
+meio que melhorando o processo que já
+acontecia. A gente tá fazendo, entre
+acontecia. A gente tá fazendo, entre
+acontecia. A gente tá fazendo, entre
+aspas a mesma coisa, só que de uma forma
+aspas a mesma coisa, só que de uma forma
+aspas a mesma coisa, só que de uma forma
+bem melhor, bem mais escalável, bem mais
+bem melhor, bem mais escalável, bem mais
+bem melhor, bem mais escalável, bem mais
+rápida. Então aqui eu posso até copiar
+rápida. Então aqui eu posso até copiar
+rápida. Então aqui eu posso até copiar
+essa parte aqui da documentação do COP e
+essa parte aqui da documentação do COP e
+essa parte aqui da documentação do COP e
+vou colar no nosso arquivo Docker File.
+vou colar no nosso arquivo Docker File.
+vou colar no nosso arquivo Docker File.
+E como que funciona o comando copia? A
+E como que funciona o comando copia? A
+E como que funciona o comando copia? A
+primeira parte do comando é a pasta, o
+primeira parte do comando é a pasta, o
+primeira parte do comando é a pasta, o
+arquivo que a gente quer copiar, né? É
+arquivo que a gente quer copiar, né? É
+arquivo que a gente quer copiar, né? É
+onde a gente vai fazer o contrl C. E a
+onde a gente vai fazer o contrl C. E a
+onde a gente vai fazer o contrl C. E a
+segunda parte depois do espaço é o
+segunda parte depois do espaço é o
+segunda parte depois do espaço é o
+caminho dentro do contêiner que a gente
+caminho dentro do contêiner que a gente
+caminho dentro do contêiner que a gente
+vai colar, né, que a gente vai mover
+vai colar, né, que a gente vai mover
+vai colar, né, que a gente vai mover
+esses arquivos. O que que eu vou copiar
+esses arquivos. O que que eu vou copiar
+esses arquivos. O que que eu vou copiar
+aqui? No meu caso, eu vou copiar a pasta
+aqui? No meu caso, eu vou copiar a pasta
+aqui? No meu caso, eu vou copiar a pasta
+website. O arquivo Docker File, ele tá
+website. O arquivo Docker File, ele tá
+website. O arquivo Docker File, ele tá
+no mesmo lugar que o website. Então, se
+no mesmo lugar que o website. Então, se
+no mesmo lugar que o website. Então, se
+eu abrir o terminal aqui e eu der um LS
+eu abrir o terminal aqui e eu der um LS
+eu abrir o terminal aqui e eu der um LS
+nessa pasta lab, se você reparar, o
+nessa pasta lab, se você reparar, o
+nessa pasta lab, se você reparar, o
+Docker File está na mesma pasta que a
+Docker File está na mesma pasta que a
+Docker File está na mesma pasta que a
+pasta website. Então aqui eu vou passar
+pasta website. Então aqui eu vou passar
+pasta website. Então aqui eu vou passar
+apenas o nome da pasta. Então ele vai
+apenas o nome da pasta. Então ele vai
+apenas o nome da pasta. Então ele vai
+copiar tudo que tá dentro de website. O
+copiar tudo que tá dentro de website. O
+copiar tudo que tá dentro de website. O
+que que tá dentro de website? O código
+que que tá dentro de website? O código
+que que tá dentro de website? O código
+CSS, JavaScript e o index html. E eu vou
+CSS, JavaScript e o index html. E eu vou
+CSS, JavaScript e o index html. E eu vou
+colar, né? Eu vou mover esses arquivos
+colar, né? Eu vou mover esses arquivos
+colar, né? Eu vou mover esses arquivos
+para dentro deste lugar aqui no meu
+para dentro deste lugar aqui no meu
+para dentro deste lugar aqui no meu
+contêiner. Feito isso, a gente precisa
+contêiner. Feito isso, a gente precisa
+contêiner. Feito isso, a gente precisa
+expor a porta desse contêiner para que
+expor a porta desse contêiner para que
+expor a porta desse contêiner para que
+ele receba as requisições, né? Para que
+ele receba as requisições, né? Para que
+ele receba as requisições, né? Para que
+ele consiga receber as requisições
+ele consiga receber as requisições
+ele consiga receber as requisições
+externas. A porta padrão para conexões,
+externas. A porta padrão para conexões,
+externas. A porta padrão para conexões,
+né, HTTP é a porta 80. Então é
+né, HTTP é a porta 80. Então é
+né, HTTP é a porta 80. Então é
+literalmente o comando expose, qual
+literalmente o comando expose, qual
+literalmente o comando expose, qual
+porta? 80. E por fim a gente precisa
+porta? 80. E por fim a gente precisa
+porta? 80. E por fim a gente precisa
+rodar um comando que vai iniciar o NJ
+rodar um comando que vai iniciar o NJ
+rodar um comando que vai iniciar o NJ
+Next e manter, né, o NJNX rodando.
+Next e manter, né, o NJNX rodando.
+Next e manter, né, o NJNX rodando.
+Então, pensando no nosso cenário antigo,
+Então, pensando no nosso cenário antigo,
+Então, pensando no nosso cenário antigo,
+a pessoa que era responsável pelo
+a pessoa que era responsável pelo
+a pessoa que era responsável pelo
+deploy, ela rodava ali um CCTL Start
+deploy, ela rodava ali um CCTL Start
+deploy, ela rodava ali um CCTL Start
+Enginex, então ela iniciava o serviço do
+Enginex, então ela iniciava o serviço do
+Enginex, então ela iniciava o serviço do
+Engineex. Como que a gente faz isso aqui
+Engineex. Como que a gente faz isso aqui
+Engineex. Como que a gente faz isso aqui
+no nosso Docker file, dentro do nosso
+no nosso Docker file, dentro do nosso
+no nosso Docker file, dentro do nosso
+contêiner? a gente roda um comando e
+contêiner? a gente roda um comando e
+contêiner? a gente roda um comando e
+para isso a gente utiliza o cmd. E aqui
+para isso a gente utiliza o cmd. E aqui
+para isso a gente utiliza o cmd. E aqui
+eu vou até dar o tab que ele tá
+eu vou até dar o tab que ele tá
+eu vou até dar o tab que ele tá
+completando aqui para mim. Caso você
+completando aqui para mim. Caso você
+completando aqui para mim. Caso você
+esteja com dúvida, eu até perguntei pro
+esteja com dúvida, eu até perguntei pro
+esteja com dúvida, eu até perguntei pro
+copilot aqui qual que é o significado
+copilot aqui qual que é o significado
+copilot aqui qual que é o significado
+específico de cada parte desse comando
+específico de cada parte desse comando
+específico de cada parte desse comando
+aqui para que você entenda. Então o cmd
+aqui para que você entenda. Então o cmd
+aqui para que você entenda. Então o cmd
+é a instrução do docker file que vai
+é a instrução do docker file que vai
+é a instrução do docker file que vai
+definir o comando que eu vou executar é
+definir o comando que eu vou executar é
+definir o comando que eu vou executar é
+quando o meu contêiner iniciar. Cada
+quando o meu contêiner iniciar. Cada
+quando o meu contêiner iniciar. Cada
+elemento desse array é um argumento
+elemento desse array é um argumento
+elemento desse array é um argumento
+separado. Então eu vou rodar em J Next,
+separado. Então eu vou rodar em J Next,
+separado. Então eu vou rodar em J Next,
+que é o executável principal do
+que é o executável principal do
+que é o executável principal do
+servidor. Então menos G é a flag que eu
+servidor. Então menos G é a flag que eu
+servidor. Então menos G é a flag que eu
+tô passando, certo? Que ela é global. E
+tô passando, certo? Que ela é global. E
+tô passando, certo? Que ela é global. E
+aí aqui é o que que eu quero, né, de
+aí aqui é o que que eu quero, né, de
+aí aqui é o que que eu quero, né, de
+configuração, neste caso, Demonf, que
+configuração, neste caso, Demonf, que
+configuração, neste caso, Demonf, que
+vai instruir o NJNEX a rodar em primeiro
+vai instruir o NJNEX a rodar em primeiro
+vai instruir o NJNEX a rodar em primeiro
+plano. Aqui até tá falando por, né, que
+plano. Aqui até tá falando por, né, que
+plano. Aqui até tá falando por, né, que
+que isso é importante. É porque o
+que isso é importante. É porque o
+que isso é importante. É porque o
+contêiner precisa manter o processo
+contêiner precisa manter o processo
+contêiner precisa manter o processo
+principal rodando e se o NJ Next rodasse
+principal rodando e se o NJ Next rodasse
+principal rodando e se o NJ Next rodasse
+em background, o contêiner iria encerrar
+em background, o contêiner iria encerrar
+em background, o contêiner iria encerrar
+imediatamente. Quando a gente tá
+imediatamente. Quando a gente tá
+imediatamente. Quando a gente tá
+trabalhando com Docker, o contêiner ele
+trabalhando com Docker, o contêiner ele
+trabalhando com Docker, o contêiner ele
+só vive, ele só fica funcionando quando
+só vive, ele só fica funcionando quando
+só vive, ele só fica funcionando quando
+há um processo ativo. Se o processo ele
+há um processo ativo. Se o processo ele
+há um processo ativo. Se o processo ele
+por algum motivo para, né, ou inicia e
+por algum motivo para, né, ou inicia e
+por algum motivo para, né, ou inicia e
+termina, o contêiner termina quando não
+termina, o contêiner termina quando não
+termina, o contêiner termina quando não
+há nenhum processo ativo. Bom, o nosso
+há nenhum processo ativo. Bom, o nosso
+há nenhum processo ativo. Bom, o nosso
+Dockerfile já está completo, então toda
+Dockerfile já está completo, então toda
+Dockerfile já está completo, então toda
+aquela parte que a pessoa ela faria
+aquela parte que a pessoa ela faria
+aquela parte que a pessoa ela faria
+manualmente dentro do servidor, a gente
+manualmente dentro do servidor, a gente
+manualmente dentro do servidor, a gente
+passou para cá, né? Então, a gente,
+passou para cá, né? Então, a gente,
+passou para cá, né? Então, a gente,
+entre aspas, instalou o Enjinnex já
+entre aspas, instalou o Enjinnex já
+entre aspas, instalou o Enjinnex já
+utilizando uma imagem base do INJNX na
+utilizando uma imagem base do INJNX na
+utilizando uma imagem base do INJNX na
+versão Alpine. A gente copiou todos
+versão Alpine. A gente copiou todos
+versão Alpine. A gente copiou todos
+esses arquivos para dentro do PEF padrão
+esses arquivos para dentro do PEF padrão
+esses arquivos para dentro do PEF padrão
+do NJNX. A gente expôs a porta 80 e a
+do NJNX. A gente expôs a porta 80 e a
+do NJNX. A gente expôs a porta 80 e a
+gente rodou o comando para manter esse
+gente rodou o comando para manter esse
+gente rodou o comando para manter esse
+contêiner funcionando. Só que eu só
+contêiner funcionando. Só que eu só
+contêiner funcionando. Só que eu só
+criei o arquivo, né? Isso não tá rodando
+criei o arquivo, né? Isso não tá rodando
+criei o arquivo, né? Isso não tá rodando
+em nenhum lugar, não tá funcionando. O
+em nenhum lugar, não tá funcionando. O
+em nenhum lugar, não tá funcionando. O
+que que eu tenho que fazer agora? A
+que que eu tenho que fazer agora? A
+que que eu tenho que fazer agora? A
+gente precisa empacotar, a gente precisa
+gente precisa empacotar, a gente precisa
+gente precisa empacotar, a gente precisa
+criar a imagem do nosso site. Então, o
+criar a imagem do nosso site. Então, o
+criar a imagem do nosso site. Então, o
+que que eu tenho que fazer agora? Eu
+que que eu tenho que fazer agora? Eu
+que que eu tenho que fazer agora? Eu
+preciso fazer o build desta imagem. Se
+preciso fazer o build desta imagem. Se
+preciso fazer o build desta imagem. Se
+eu digitar o comando docker images, ele
+eu digitar o comando docker images, ele
+eu digitar o comando docker images, ele
+vai listar para mim todas as imagens que
+vai listar para mim todas as imagens que
+vai listar para mim todas as imagens que
+eu tenho aqui na minha máquina. No caso,
+eu tenho aqui na minha máquina. No caso,
+eu tenho aqui na minha máquina. No caso,
+eu não tenho nenhuma. Para buildar essa
+eu não tenho nenhuma. Para buildar essa
+eu não tenho nenhuma. Para buildar essa
+imagem, eu vou rodar o comando docker
+imagem, eu vou rodar o comando docker
+imagem, eu vou rodar o comando docker
+build. E aí eu vou passar a flag men- T,
+build. E aí eu vou passar a flag men- T,
+build. E aí eu vou passar a flag men- T,
+que eu vou dar um nome para essa imagem.
+que eu vou dar um nome para essa imagem.
+que eu vou dar um nome para essa imagem.
+O nome, no caso, vai ser, ã, por
+O nome, no caso, vai ser, ã, por
+O nome, no caso, vai ser, ã, por
+exemplo, meu site. Eu aperto dois pontos
+exemplo, meu site. Eu aperto dois pontos
+exemplo, meu site. Eu aperto dois pontos
+e eu preciso passar a tag dessa imagem,
+e eu preciso passar a tag dessa imagem,
+e eu preciso passar a tag dessa imagem,
+ou seja, qual a versão dessa imagem. No
+ou seja, qual a versão dessa imagem. No
+ou seja, qual a versão dessa imagem. No
+meu caso, vai ser a versão 1.0. E aí,
+meu caso, vai ser a versão 1.0. E aí,
+meu caso, vai ser a versão 1.0. E aí,
+depois desse comando, eu preciso passar
+depois desse comando, eu preciso passar
+depois desse comando, eu preciso passar
+aonde está, né, o caminho do meu Docker
+aonde está, né, o caminho do meu Docker
+aonde está, né, o caminho do meu Docker
+file. No meu caso, eu vou digitar o
+file. No meu caso, eu vou digitar o
+file. No meu caso, eu vou digitar o
+ponto. Por quê? Porque o Docker File
+ponto. Por quê? Porque o Docker File
+ponto. Por quê? Porque o Docker File
+está na mesma pasta que o comando onde
+está na mesma pasta que o comando onde
+está na mesma pasta que o comando onde
+eu estou rodando. Então, ele está na
+eu estou rodando. Então, ele está na
+eu estou rodando. Então, ele está na
+pasta lab. E aí eu digito o ponto e já
+pasta lab. E aí eu digito o ponto e já
+pasta lab. E aí eu digito o ponto e já
+vai funcionar. Aqui eu digitei errado, é
+vai funcionar. Aqui eu digitei errado, é
+vai funcionar. Aqui eu digitei errado, é
+Docker build. E beleza, ele já tá
+Docker build. E beleza, ele já tá
+Docker build. E beleza, ele já tá
+buildando, já buildou a minha imagem
+buildando, já buildou a minha imagem
+buildando, já buildou a minha imagem
+aqui. Se eu der um Docker images
+aqui. Se eu der um Docker images
+aqui. Se eu der um Docker images
+novamente, ele já vai aparecer aí o meu
+novamente, ele já vai aparecer aí o meu
+novamente, ele já vai aparecer aí o meu
+site. Aqui tá aparecendo há 15 minutos
+site. Aqui tá aparecendo há 15 minutos
+site. Aqui tá aparecendo há 15 minutos
+atrás porque eu já havia criado a imagem
+atrás porque eu já havia criado a imagem
+atrás porque eu já havia criado a imagem
+e não fiz nenhuma modificação. Então
+e não fiz nenhuma modificação. Então
+e não fiz nenhuma modificação. Então
+aqui ele me dá o nome da imagem, a tag,
+aqui ele me dá o nome da imagem, a tag,
+aqui ele me dá o nome da imagem, a tag,
+um ID único para esta imagem, o tamanho
+um ID único para esta imagem, o tamanho
+um ID único para esta imagem, o tamanho
+e o tempo de criação, né? Desde quando
+e o tempo de criação, né? Desde quando
+e o tempo de criação, né? Desde quando
+essa imagem está criada, tá? Eu já criei
+essa imagem está criada, tá? Eu já criei
+essa imagem está criada, tá? Eu já criei
+imagem, Maria. E agora como que eu
+imagem, Maria. E agora como que eu
+imagem, Maria. E agora como que eu
+acesso a aplicação? Imagem é diferente
+acesso a aplicação? Imagem é diferente
+acesso a aplicação? Imagem é diferente
+de contêiner, tá? O contêiner ele se
+de contêiner, tá? O contêiner ele se
+de contêiner, tá? O contêiner ele se
+baseia numa imagem para rodar, mas eu
+baseia numa imagem para rodar, mas eu
+baseia numa imagem para rodar, mas eu
+posso ter, por exemplo, vários
+posso ter, por exemplo, vários
+posso ter, por exemplo, vários
+contêiners que utilizam a mesma imagem.
+contêiners que utilizam a mesma imagem.
+contêiners que utilizam a mesma imagem.
+Então a imagem ela serve para isso. Você
+Então a imagem ela serve para isso. Você
+Então a imagem ela serve para isso. Você
+empacota a aplicação nela e aí você pode
+empacota a aplicação nela e aí você pode
+empacota a aplicação nela e aí você pode
+rodar vários contêiners com a mesma
+rodar vários contêiners com a mesma
+rodar vários contêiners com a mesma
+imagem. E aí para poder rodar essa
+imagem. E aí para poder rodar essa
+imagem. E aí para poder rodar essa
+imagem, certo? Eu vou rodar o comando
+imagem, certo? Eu vou rodar o comando
+imagem, certo? Eu vou rodar o comando
+docker run. Eu vou passar a flag - D pro
+docker run. Eu vou passar a flag - D pro
+docker run. Eu vou passar a flag - D pro
+nosso terminal não travar. Eh, porque se
+nosso terminal não travar. Eh, porque se
+nosso terminal não travar. Eh, porque se
+eu não passar essa flag aqui, vai ficar
+eu não passar essa flag aqui, vai ficar
+eu não passar essa flag aqui, vai ficar
+aparecendo os logs e eu não vou
+aparecendo os logs e eu não vou
+aparecendo os logs e eu não vou
+conseguir sair do terminal depois. O
+conseguir sair do terminal depois. O
+conseguir sair do terminal depois. O
+parâmetro - P, que é a porta que eu vou
+parâmetro - P, que é a porta que eu vou
+parâmetro - P, que é a porta que eu vou
+acessar esse contêiner. Então, vou
+acessar esse contêiner. Então, vou
+acessar esse contêiner. Então, vou
+digitar a porta 8080, que vai
+digitar a porta 8080, que vai
+digitar a porta 8080, que vai
+redirecionar paraa porta 80 do meu
+redirecionar paraa porta 80 do meu
+redirecionar paraa porta 80 do meu
+contêiner. Essa parte aqui eu sempre
+contêiner. Essa parte aqui eu sempre
+contêiner. Essa parte aqui eu sempre
+ficava em dúvida quando eu tava
+ficava em dúvida quando eu tava
+ficava em dúvida quando eu tava
+aprendendo sobre Docker. A primeira
+aprendendo sobre Docker. A primeira
+aprendendo sobre Docker. A primeira
+parte é a porta aonde eu vou acessar no
+parte é a porta aonde eu vou acessar no
+parte é a porta aonde eu vou acessar no
+meu computador, na minha máquina. E a
+meu computador, na minha máquina. E a
+meu computador, na minha máquina. E a
+segunda parte é a porta do contêiner que
+segunda parte é a porta do contêiner que
+segunda parte é a porta do contêiner que
+está exposta. No nosso caso aqui, a
+está exposta. No nosso caso aqui, a
+está exposta. No nosso caso aqui, a
+gente expôs a porta 80. Então aqui é a
+gente expôs a porta 80. Então aqui é a
+gente expôs a porta 80. Então aqui é a
+porta 80 que eu quero acessar. A
+porta 80 que eu quero acessar. A
+porta 80 que eu quero acessar. A
+primeira parte aqui pode ser qualquer
+primeira parte aqui pode ser qualquer
+primeira parte aqui pode ser qualquer
+porta. Então aqui, por exemplo, eu
+porta. Então aqui, por exemplo, eu
+porta. Então aqui, por exemplo, eu
+poderia digitar a porta 3.000, porta 50,
+poderia digitar a porta 3.000, porta 50,
+poderia digitar a porta 3.000, porta 50,
+enfim, vai depender muito da ocasião do
+enfim, vai depender muito da ocasião do
+enfim, vai depender muito da ocasião do
+caso. É, poderia inclusive digitar a
+caso. É, poderia inclusive digitar a
+caso. É, poderia inclusive digitar a
+porta 80 mesmo para ficar os dois iguais
+porta 80 mesmo para ficar os dois iguais
+porta 80 mesmo para ficar os dois iguais
+e tanto faz, tá? E aí eu preciso passar
+e tanto faz, tá? E aí eu preciso passar
+e tanto faz, tá? E aí eu preciso passar
+qual que é a imagem que este contêiner
+qual que é a imagem que este contêiner
+qual que é a imagem que este contêiner
+utilizar. No nosso caso aqui é a imagem
+utilizar. No nosso caso aqui é a imagem
+utilizar. No nosso caso aqui é a imagem
+que a gente acabou de criar chamada meu
+que a gente acabou de criar chamada meu
+que a gente acabou de criar chamada meu
+site. Então vai ser meu site. E qual a
+site. Então vai ser meu site. E qual a
+site. Então vai ser meu site. E qual a
+tag, qual que é a versão dessa imagem? É
+tag, qual que é a versão dessa imagem? É
+tag, qual que é a versão dessa imagem? É
+a versão 1.0. Pronto, apareceu o hash
+a versão 1.0. Pronto, apareceu o hash
+a versão 1.0. Pronto, apareceu o hash
+aqui. Significa que o nosso contêiner
+aqui. Significa que o nosso contêiner
+aqui. Significa que o nosso contêiner
+está rodando. Como que eu sei se esse
+está rodando. Como que eu sei se esse
+está rodando. Como que eu sei se esse
+contêiner tá rodando? Eu digito o
+contêiner tá rodando? Eu digito o
+contêiner tá rodando? Eu digito o
+comando dockerps. Aqui a gente consegue
+comando dockerps. Aqui a gente consegue
+comando dockerps. Aqui a gente consegue
+ver que já tem o processo rodando aqui
+ver que já tem o processo rodando aqui
+ver que já tem o processo rodando aqui
+do nosso contêiner. Então ele vai ter um
+do nosso contêiner. Então ele vai ter um
+do nosso contêiner. Então ele vai ter um
+ID, ele vai ter a imagem, foi criado há
+ID, ele vai ter a imagem, foi criado há
+ID, ele vai ter a imagem, foi criado há
+10 segundos atrás. Então aqui a porta
+10 segundos atrás. Então aqui a porta
+10 segundos atrás. Então aqui a porta
+8080 está redirecionando para a porta
+8080 está redirecionando para a porta
+8080 está redirecionando para a porta
+80. E esse name aqui apareceu um nome
+80. E esse name aqui apareceu um nome
+80. E esse name aqui apareceu um nome
+aleatório porque eu não passei a flag
+aleatório porque eu não passei a flag
+aleatório porque eu não passei a flag
+name, mas se eu quisesse eu poderia
+name, mas se eu quisesse eu poderia
+name, mas se eu quisesse eu poderia
+rodar um contêiner aqui, por exemplo, e
+rodar um contêiner aqui, por exemplo, e
+rodar um contêiner aqui, por exemplo, e
+passar menos name e o nome que eu
+passar menos name e o nome que eu
+passar menos name e o nome que eu
+quisesse. Por exemplo, site dois. E aí
+quisesse. Por exemplo, site dois. E aí
+quisesse. Por exemplo, site dois. E aí
+eu vou só trocar a porta aqui na porta,
+eu vou só trocar a porta aqui na porta,
+eu vou só trocar a porta aqui na porta,
+na porta 3.000. Aqui eu tô rodando outro
+na porta 3.000. Aqui eu tô rodando outro
+na porta 3.000. Aqui eu tô rodando outro
+contêiner com a mesma imagem. E aí, se
+contêiner com a mesma imagem. E aí, se
+contêiner com a mesma imagem. E aí, se
+eu der um Dockerps, a gente tem dois
+eu der um Dockerps, a gente tem dois
+eu der um Dockerps, a gente tem dois
+contêiners usando a mesma imagem. E aqui
+contêiners usando a mesma imagem. E aqui
+contêiners usando a mesma imagem. E aqui
+aparece o nome dela, tá vendo, ó? Site
+aparece o nome dela, tá vendo, ó? Site
+aparece o nome dela, tá vendo, ó? Site
+dois. E como que eu entro, né? Como que
+dois. E como que eu entro, né? Como que
+dois. E como que eu entro, né? Como que
+eu vejo? É só digitar no meu navegador,
+eu vejo? É só digitar no meu navegador,
+eu vejo? É só digitar no meu navegador,
+local host dois pontos, a porta que eu
+local host dois pontos, a porta que eu
+local host dois pontos, a porta que eu
+quero acessar, no caso 8080. E aí a
+quero acessar, no caso 8080. E aí a
+quero acessar, no caso 8080. E aí a
+gente já tem o nosso site. Se eu digitar
+gente já tem o nosso site. Se eu digitar
+gente já tem o nosso site. Se eu digitar
+também a porta 3.000, que é do segundo
+também a porta 3.000, que é do segundo
+também a porta 3.000, que é do segundo
+contêiner, a gente também vai ter o
+contêiner, a gente também vai ter o
+contêiner, a gente também vai ter o
+mesmo site, né? Porque no caso é a mesma
+mesmo site, né? Porque no caso é a mesma
+mesmo site, né? Porque no caso é a mesma
+imagem. Então beleza, a gente já
+imagem. Então beleza, a gente já
+imagem. Então beleza, a gente já
+validou, já testou localmente aqui, já
+validou, já testou localmente aqui, já
+validou, já testou localmente aqui, já
+viu que o nosso contêiner tá
+viu que o nosso contêiner tá
+viu que o nosso contêiner tá
+funcionando, é só a gente parar o
+funcionando, é só a gente parar o
+funcionando, é só a gente parar o
+contêiner. Para isso, a gente digita o
+contêiner. Para isso, a gente digita o
+contêiner. Para isso, a gente digita o
+comando docker stop e eu copio aqui o ID
+comando docker stop e eu copio aqui o ID
+comando docker stop e eu copio aqui o ID
+desse contêiner que eu quero parar.
+desse contêiner que eu quero parar.
+desse contêiner que eu quero parar.
+Beleza, já parou. Docker PS de novo. Eu
+Beleza, já parou. Docker PS de novo. Eu
+Beleza, já parou. Docker PS de novo. Eu
+vou parar esse aqui também. Então,
+vou parar esse aqui também. Então,
+vou parar esse aqui também. Então,
+Docker stop. E agora se eu der um Docker
+Docker stop. E agora se eu der um Docker
+Docker stop. E agora se eu der um Docker
+PS, a gente não tem mais nenhum
+PS, a gente não tem mais nenhum
+PS, a gente não tem mais nenhum
+contêiner rodando. Se eu der um Docker
+contêiner rodando. Se eu der um Docker
+contêiner rodando. Se eu der um Docker
+PS-A, eu vou ver todos os contêiners que
+PS-A, eu vou ver todos os contêiners que
+PS-A, eu vou ver todos os contêiners que
+foram criados aqui por mim e que eles
+foram criados aqui por mim e que eles
+foram criados aqui por mim e que eles
+estão inativos, certo? Eu recomendo que
+estão inativos, certo? Eu recomendo que
+estão inativos, certo? Eu recomendo que
+você exclua esses contêiners. Para
+você exclua esses contêiners. Para
+você exclua esses contêiners. Para
+excluir é só você dar um docker RM e
+excluir é só você dar um docker RM e
+excluir é só você dar um docker RM e
+passar o ID do contêiner. Por exemplo,
+passar o ID do contêiner. Por exemplo,
+passar o ID do contêiner. Por exemplo,
+eu quero remover o site do aqui, Docker
+eu quero remover o site do aqui, Docker
+eu quero remover o site do aqui, Docker
+RM. E pronto. Se eu der um Docker PS -
+RM. E pronto. Se eu der um Docker PS -
+RM. E pronto. Se eu der um Docker PS -
+A, apareceu os dois. E aí faça isso,
+A, apareceu os dois. E aí faça isso,
+A, apareceu os dois. E aí faça isso,
+remova os contêiners aí. E beleza, então
+remova os contêiners aí. E beleza, então
+remova os contêiners aí. E beleza, então
+do nosso escopo aqui, a gente já
+do nosso escopo aqui, a gente já
+do nosso escopo aqui, a gente já
+conseguiu criar e empacotar a imagem da
+conseguiu criar e empacotar a imagem da
+conseguiu criar e empacotar a imagem da
+nossa aplicação. E o que a gente vai
+nossa aplicação. E o que a gente vai
+nossa aplicação. E o que a gente vai
+fazer agora vai ser a infraestrutura, ou
+fazer agora vai ser a infraestrutura, ou
+fazer agora vai ser a infraestrutura, ou
+seja, nós vamos provisionar todos os
+seja, nós vamos provisionar todos os
+seja, nós vamos provisionar todos os
+recursos na AWS. Então, a nuvem
+recursos na AWS. Então, a nuvem
+recursos na AWS. Então, a nuvem
+escolhida aqui é a WS. E a gente vai
+escolhida aqui é a WS. E a gente vai
+escolhida aqui é a WS. E a gente vai
+criar um ECR, né, um elastic container
+criar um ECR, né, um elastic container
+criar um ECR, né, um elastic container
+registry, que nada mais é do que um
+registry, que nada mais é do que um
+registry, que nada mais é do que um
+repositório de imagens da AWS. É como se
+repositório de imagens da AWS. É como se
+repositório de imagens da AWS. É como se
+fosse um Docker Hub. E nós vamos
+fosse um Docker Hub. E nós vamos
+fosse um Docker Hub. E nós vamos
+provisionar um servidor na nuvem. No
+provisionar um servidor na nuvem. No
+provisionar um servidor na nuvem. No
+nosso caso aqui, esse servidor se chama
+nosso caso aqui, esse servidor se chama
+nosso caso aqui, esse servidor se chama
+EC2, que são instâncias na AWS. Então,
+EC2, que são instâncias na AWS. Então,
+EC2, que são instâncias na AWS. Então,
+com o meu console da WS aqui, eu vou
+com o meu console da WS aqui, eu vou
+com o meu console da WS aqui, eu vou
+clicar em elastic containeristry. Se ele
+clicar em elastic containeristry. Se ele
+clicar em elastic containeristry. Se ele
+não tiver aparecendo aqui para você, é
+não tiver aparecendo aqui para você, é
+não tiver aparecendo aqui para você, é
+só você pesquisar, digitar esse R aqui.
+só você pesquisar, digitar esse R aqui.
+só você pesquisar, digitar esse R aqui.
+Aí já aparece aqui Elátic container
+Aí já aparece aqui Elátic container
+Aí já aparece aqui Elátic container
+registry. E aqui eu vou clicar em
+registry. E aqui eu vou clicar em
+registry. E aqui eu vou clicar em
+create. Repara, pessoal, que eu tô
+create. Repara, pessoal, que eu tô
+create. Repara, pessoal, que eu tô
+trabalhando na região de Ohio, né, US2.
+trabalhando na região de Ohio, né, US2.
+trabalhando na região de Ohio, né, US2.
+Eh, eu recomendo que você verifique a
+Eh, eu recomendo que você verifique a
+Eh, eu recomendo que você verifique a
+região que você está e que você crie os
+região que você está e que você crie os
+região que você está e que você crie os
+recursos, todos os recursos na mesma
+recursos, todos os recursos na mesma
+recursos, todos os recursos na mesma
+região. Para quê? Para você evitar se
+região. Para quê? Para você evitar se
+região. Para quê? Para você evitar se
+perder, porque são várias regiões e aí
+perder, porque são várias regiões e aí
+perder, porque são várias regiões e aí
+você acaba esquecendo algum recurso
+você acaba esquecendo algum recurso
+você acaba esquecendo algum recurso
+ligado. Então, sempre que você for fazer
+ligado. Então, sempre que você for fazer
+ligado. Então, sempre que você for fazer
+um laboratório, escolha uma região e
+um laboratório, escolha uma região e
+um laboratório, escolha uma região e
+crie tudo na mesma região para você não
+crie tudo na mesma região para você não
+crie tudo na mesma região para você não
+se perder. Dito isso, aqui, a gente vai
+se perder. Dito isso, aqui, a gente vai
+se perder. Dito isso, aqui, a gente vai
+dar um nome pro nosso repositório, aonde
+dar um nome pro nosso repositório, aonde
+dar um nome pro nosso repositório, aonde
+a gente vai armazenar a nossa imagem. No
+a gente vai armazenar a nossa imagem. No
+a gente vai armazenar a nossa imagem. No
+meu caso aqui, eu vou colocar site prod
+meu caso aqui, eu vou colocar site prod
+meu caso aqui, eu vou colocar site prod
+e eu não vou mudar nada, eu vou deixar
+e eu não vou mudar nada, eu vou deixar
+e eu não vou mudar nada, eu vou deixar
+as configurações padrão e eu vou clicar
+as configurações padrão e eu vou clicar
+as configurações padrão e eu vou clicar
+em create. Beleza, ele já criou aqui o
+em create. Beleza, ele já criou aqui o
+em create. Beleza, ele já criou aqui o
+meu repositório e ele já me dá a URL
+meu repositório e ele já me dá a URL
+meu repositório e ele já me dá a URL
+deste repositório. Esses primeiros
+deste repositório. Esses primeiros
+deste repositório. Esses primeiros
+números é o número da minha conta e aqui
+números é o número da minha conta e aqui
+números é o número da minha conta e aqui
+a região. Então essa é uma URL padrão.
+a região. Então essa é uma URL padrão.
+a região. Então essa é uma URL padrão.
+Todas as URLs do ECR, elas possuem essa
+Todas as URLs do ECR, elas possuem essa
+Todas as URLs do ECR, elas possuem essa
+nomenclatura, este padrão. E o barra,
+nomenclatura, este padrão. E o barra,
+nomenclatura, este padrão. E o barra,
+tudo que vier depois do barra é o nome
+tudo que vier depois do barra é o nome
+tudo que vier depois do barra é o nome
+do nosso repositório privado. E como o
+do nosso repositório privado. E como o
+do nosso repositório privado. E como o
+nome já diz, é um repositório privado,
+nome já diz, é um repositório privado,
+nome já diz, é um repositório privado,
+ou seja, como que eu vou enviar a minha
+ou seja, como que eu vou enviar a minha
+ou seja, como que eu vou enviar a minha
+imagem que eu acabei de criar para
+imagem que eu acabei de criar para
+imagem que eu acabei de criar para
+dentro do ECR. Para isso, a gente
+dentro do ECR. Para isso, a gente
+dentro do ECR. Para isso, a gente
+precisa se autenticar. Não é qualquer
+precisa se autenticar. Não é qualquer
+precisa se autenticar. Não é qualquer
+pessoa que vai conseguir baixar essa
+pessoa que vai conseguir baixar essa
+pessoa que vai conseguir baixar essa
+imagem ou enviar alguma imagem para esse
+imagem ou enviar alguma imagem para esse
+imagem ou enviar alguma imagem para esse
+repositório, porque ele é um repositório
+repositório, porque ele é um repositório
+repositório, porque ele é um repositório
+privado. Diferente do Docker Hub, aonde
+privado. Diferente do Docker Hub, aonde
+privado. Diferente do Docker Hub, aonde
+a gente consegue, por exemplo, baixar a
+a gente consegue, por exemplo, baixar a
+a gente consegue, por exemplo, baixar a
+imagem do NEX, que foi o que a gente fez
+imagem do NEX, que foi o que a gente fez
+imagem do NEX, que foi o que a gente fez
+para poder buildar essa imagem nossa,
+para poder buildar essa imagem nossa,
+para poder buildar essa imagem nossa,
+aqui a gente não vai conseguir fazer
+aqui a gente não vai conseguir fazer
+aqui a gente não vai conseguir fazer
+isso. Então, grande parte das empresas,
+isso. Então, grande parte das empresas,
+isso. Então, grande parte das empresas,
+eu diria maioria, utiliza repositórios
+eu diria maioria, utiliza repositórios
+eu diria maioria, utiliza repositórios
+privados porque eles não querem que
+privados porque eles não querem que
+privados porque eles não querem que
+qualquer pessoa acesse as suas imagens.
+qualquer pessoa acesse as suas imagens.
+qualquer pessoa acesse as suas imagens.
+Então, para se autenticar dentro do SR,
+Então, para se autenticar dentro do SR,
+Então, para se autenticar dentro do SR,
+a gente precisa de um login e de uma
+a gente precisa de um login e de uma
+a gente precisa de um login e de uma
+senha. Como que eu consigo esse login e
+senha. Como que eu consigo esse login e
+senha. Como que eu consigo esse login e
+essa senha? Se eu clicar aqui no canto
+essa senha? Se eu clicar aqui no canto
+essa senha? Se eu clicar aqui no canto
+em Security Credentials, aqui ele vai me
+em Security Credentials, aqui ele vai me
+em Security Credentials, aqui ele vai me
+dar as informações da minha conta. E
+dar as informações da minha conta. E
+dar as informações da minha conta. E
+aqui tem a parte de access keys, que é
+aqui tem a parte de access keys, que é
+aqui tem a parte de access keys, que é
+onde eu gero um login e uma senha pro
+onde eu gero um login e uma senha pro
+onde eu gero um login e uma senha pro
+meu usuário, no caso, o usuário varia
+meu usuário, no caso, o usuário varia
+meu usuário, no caso, o usuário varia
+laser. Aqui já tem uma access key
+laser. Aqui já tem uma access key
+laser. Aqui já tem uma access key
+criada, mas se você não tiver, é só
+criada, mas se você não tiver, é só
+criada, mas se você não tiver, é só
+clicar aqui em create access key, é
+clicar aqui em create access key, é
+clicar aqui em create access key, é
+command line interface, por exemplo, e
+command line interface, por exemplo, e
+command line interface, por exemplo, e
+aí você segue todas as etapas, ele vai
+aí você segue todas as etapas, ele vai
+aí você segue todas as etapas, ele vai
+te dar o seu login e a sua senha. E
+te dar o seu login e a sua senha. E
+te dar o seu login e a sua senha. E
+aonde que você insere este login e essa
+aonde que você insere este login e essa
+aonde que você insere este login e essa
+senha? Voltando aqui pro meu VS Code, se
+senha? Voltando aqui pro meu VS Code, se
+senha? Voltando aqui pro meu VS Code, se
+eu digitar a WS configure, eu consigo já
+eu digitar a WS configure, eu consigo já
+eu digitar a WS configure, eu consigo já
+fazer as configurações da WS e colocar o
+fazer as configurações da WS e colocar o
+fazer as configurações da WS e colocar o
+meu usuário e a minha senha. Então, no
+meu usuário e a minha senha. Então, no
+meu usuário e a minha senha. Então, no
+Access Key, eu vou passar o Access Key.
+Access Key, eu vou passar o Access Key.
+Access Key, eu vou passar o Access Key.
+No meu caso, eu já configurei. Se eu
+No meu caso, eu já configurei. Se eu
+No meu caso, eu já configurei. Se eu
+apertar enter, aparece o secret access
+apertar enter, aparece o secret access
+apertar enter, aparece o secret access
+key, né, que seria entre aspas a senha.
+key, né, que seria entre aspas a senha.
+key, né, que seria entre aspas a senha.
+E aí você coloca o secret, a região
+E aí você coloca o secret, a região
+E aí você coloca o secret, a região
+default, no meu caso, tá? O S e X2. Aí
+default, no meu caso, tá? O S e X2. Aí
+default, no meu caso, tá? O S e X2. Aí
+você coloca a região que você está
+você coloca a região que você está
+você coloca a região que você está
+trabalhando e o output você pode deixar
+trabalhando e o output você pode deixar
+trabalhando e o output você pode deixar
+Jon mesmo. E pronto, as configurações,
+Jon mesmo. E pronto, as configurações,
+Jon mesmo. E pronto, as configurações,
+né, as credenciais já foram setadas, já
+né, as credenciais já foram setadas, já
+né, as credenciais já foram setadas, já
+foram configuradas e aí a gente vai
+foram configuradas e aí a gente vai
+foram configuradas e aí a gente vai
+conseguir fazer o login do SR
+conseguir fazer o login do SR
+conseguir fazer o login do SR
+tranquilamente. Para fazer o login na
+tranquilamente. Para fazer o login na
+tranquilamente. Para fazer o login na
+WS, a gente vai utilizar este comando,
+WS, a gente vai utilizar este comando,
+WS, a gente vai utilizar este comando,
+que ele é um pouco grande, tá? Eu já
+que ele é um pouco grande, tá? Eu já
+que ele é um pouco grande, tá? Eu já
+colei aqui que basicamente essa primeira
+colei aqui que basicamente essa primeira
+colei aqui que basicamente essa primeira
+parte aqui antes do pipe é aonde eu vou
+parte aqui antes do pipe é aonde eu vou
+parte aqui antes do pipe é aonde eu vou
+gerar uma senha temporária que ela dura
+gerar uma senha temporária que ela dura
+gerar uma senha temporária que ela dura
+aproximadamente 12 horas para me
+aproximadamente 12 horas para me
+aproximadamente 12 horas para me
+autenticar no ECR, né, no repositório
+autenticar no ECR, né, no repositório
+autenticar no ECR, né, no repositório
+privado da WS. Esse Docker login com
+privado da WS. Esse Docker login com
+privado da WS. Esse Docker login com
+username AWS é um comando padrão pra
+username AWS é um comando padrão pra
+username AWS é um comando padrão pra
+gente fazer login utilizando essa
+gente fazer login utilizando essa
+gente fazer login utilizando essa
+credencial que foi gerada nesse primeiro
+credencial que foi gerada nesse primeiro
+credencial que foi gerada nesse primeiro
+comando. Então aqui eu vou só substituir
+comando. Então aqui eu vou só substituir
+comando. Então aqui eu vou só substituir
+pelas informações. A minha região aqui é
+pelas informações. A minha região aqui é
+pelas informações. A minha região aqui é
+o S2. Aqui eu vou colocar a minha conta
+o S2. Aqui eu vou colocar a minha conta
+o S2. Aqui eu vou colocar a minha conta
+da WS. É só clicar aqui no account ID e
+da WS. É só clicar aqui no account ID e
+da WS. É só clicar aqui no account ID e
+copiar. E aqui eu vou passar a região
+copiar. E aqui eu vou passar a região
+copiar. E aqui eu vou passar a região
+que eu estou trabalhando que é a US IS2.
+que eu estou trabalhando que é a US IS2.
+que eu estou trabalhando que é a US IS2.
+Ah, Maria, por que que você não coloca
+Ah, Maria, por que que você não coloca
+Ah, Maria, por que que você não coloca
+aqui o barra site, né, que é o nome do
+aqui o barra site, né, que é o nome do
+aqui o barra site, né, que é o nome do
+nosso repositório? Porque aqui eu tô
+nosso repositório? Porque aqui eu tô
+nosso repositório? Porque aqui eu tô
+fazendo login no ECR, né, no serviço da
+fazendo login no ECR, né, no serviço da
+fazendo login no ECR, né, no serviço da
+WS elastic container register e não no
+WS elastic container register e não no
+WS elastic container register e não no
+repositório privado em si. Então é só a
+repositório privado em si. Então é só a
+repositório privado em si. Então é só a
+gente apertar enter aqui que ele vai
+gente apertar enter aqui que ele vai
+gente apertar enter aqui que ele vai
+fazer o login. Aqui deu erro pessoal
+fazer o login. Aqui deu erro pessoal
+fazer o login. Aqui deu erro pessoal
+porque eu digitei errado. É o S East 2.
+porque eu digitei errado. É o S East 2.
+porque eu digitei errado. É o S East 2.
+E beleza, ele já fez o login. Com o
+E beleza, ele já fez o login. Com o
+E beleza, ele já fez o login. Com o
+login feito, a gente precisa enviar a
+login feito, a gente precisa enviar a
+login feito, a gente precisa enviar a
+imagem que a gente gerou para o ECR.
+imagem que a gente gerou para o ECR.
+imagem que a gente gerou para o ECR.
+Então se eu digitar Docker images, eu
+Então se eu digitar Docker images, eu
+Então se eu digitar Docker images, eu
+tenho a imagem que foi gerada aqui do
+tenho a imagem que foi gerada aqui do
+tenho a imagem que foi gerada aqui do
+meu site. Como que eu pego essa imagem
+meu site. Como que eu pego essa imagem
+meu site. Como que eu pego essa imagem
+que eu gerei na minha máquina e armazeno
+que eu gerei na minha máquina e armazeno
+que eu gerei na minha máquina e armazeno
+ela, envio ela para o SR? Eu preciso dar
+ela, envio ela para o SR? Eu preciso dar
+ela, envio ela para o SR? Eu preciso dar
+uma tag para essa imagem. Então eu
+uma tag para essa imagem. Então eu
+uma tag para essa imagem. Então eu
+preciso gerar uma tag que vai dizer que
+preciso gerar uma tag que vai dizer que
+preciso gerar uma tag que vai dizer que
+esta imagem ela vai ser enviada para o
+esta imagem ela vai ser enviada para o
+esta imagem ela vai ser enviada para o
+então para isso eu vou escrever docker
+então para isso eu vou escrever docker
+então para isso eu vou escrever docker
+tag. Eu vou passar qual imagem eu quero
+tag. Eu vou passar qual imagem eu quero
+tag. Eu vou passar qual imagem eu quero
+colocar uma nova tag. Então no caso é a
+colocar uma nova tag. Então no caso é a
+colocar uma nova tag. Então no caso é a
+imagem chamada meu site na versão 1.0. E
+imagem chamada meu site na versão 1.0. E
+imagem chamada meu site na versão 1.0. E
+aí eu digito qual a nova tag que essa
+aí eu digito qual a nova tag que essa
+aí eu digito qual a nova tag que essa
+imagem vai passar a ter. A nova tag é aí
+imagem vai passar a ter. A nova tag é aí
+imagem vai passar a ter. A nova tag é aí
+sim de fato essa URL aqui. Então vou
+sim de fato essa URL aqui. Então vou
+sim de fato essa URL aqui. Então vou
+clicar e copiar ela. Vou colar aqui dois
+clicar e copiar ela. Vou colar aqui dois
+clicar e copiar ela. Vou colar aqui dois
+pontos e eu coloco uma tag específica,
+pontos e eu coloco uma tag específica,
+pontos e eu coloco uma tag específica,
+uma versão específica para essa imagem.
+uma versão específica para essa imagem.
+uma versão específica para essa imagem.
+Eu vou manter a mesma 1.0. Se eu der um
+Eu vou manter a mesma 1.0. Se eu der um
+Eu vou manter a mesma 1.0. Se eu der um
+docker images agora, vai aparecer a
+docker images agora, vai aparecer a
+docker images agora, vai aparecer a
+minha imagem aqui. Se você reparar tem o
+minha imagem aqui. Se você reparar tem o
+minha imagem aqui. Se você reparar tem o
+mesmo ID, porque é a mesma imagem. A
+mesmo ID, porque é a mesma imagem. A
+mesmo ID, porque é a mesma imagem. A
+gente só adicionou uma nova tag a essa
+gente só adicionou uma nova tag a essa
+gente só adicionou uma nova tag a essa
+imagem. E agora para fazer o envio dela
+imagem. E agora para fazer o envio dela
+imagem. E agora para fazer o envio dela
+pra CR é bem simples. É só a gente
+pra CR é bem simples. É só a gente
+pra CR é bem simples. É só a gente
+digitar docker push. Qual imagem que eu
+digitar docker push. Qual imagem que eu
+digitar docker push. Qual imagem que eu
+quero enviar, né? Esta imagem aqui e
+quero enviar, né? Esta imagem aqui e
+quero enviar, né? Esta imagem aqui e
+qual versão? Na versão 1.0. Se eu der
+qual versão? Na versão 1.0. Se eu der
+qual versão? Na versão 1.0. Se eu der
+enter agora, ele vai começar a fazer o
+enter agora, ele vai começar a fazer o
+enter agora, ele vai começar a fazer o
+push lá pro repositório. Então, entrando
+push lá pro repositório. Então, entrando
+push lá pro repositório. Então, entrando
+dentro aqui do repositório privado, a
+dentro aqui do repositório privado, a
+dentro aqui do repositório privado, a
+gente já consegue ver a nossa tagada.
+gente já consegue ver a nossa tagada.
+gente já consegue ver a nossa tagada.
+Então, aqui do nosso projeto, a parte do
+Então, aqui do nosso projeto, a parte do
+Então, aqui do nosso projeto, a parte do
+ECR já foi feita. Agora o que falta é a
+ECR já foi feita. Agora o que falta é a
+ECR já foi feita. Agora o que falta é a
+gente provisionar uma instância S2 na
+gente provisionar uma instância S2 na
+gente provisionar uma instância S2 na
+AWS. Pra isso, aqui na AWS, a gente vai
+AWS. Pra isso, aqui na AWS, a gente vai
+AWS. Pra isso, aqui na AWS, a gente vai
+vir no serviço EC2 e clicando em
+vir no serviço EC2 e clicando em
+vir no serviço EC2 e clicando em
+instâncias, a gente clica em launch
+instâncias, a gente clica em launch
+instâncias, a gente clica em launch
+instan para poder criar uma nova
+instan para poder criar uma nova
+instan para poder criar uma nova
+instância. Aqui eu vou dar o nome, por
+instância. Aqui eu vou dar o nome, por
+instância. Aqui eu vou dar o nome, por
+exemplo, de website server. Aqui você
+exemplo, de website server. Aqui você
+exemplo, de website server. Aqui você
+pode escolher qual sistema operacional
+pode escolher qual sistema operacional
+pode escolher qual sistema operacional
+vai ter esse servidor. No meu caso, eu
+vai ter esse servidor. No meu caso, eu
+vai ter esse servidor. No meu caso, eu
+vou deixar Amazon Linux mesmo. E aqui
+vou deixar Amazon Linux mesmo. E aqui
+vou deixar Amazon Linux mesmo. E aqui
+nessa AMI que é free tier. Descendo um
+nessa AMI que é free tier. Descendo um
+nessa AMI que é free tier. Descendo um
+pouco na parte de tipo da instância, a
+pouco na parte de tipo da instância, a
+pouco na parte de tipo da instância, a
+gente tem diversos tipos de instância
+gente tem diversos tipos de instância
+gente tem diversos tipos de instância
+aqui para cada ocasião. Essa instância
+aqui para cada ocasião. Essa instância
+aqui para cada ocasião. Essa instância
+aqui, por exemplo, tem 8 CPU, 32 GB de
+aqui, por exemplo, tem 8 CPU, 32 GB de
+aqui, por exemplo, tem 8 CPU, 32 GB de
+memória. Eh, mas no nosso caso, pode
+memória. Eh, mas no nosso caso, pode
+memória. Eh, mas no nosso caso, pode
+deixar a T2 micro mesmo, que ela é bem
+deixar a T2 micro mesmo, que ela é bem
+deixar a T2 micro mesmo, que ela é bem
+pequenininha, tem um VCPU e 1 GB de
+pequenininha, tem um VCPU e 1 GB de
+pequenininha, tem um VCPU e 1 GB de
+memória. E ela é frer, ou seja, a gente
+memória. E ela é frer, ou seja, a gente
+memória. E ela é frer, ou seja, a gente
+não vai ser cobrado pela WS. Tome
+não vai ser cobrado pela WS. Tome
+não vai ser cobrado pela WS. Tome
+bastante cuidado na hora de selecionar a
+bastante cuidado na hora de selecionar a
+bastante cuidado na hora de selecionar a
+instância, porque existem instâncias
+instância, porque existem instâncias
+instância, porque existem instâncias
+muito caras aqui, tá? como, por exemplo,
+muito caras aqui, tá? como, por exemplo,
+muito caras aqui, tá? como, por exemplo,
+essa daqui que custa cerca de $.000 por
+essa daqui que custa cerca de $.000 por
+essa daqui que custa cerca de $.000 por
+hora. Então, cuidado. Aqui na parte da
+hora. Então, cuidado. Aqui na parte da
+hora. Então, cuidado. Aqui na parte da
+Kir é onde a gente vai gerar uma chave
+Kir é onde a gente vai gerar uma chave
+Kir é onde a gente vai gerar uma chave
+SSH para poder se conectar na nossa
+SSH para poder se conectar na nossa
+SSH para poder se conectar na nossa
+instância. Então eu posso selecionar uma
+instância. Então eu posso selecionar uma
+instância. Então eu posso selecionar uma
+existente, mas no nosso caso aqui eu vou
+existente, mas no nosso caso aqui eu vou
+existente, mas no nosso caso aqui eu vou
+criar uma nova chave. Eu vou dar o nome,
+criar uma nova chave. Eu vou dar o nome,
+criar uma nova chave. Eu vou dar o nome,
+por exemplo, de chave site prod. E aí eu
+por exemplo, de chave site prod. E aí eu
+por exemplo, de chave site prod. E aí eu
+vou deixar no tipo RSA e no formato
+vou deixar no tipo RSA e no formato
+vou deixar no tipo RSA e no formato
+ponpen. Se você estiver usando Windows,
+ponpen. Se você estiver usando Windows,
+ponpen. Se você estiver usando Windows,
+eh, vai ser essa outra versão. Eu não
+eh, vai ser essa outra versão. Eu não
+eh, vai ser essa outra versão. Eu não
+vou entrar em detalhes aqui porque não é
+vou entrar em detalhes aqui porque não é
+vou entrar em detalhes aqui porque não é
+o foco do nosso projeto, mas é bem
+o foco do nosso projeto, mas é bem
+o foco do nosso projeto, mas é bem
+simples. Você pode pesquisar aí no
+simples. Você pode pesquisar aí no
+simples. Você pode pesquisar aí no
+YouTube como que você faz para poder se
+YouTube como que você faz para poder se
+YouTube como que você faz para poder se
+conectar na instância via SSH com o
+conectar na instância via SSH com o
+conectar na instância via SSH com o
+sistema operacional Windows. E aí é só
+sistema operacional Windows. E aí é só
+sistema operacional Windows. E aí é só
+clicar em create pair que ele vai gerar
+clicar em create pair que ele vai gerar
+clicar em create pair que ele vai gerar
+um arquivo pra gente baixar. Beleza? Já
+um arquivo pra gente baixar. Beleza? Já
+um arquivo pra gente baixar. Beleza? Já
+baixei a chave aqui. Aqui é as
+baixei a chave aqui. Aqui é as
+baixei a chave aqui. Aqui é as
+configurações de network, certo? de
+configurações de network, certo? de
+configurações de network, certo? de
+rede. No caso, a gente vai criar uma
+rede. No caso, a gente vai criar uma
+rede. No caso, a gente vai criar uma
+Security Group. E o que que é uma
+Security Group. E o que que é uma
+Security Group. E o que que é uma
+Security Group? Nada mais é do que um
+Security Group? Nada mais é do que um
+Security Group? Nada mais é do que um
+fire. É na Security Group que vai conter
+fire. É na Security Group que vai conter
+fire. É na Security Group que vai conter
+as regras de entrada. Então aqui já tem
+as regras de entrada. Então aqui já tem
+as regras de entrada. Então aqui já tem
+algumas que você pode selecionar. No meu
+algumas que você pode selecionar. No meu
+algumas que você pode selecionar. No meu
+caso, vou permitir o acesso SSH do meu
+caso, vou permitir o acesso SSH do meu
+caso, vou permitir o acesso SSH do meu
+IP apenas. Também vou permitir o acesso
+IP apenas. Também vou permitir o acesso
+IP apenas. Também vou permitir o acesso
+https e o acesso HTTP para que a
+https e o acesso HTTP para que a
+https e o acesso HTTP para que a
+internet, né, os todos os IPs do mundo
+internet, né, os todos os IPs do mundo
+internet, né, os todos os IPs do mundo
+possam acessar a minha máquina na porta
+possam acessar a minha máquina na porta
+possam acessar a minha máquina na porta
+80, né, na porta default e na porta 443,
+80, né, na porta default e na porta 443,
+80, né, na porta default e na porta 443,
+que é a porta https. Aqui de resto, eu
+que é a porta https. Aqui de resto, eu
+que é a porta https. Aqui de resto, eu
+vou deixar tudo padrão e é só clicar em
+vou deixar tudo padrão e é só clicar em
+vou deixar tudo padrão e é só clicar em
+launch instance. E pronto, a WS já vai
+launch instance. E pronto, a WS já vai
+launch instance. E pronto, a WS já vai
+começar a provisionar uma instância S2
+começar a provisionar uma instância S2
+começar a provisionar uma instância S2
+para mim. Se eu voltar aqui em
+para mim. Se eu voltar aqui em
+para mim. Se eu voltar aqui em
+instâncias, ele já começa a subir. O
+instâncias, ele já começa a subir. O
+instâncias, ele já começa a subir. O
+status está pendente aqui embaixo. Eu
+status está pendente aqui embaixo. Eu
+status está pendente aqui embaixo. Eu
+consigo também ver as informações desse
+consigo também ver as informações desse
+consigo também ver as informações desse
+servidor. Eu vou clicar aqui no endereço
+servidor. Eu vou clicar aqui no endereço
+servidor. Eu vou clicar aqui no endereço
+público e colar aqui para vocês verem
+público e colar aqui para vocês verem
+público e colar aqui para vocês verem
+que não vai aparecer nada, porque não
+que não vai aparecer nada, porque não
+que não vai aparecer nada, porque não
+tem nada nessa máquina ainda. Mas a
+tem nada nessa máquina ainda. Mas a
+tem nada nessa máquina ainda. Mas a
+ideia é que quando a gente digitar o
+ideia é que quando a gente digitar o
+ideia é que quando a gente digitar o
+nosso IP aqui na porta correta, ele abra
+nosso IP aqui na porta correta, ele abra
+nosso IP aqui na porta correta, ele abra
+o nosso site. Voltando aqui pro nosso
+o nosso site. Voltando aqui pro nosso
+o nosso site. Voltando aqui pro nosso
+desenho, a parte de criar a instância C2
+desenho, a parte de criar a instância C2
+desenho, a parte de criar a instância C2
+já foi feita. Agora o que falta é a
+já foi feita. Agora o que falta é a
+já foi feita. Agora o que falta é a
+gente entrar dentro dessa instância EC2,
+gente entrar dentro dessa instância EC2,
+gente entrar dentro dessa instância EC2,
+dentro desse servidor e baixar a imagem
+dentro desse servidor e baixar a imagem
+dentro desse servidor e baixar a imagem
+que a gente armazenou no ECR e rodar,
+que a gente armazenou no ECR e rodar,
+que a gente armazenou no ECR e rodar,
+né, o contêiner, assim como a gente fez
+né, o contêiner, assim como a gente fez
+né, o contêiner, assim como a gente fez
+a nossa máquina local, a gente vai fazer
+a nossa máquina local, a gente vai fazer
+a nossa máquina local, a gente vai fazer
+dentro do servidor, que nada mais é do
+dentro do servidor, que nada mais é do
+dentro do servidor, que nada mais é do
+que uma máquina que está na nuvem. Então
+que uma máquina que está na nuvem. Então
+que uma máquina que está na nuvem. Então
+vamos lá, pessoal. Como que a gente se
+vamos lá, pessoal. Como que a gente se
+vamos lá, pessoal. Como que a gente se
+conecta em um servidor, em uma máquina
+conecta em um servidor, em uma máquina
+conecta em um servidor, em uma máquina
+que está lá na WS, lá em Ohio, né? A
+que está lá na WS, lá em Ohio, né? A
+que está lá na WS, lá em Ohio, né? A
+gente faz isso através da conexão SSH. A
+gente faz isso através da conexão SSH. A
+gente faz isso através da conexão SSH. A
+conexão SSH, ela é um protocolo de rede
+conexão SSH, ela é um protocolo de rede
+conexão SSH, ela é um protocolo de rede
+aonde a gente consegue se conectar
+aonde a gente consegue se conectar
+aonde a gente consegue se conectar
+remotamente a diversos servidores aí que
+remotamente a diversos servidores aí que
+remotamente a diversos servidores aí que
+estão espalhados pelo mundo. Para a
+estão espalhados pelo mundo. Para a
+estão espalhados pelo mundo. Para a
+gente fazer isso, a gente precisa do
+gente fazer isso, a gente precisa do
+gente fazer isso, a gente precisa do
+usuário daquela máquina e do IP da
+usuário daquela máquina e do IP da
+usuário daquela máquina e do IP da
+máquina, além da chave privada para
+máquina, além da chave privada para
+máquina, além da chave privada para
+poder se conectar a essa instância, a
+poder se conectar a essa instância, a
+poder se conectar a essa instância, a
+essa máquina. Se eu der um LS aqui, a
+essa máquina. Se eu der um LS aqui, a
+essa máquina. Se eu der um LS aqui, a
+gente vê a chave aqui que eu acabei de
+gente vê a chave aqui que eu acabei de
+gente vê a chave aqui que eu acabei de
+baixar. Tá? Eu baixei a chave privada,
+baixar. Tá? Eu baixei a chave privada,
+baixar. Tá? Eu baixei a chave privada,
+aquela Keep Per dentro da minha pasta
+aquela Keep Per dentro da minha pasta
+aquela Keep Per dentro da minha pasta
+lab para poder ficar mais fácil aqui
+lab para poder ficar mais fácil aqui
+lab para poder ficar mais fácil aqui
+para vocês. Então o comando SSH, ele é
+para vocês. Então o comando SSH, ele é
+para vocês. Então o comando SSH, ele é
+bem simples, então você vai digitar SSH-
+bem simples, então você vai digitar SSH-
+bem simples, então você vai digitar SSH-
+i e aí você vai passar qual que é o
+i e aí você vai passar qual que é o
+i e aí você vai passar qual que é o
+arquivo da chave privada. No nosso caso
+arquivo da chave privada. No nosso caso
+arquivo da chave privada. No nosso caso
+é essa chaveitep.pen.
+é essa chaveitep.pen.
+é essa chaveitep.pen.
+Aí eu vou passar o usuário da máquina e
+Aí eu vou passar o usuário da máquina e
+Aí eu vou passar o usuário da máquina e
+o IP da máquina que eu quero me
+o IP da máquina que eu quero me
+o IP da máquina que eu quero me
+conectar. Como que eu sei essas
+conectar. Como que eu sei essas
+conectar. Como que eu sei essas
+informações? Voltando aqui pra WS, se eu
+informações? Voltando aqui pra WS, se eu
+informações? Voltando aqui pra WS, se eu
+clicar na instância em connect, aqui
+clicar na instância em connect, aqui
+clicar na instância em connect, aqui
+embaixo em username, aparece o usuário
+embaixo em username, aparece o usuário
+embaixo em username, aparece o usuário
+padrão dessa máquina. No caso chama S2
+padrão dessa máquina. No caso chama S2
+padrão dessa máquina. No caso chama S2
+user. Se fosse uma máquina Ubuntu, por
+user. Se fosse uma máquina Ubuntu, por
+user. Se fosse uma máquina Ubuntu, por
+exemplo, o usuário seria Ubuntuo. Aqui,
+exemplo, o usuário seria Ubuntuo. Aqui,
+exemplo, o usuário seria Ubuntuo. Aqui,
+então cada sistema operacional vai ter
+então cada sistema operacional vai ter
+então cada sistema operacional vai ter
+um usuário ali diferente. Então,
+um usuário ali diferente. Então,
+um usuário ali diferente. Então,
+username é esse é do user e o IP dessa
+username é esse é do user e o IP dessa
+username é esse é do user e o IP dessa
+máquina é aqui, ó. Public IPv4. Eu já
+máquina é aqui, ó. Public IPv4. Eu já
+máquina é aqui, ó. Public IPv4. Eu já
+vou copiar. Voltando pro meu terminal,
+vou copiar. Voltando pro meu terminal,
+vou copiar. Voltando pro meu terminal,
+eu vou digitar o usuário, que é esse
+eu vou digitar o usuário, que é esse
+eu vou digitar o usuário, que é esse
+2user @ipdamina. Aqui vai dar erro, tá?
+2user @ipdamina. Aqui vai dar erro, tá?
+2user @ipdamina. Aqui vai dar erro, tá?
+Se eu tentar apertar enter, e deu erro.
+Se eu tentar apertar enter, e deu erro.
+Se eu tentar apertar enter, e deu erro.
+Não se assuste com esse erro. O que que
+Não se assuste com esse erro. O que que
+Não se assuste com esse erro. O que que
+isso significa, né? Tá falando aqui
+isso significa, né? Tá falando aqui
+isso significa, né? Tá falando aqui
+chave privada desprotegida. Por quê? Se
+chave privada desprotegida. Por quê? Se
+chave privada desprotegida. Por quê? Se
+eu der um LS - LH aqui, a gente consegue
+eu der um LS - LH aqui, a gente consegue
+eu der um LS - LH aqui, a gente consegue
+ver que as permissões dessa chave aqui
+ver que as permissões dessa chave aqui
+ver que as permissões dessa chave aqui
+estão muito abertas, então as pessoas
+estão muito abertas, então as pessoas
+estão muito abertas, então as pessoas
+conseguem editar esse arquivo. E como
+conseguem editar esse arquivo. E como
+conseguem editar esse arquivo. E como
+ela é uma chave privada, ela não deve
+ela é uma chave privada, ela não deve
+ela é uma chave privada, ela não deve
+ser editada, né? Porque senão, se eu for
+ser editada, né? Porque senão, se eu for
+ser editada, né? Porque senão, se eu for
+lá e mudar a chave, eu não vou conseguir
+lá e mudar a chave, eu não vou conseguir
+lá e mudar a chave, eu não vou conseguir
+acessar a instância, né? Porque a chave
+acessar a instância, né? Porque a chave
+acessar a instância, né? Porque a chave
+ela tem que ser imutável. Para resolver
+ela tem que ser imutável. Para resolver
+ela tem que ser imutável. Para resolver
+esse problema de permissão, a gente roda
+esse problema de permissão, a gente roda
+esse problema de permissão, a gente roda
+o comando chamado CH mod. E aqui a gente
+o comando chamado CH mod. E aqui a gente
+o comando chamado CH mod. E aqui a gente
+vai passar o número 400. E qual o
+vai passar o número 400. E qual o
+vai passar o número 400. E qual o
+arquivo a gente quer alterar? No caso é
+arquivo a gente quer alterar? No caso é
+arquivo a gente quer alterar? No caso é
+esse arquivo aqui. Então aqui por que
+esse arquivo aqui. Então aqui por que
+esse arquivo aqui. Então aqui por que
+que a gente tá colocando o 400, certo?
+que a gente tá colocando o 400, certo?
+que a gente tá colocando o 400, certo?
+Porque a gente só quer que o dono desse
+Porque a gente só quer que o dono desse
+Porque a gente só quer que o dono desse
+arquivo consiga ler e ninguém mais
+arquivo consiga ler e ninguém mais
+arquivo consiga ler e ninguém mais
+consiga fazer nada com esse arquivo. Ou
+consiga fazer nada com esse arquivo. Ou
+consiga fazer nada com esse arquivo. Ou
+seja, a gente vai tornar esse arquivo
+seja, a gente vai tornar esse arquivo
+seja, a gente vai tornar esse arquivo
+inalterável. Se eu digitar enter aqui e
+inalterável. Se eu digitar enter aqui e
+inalterável. Se eu digitar enter aqui e
+dá um ls- lh agora, como você pode
+dá um ls- lh agora, como você pode
+dá um ls- lh agora, como você pode
+reparar nas permissões desse arquivo
+reparar nas permissões desse arquivo
+reparar nas permissões desse arquivo
+aqui, só a gente tem a leitura e todos
+aqui, só a gente tem a leitura e todos
+aqui, só a gente tem a leitura e todos
+os outros usuários não vão ter leitura
+os outros usuários não vão ter leitura
+os outros usuários não vão ter leitura
+disso. Se eu rodar o comando SSH
+disso. Se eu rodar o comando SSH
+disso. Se eu rodar o comando SSH
+novamente, ele vai se conectar na
+novamente, ele vai se conectar na
+novamente, ele vai se conectar na
+máquina. Beleza, agora eu já estou
+máquina. Beleza, agora eu já estou
+máquina. Beleza, agora eu já estou
+dentro da minha máquina lá em Ohio, nos
+dentro da minha máquina lá em Ohio, nos
+dentro da minha máquina lá em Ohio, nos
+Estados Unidos. Se eu tentar rodar o
+Estados Unidos. Se eu tentar rodar o
+Estados Unidos. Se eu tentar rodar o
+comando Docker aqui, ele não vai
+comando Docker aqui, ele não vai
+comando Docker aqui, ele não vai
+encontrar nada. Por quê? Porque a gente
+encontrar nada. Por quê? Porque a gente
+encontrar nada. Por quê? Porque a gente
+não instalou o Docker nessa nessa
+não instalou o Docker nessa nessa
+não instalou o Docker nessa nessa
+máquina ainda aqui. Como a gente tá
+máquina ainda aqui. Como a gente tá
+máquina ainda aqui. Como a gente tá
+utilizando o Amazon Linux, eu vou rodar
+utilizando o Amazon Linux, eu vou rodar
+utilizando o Amazon Linux, eu vou rodar
+o comando um update- Y para poder
+o comando um update- Y para poder
+o comando um update- Y para poder
+atualizar o sistema. Tem que ser sudo
+atualizar o sistema. Tem que ser sudo
+atualizar o sistema. Tem que ser sudo
+update - y e aí para baixar o Docker
+update - y e aí para baixar o Docker
+update - y e aí para baixar o Docker
+aqui vai ser sudo install Docker - Y.
+aqui vai ser sudo install Docker - Y.
+aqui vai ser sudo install Docker - Y.
+Pronto, ele já tá baixando o Docker. Com
+Pronto, ele já tá baixando o Docker. Com
+Pronto, ele já tá baixando o Docker. Com
+o Docker baixado pra gente ver se
+o Docker baixado pra gente ver se
+o Docker baixado pra gente ver se
+funcionou é só a gente dar um Docker
+funcionou é só a gente dar um Docker
+funcionou é só a gente dar um Docker
+menos version. E aí já aparece a versão
+menos version. E aí já aparece a versão
+menos version. E aí já aparece a versão
+do Docker aqui. Só que a gente precisa
+do Docker aqui. Só que a gente precisa
+do Docker aqui. Só que a gente precisa
+rodar alguns outros comandos para poder
+rodar alguns outros comandos para poder
+rodar alguns outros comandos para poder
+habilitar o Docker e ele funcionar
+habilitar o Docker e ele funcionar
+habilitar o Docker e ele funcionar
+corretamente na nossa máquina. Eu vou
+corretamente na nossa máquina. Eu vou
+corretamente na nossa máquina. Eu vou
+copiar aqui para ficar mais rápido. O
+copiar aqui para ficar mais rápido. O
+copiar aqui para ficar mais rápido. O
+primeiro aqui é pra gente startar o
+primeiro aqui é pra gente startar o
+primeiro aqui é pra gente startar o
+Docker. A gente vai habilitar ele. Se eu
+Docker. A gente vai habilitar ele. Se eu
+Docker. A gente vai habilitar ele. Se eu
+tentar rodar um Docker PS, por exemplo,
+tentar rodar um Docker PS, por exemplo,
+tentar rodar um Docker PS, por exemplo,
+ele vai falar que eu tô com permissão
+ele vai falar que eu tô com permissão
+ele vai falar que eu tô com permissão
+negada, porque somente o usuário root é
+negada, porque somente o usuário root é
+negada, porque somente o usuário root é
+que consegue rodar esse comando se a
+que consegue rodar esse comando se a
+que consegue rodar esse comando se a
+gente não ajustar. Então, se eu, por
+gente não ajustar. Então, se eu, por
+gente não ajustar. Então, se eu, por
+exemplo, usar aqui o sudo sudo dockerps,
+exemplo, usar aqui o sudo sudo dockerps,
+exemplo, usar aqui o sudo sudo dockerps,
+por exemplo, ele vai aparecer o comando.
+por exemplo, ele vai aparecer o comando.
+por exemplo, ele vai aparecer o comando.
+Pra gente resolver esse problema, a
+Pra gente resolver esse problema, a
+Pra gente resolver esse problema, a
+gente precisa rodar esse comando aqui,
+gente precisa rodar esse comando aqui,
+gente precisa rodar esse comando aqui,
+que a gente vai adicionar o usuário S2
+que a gente vai adicionar o usuário S2
+que a gente vai adicionar o usuário S2
+ao grupo do Docker para que ele consiga
+ao grupo do Docker para que ele consiga
+ao grupo do Docker para que ele consiga
+executar o comando. Eu já adicionei, só
+executar o comando. Eu já adicionei, só
+executar o comando. Eu já adicionei, só
+que para isso funcionar, eu vou precisar
+que para isso funcionar, eu vou precisar
+que para isso funcionar, eu vou precisar
+sair da máquina e entrar de novo, porque
+sair da máquina e entrar de novo, porque
+sair da máquina e entrar de novo, porque
+se eu der um docker PS aqui, ele não vai
+se eu der um docker PS aqui, ele não vai
+se eu der um docker PS aqui, ele não vai
+funcionar. Para sair da máquina é só dar
+funcionar. Para sair da máquina é só dar
+funcionar. Para sair da máquina é só dar
+um exit e aí eu vou me conectar
+um exit e aí eu vou me conectar
+um exit e aí eu vou me conectar
+novamente. E agora sim, se eu tentar dar
+novamente. E agora sim, se eu tentar dar
+novamente. E agora sim, se eu tentar dar
+um Docker PS já está funcionando. Então
+um Docker PS já está funcionando. Então
+um Docker PS já está funcionando. Então
+a gente já tá com o Docker aqui
+a gente já tá com o Docker aqui
+a gente já tá com o Docker aqui
+instalado na nossa máquina. Agora, qual
+instalado na nossa máquina. Agora, qual
+instalado na nossa máquina. Agora, qual
+que é o próximo passo? É a gente baixar
+que é o próximo passo? É a gente baixar
+que é o próximo passo? É a gente baixar
+a imagem neste servidor e rodar a
+a imagem neste servidor e rodar a
+a imagem neste servidor e rodar a
+aplicação inicial contêiner. Para isso,
+aplicação inicial contêiner. Para isso,
+aplicação inicial contêiner. Para isso,
+a gente vai baixar a imagem que está no
+a gente vai baixar a imagem que está no
+a gente vai baixar a imagem que está no
+ECR. Maria, como que eu baixo a imagem
+ECR. Maria, como que eu baixo a imagem
+ECR. Maria, como que eu baixo a imagem
+que eu subi pro ECR, certo? Como que eu
+que eu subi pro ECR, certo? Como que eu
+que eu subi pro ECR, certo? Como que eu
+vou baixar a tag aqui versão 1.0 lá na
+vou baixar a tag aqui versão 1.0 lá na
+vou baixar a tag aqui versão 1.0 lá na
+minha máquina? Assim como a gente fez o
+minha máquina? Assim como a gente fez o
+minha máquina? Assim como a gente fez o
+Docker Push para poder enviar pro SR, a
+Docker Push para poder enviar pro SR, a
+Docker Push para poder enviar pro SR, a
+gente vai fazer o Docker Pool para poder
+gente vai fazer o Docker Pool para poder
+gente vai fazer o Docker Pool para poder
+baixar essa imagem do EC. Então,
+baixar essa imagem do EC. Então,
+baixar essa imagem do EC. Então,
+basicamente, a gente roda o comando
+basicamente, a gente roda o comando
+basicamente, a gente roda o comando
+docker pool e aí eu passo qual imagem,
+docker pool e aí eu passo qual imagem,
+docker pool e aí eu passo qual imagem,
+né, que eu quero baixar. No nosso caso
+né, que eu quero baixar. No nosso caso
+né, que eu quero baixar. No nosso caso
+aqui, eu vou copiar o RL do site Prod,
+aqui, eu vou copiar o RL do site Prod,
+aqui, eu vou copiar o RL do site Prod,
+vou colar aqui e aí dois pontos eu
+vou colar aqui e aí dois pontos eu
+vou colar aqui e aí dois pontos eu
+coloco a tag, né, qual que é a versão
+coloco a tag, né, qual que é a versão
+coloco a tag, né, qual que é a versão
+dessa imagem. No caso aqui vai ser a
+dessa imagem. No caso aqui vai ser a
+dessa imagem. No caso aqui vai ser a
+versão 1.0. E se você for inteligente,
+versão 1.0. E se você for inteligente,
+versão 1.0. E se você for inteligente,
+você vai imaginar o que vai acontecer
+você vai imaginar o que vai acontecer
+você vai imaginar o que vai acontecer
+agora. Se você reparar, tá aparecendo no
+agora. Se você reparar, tá aparecendo no
+agora. Se você reparar, tá aparecendo no
+basic out credentials. O que que isso
+basic out credentials. O que que isso
+basic out credentials. O que que isso
+significa? Que falta as credenciais.
+significa? Que falta as credenciais.
+significa? Que falta as credenciais.
+Você lembra que eu falei para você que o
+Você lembra que eu falei para você que o
+Você lembra que eu falei para você que o
+repositório ele é um repositório
+repositório ele é um repositório
+repositório ele é um repositório
+privado? Ou seja, não é qualquer pessoa
+privado? Ou seja, não é qualquer pessoa
+privado? Ou seja, não é qualquer pessoa
+que consegue acessar esse repositório.
+que consegue acessar esse repositório.
+que consegue acessar esse repositório.
+Ah, Maria, mas tá o SR tá na mesma
+Ah, Maria, mas tá o SR tá na mesma
+Ah, Maria, mas tá o SR tá na mesma
+região, tá na mesma conta WS e que a
+região, tá na mesma conta WS e que a
+região, tá na mesma conta WS e que a
+instância C2. Eles estão no mesmo, entre
+instância C2. Eles estão no mesmo, entre
+instância C2. Eles estão no mesmo, entre
+aspas, no mesmo lugar. E por que que a
+aspas, no mesmo lugar. E por que que a
+aspas, no mesmo lugar. E por que que a
+instância, né, a EC2, ela não consegue
+instância, né, a EC2, ela não consegue
+instância, né, a EC2, ela não consegue
+acessar o SR, porque tudo na WS você
+acessar o SR, porque tudo na WS você
+acessar o SR, porque tudo na WS você
+precisa concedermissão.
+precisa concedermissão.
+precisa concedermissão.
+A AWS ela é extremamente segura neste
+A AWS ela é extremamente segura neste
+A AWS ela é extremamente segura neste
+quesito. Então se você não declarar, né,
+quesito. Então se você não declarar, né,
+quesito. Então se você não declarar, né,
+explicitamente que tal recurso tem
+explicitamente que tal recurso tem
+explicitamente que tal recurso tem
+permissão para acessar outro recurso,
+permissão para acessar outro recurso,
+permissão para acessar outro recurso,
+isso não vai acontecer. Então a gente
+isso não vai acontecer. Então a gente
+isso não vai acontecer. Então a gente
+precisa fazer essa configuração, essa
+precisa fazer essa configuração, essa
+precisa fazer essa configuração, essa
+autenticação. E aí você deve est
+autenticação. E aí você deve est
+autenticação. E aí você deve est
+pensando que, ah, Maria, é só a gente
+pensando que, ah, Maria, é só a gente
+pensando que, ah, Maria, é só a gente
+rodar um AWS configure e aí passar aqui,
+rodar um AWS configure e aí passar aqui,
+rodar um AWS configure e aí passar aqui,
+né, Marias, o Access Key, o Secret Key e
+né, Marias, o Access Key, o Secret Key e
+né, Marias, o Access Key, o Secret Key e
+a região, enfim, e logar. Só que não é
+a região, enfim, e logar. Só que não é
+a região, enfim, e logar. Só que não é
+ideal a gente fazer isso. Por quê?
+ideal a gente fazer isso. Por quê?
+ideal a gente fazer isso. Por quê?
+Porque aquele Access Key Secret Key, ele
+Porque aquele Access Key Secret Key, ele
+Porque aquele Access Key Secret Key, ele
+é do meu usuário, né? O meu usuário
+é do meu usuário, né? O meu usuário
+é do meu usuário, né? O meu usuário
+pessoal, Maria Lázara. E aqui no meu
+pessoal, Maria Lázara. E aqui no meu
+pessoal, Maria Lázara. E aqui no meu
+caso, quem tá tentando baixar é a
+caso, quem tá tentando baixar é a
+caso, quem tá tentando baixar é a
+instância C2. Então se você for ver o
+instância C2. Então se você for ver o
+instância C2. Então se você for ver o
+desenho aqui, que eu acho que fica mais
+desenho aqui, que eu acho que fica mais
+desenho aqui, que eu acho que fica mais
+fácil de entender, a instância C2 é que
+fácil de entender, a instância C2 é que
+fácil de entender, a instância C2 é que
+vai baixar a imagem que está nesse CCR.
+vai baixar a imagem que está nesse CCR.
+vai baixar a imagem que está nesse CCR.
+Então pra isso, a gente precisa
+Então pra isso, a gente precisa
+Então pra isso, a gente precisa
+configurar uma permissão. Só que
+configurar uma permissão. Só que
+configurar uma permissão. Só que
+diferente das credenciais de usuário que
+diferente das credenciais de usuário que
+diferente das credenciais de usuário que
+é o Access Key Security Key, quando a
+é o Access Key Security Key, quando a
+é o Access Key Security Key, quando a
+gente fala de um serviço da WS, né, um
+gente fala de um serviço da WS, né, um
+gente fala de um serviço da WS, né, um
+recurso, acessar outro recurso da WS, a
+recurso, acessar outro recurso da WS, a
+recurso, acessar outro recurso da WS, a
+gente utiliza o que a gente chama de
+gente utiliza o que a gente chama de
+gente utiliza o que a gente chama de
+roles. Então aqui a gente vai precisar
+roles. Então aqui a gente vai precisar
+roles. Então aqui a gente vai precisar
+de uma RLE, não precisa se assustar com
+de uma RLE, não precisa se assustar com
+de uma RLE, não precisa se assustar com
+o nome, que eu vou tentar explicar da
+o nome, que eu vou tentar explicar da
+o nome, que eu vou tentar explicar da
+forma mais simples aqui para você o que
+forma mais simples aqui para você o que
+forma mais simples aqui para você o que
+que significa isso. Uma rolly, ela nada
+que significa isso. Uma rolly, ela nada
+que significa isso. Uma rolly, ela nada
+mais é do que um crachá. Então, pensa na
+mais é do que um crachá. Então, pensa na
+mais é do que um crachá. Então, pensa na
+sua cabeça como crashar em português.
+sua cabeça como crashar em português.
+sua cabeça como crashar em português.
+Rolley, eh, na WS, se você for ver está
+Rolley, eh, na WS, se você for ver está
+Rolley, eh, na WS, se você for ver está
+como funções. Então, se você pensar num
+como funções. Então, se você pensar num
+como funções. Então, se você pensar num
+crashar com uma função específica, se eu
+crashar com uma função específica, se eu
+crashar com uma função específica, se eu
+for entrar em uma determinada empresa,
+for entrar em uma determinada empresa,
+for entrar em uma determinada empresa,
+eu ganho o meu crachá, certo? No meu
+eu ganho o meu crachá, certo? No meu
+eu ganho o meu crachá, certo? No meu
+crachá vai ter a minha função, o que que
+crachá vai ter a minha função, o que que
+crachá vai ter a minha função, o que que
+eu sou ali, o que que eu posso fazer
+eu sou ali, o que que eu posso fazer
+eu sou ali, o que que eu posso fazer
+naquela empresa e o que que eu não posso
+naquela empresa e o que que eu não posso
+naquela empresa e o que que eu não posso
+fazer. E pensa naqueles crachás que você
+fazer. E pensa naqueles crachás que você
+fazer. E pensa naqueles crachás que você
+encosta assim, você vai abrindo as
+encosta assim, você vai abrindo as
+encosta assim, você vai abrindo as
+portas, sabe? Então tem determinados
+portas, sabe? Então tem determinados
+portas, sabe? Então tem determinados
+lugares que você pode entrar porque você
+lugares que você pode entrar porque você
+lugares que você pode entrar porque você
+tem permissão e esse crashat te dá essa
+tem permissão e esse crashat te dá essa
+tem permissão e esse crashat te dá essa
+permissão, certo? E tem alguns outros
+permissão, certo? E tem alguns outros
+permissão, certo? E tem alguns outros
+lugares que você não pode acessar porque
+lugares que você não pode acessar porque
+lugares que você não pode acessar porque
+a sua função não é essa. Então a RL ela
+a sua função não é essa. Então a RL ela
+a sua função não é essa. Então a RL ela
+é como se fosse o crashar que a
+é como se fosse o crashar que a
+é como se fosse o crashar que a
+instância vai usar para poder acessar o
+instância vai usar para poder acessar o
+instância vai usar para poder acessar o
+Sr. Então pra gente fazer isso, a gente
+Sr. Então pra gente fazer isso, a gente
+Sr. Então pra gente fazer isso, a gente
+vai usar o serviço chamado Iim da AWS,
+vai usar o serviço chamado Iim da AWS,
+vai usar o serviço chamado Iim da AWS,
+que é o Identity Access Management. Aqui
+que é o Identity Access Management. Aqui
+que é o Identity Access Management. Aqui
+na tela do IM você pode ver que a gente
+na tela do IM você pode ver que a gente
+na tela do IM você pode ver que a gente
+tem grupos, usuários, roles e políticas.
+tem grupos, usuários, roles e políticas.
+tem grupos, usuários, roles e políticas.
+Essa role ela vai ter o que a gente
+Essa role ela vai ter o que a gente
+Essa role ela vai ter o que a gente
+chama de policy ou em português
+chama de policy ou em português
+chama de policy ou em português
+política. O que que é uma política?
+política. O que que é uma política?
+política. O que que é uma política?
+Uma política nada mais é do que um
+Uma política nada mais é do que um
+Uma política nada mais é do que um
+conjunto de regras, ou seja, o que eu
+conjunto de regras, ou seja, o que eu
+conjunto de regras, ou seja, o que eu
+posso fazer e o que eu não posso fazer.
+posso fazer e o que eu não posso fazer.
+posso fazer e o que eu não posso fazer.
+Então, a police, por exemplo, vai est
+Então, a police, por exemplo, vai est
+Então, a police, por exemplo, vai est
+escrito: "Você pode fazer isso, você não
+escrito: "Você pode fazer isso, você não
+escrito: "Você pode fazer isso, você não
+pode fazer aquilo". E aí você atrela
+pode fazer aquilo". E aí você atrela
+pode fazer aquilo". E aí você atrela
+essa política a uma role, a um crachá. E
+essa política a uma role, a um crachá. E
+essa política a uma role, a um crachá. E
+aí a gente atrela a Rolly no serviço. Eu
+aí a gente atrela a Rolly no serviço. Eu
+aí a gente atrela a Rolly no serviço. Eu
+tinha bastante dificuldade de entender
+tinha bastante dificuldade de entender
+tinha bastante dificuldade de entender
+como que funciona isso daqui. Eh, então,
+como que funciona isso daqui. Eh, então,
+como que funciona isso daqui. Eh, então,
+se você não entendeu, não se cobra, não
+se você não entendeu, não se cobra, não
+se você não entendeu, não se cobra, não
+precisa ficar com medo, porque com o
+precisa ficar com medo, porque com o
+precisa ficar com medo, porque com o
+tempo, é, praticando, você vai pegando o
+tempo, é, praticando, você vai pegando o
+tempo, é, praticando, você vai pegando o
+jeito, você vai entendendo como que as
+jeito, você vai entendendo como que as
+jeito, você vai entendendo como que as
+peças elas se encaixam neste
+peças elas se encaixam neste
+peças elas se encaixam neste
+quebra-cabeça. Aqui no meu painel do IM,
+quebra-cabeça. Aqui no meu painel do IM,
+quebra-cabeça. Aqui no meu painel do IM,
+eu vou clicar em rolls e eu vou criar
+eu vou clicar em rolls e eu vou criar
+eu vou clicar em rolls e eu vou criar
+uma nova role, um novo crashar. Aí ele
+uma nova role, um novo crashar. Aí ele
+uma nova role, um novo crashar. Aí ele
+me pergunta aqui, né, para quem que você
+me pergunta aqui, né, para quem que você
+me pergunta aqui, né, para quem que você
+quer criar essa role? No meu caso, eu
+quer criar essa role? No meu caso, eu
+quer criar essa role? No meu caso, eu
+vou criar para um serviço da WS, que é a
+vou criar para um serviço da WS, que é a
+vou criar para um serviço da WS, que é a
+EC2. A EC2, ela é um serviço da AWS. Até
+EC2. A EC2, ela é um serviço da AWS. Até
+EC2. A EC2, ela é um serviço da AWS. Até
+aparece aqui, ó, permite os serviços da
+aparece aqui, ó, permite os serviços da
+aparece aqui, ó, permite os serviços da
+WS, como o EC2 ou outros a fazerem ações
+WS, como o EC2 ou outros a fazerem ações
+WS, como o EC2 ou outros a fazerem ações
+nessa compra. Então, vai ser um serviço
+nessa compra. Então, vai ser um serviço
+nessa compra. Então, vai ser um serviço
+da WS. E aqui eu posso colocar qual
+da WS. E aqui eu posso colocar qual
+da WS. E aqui eu posso colocar qual
+serviço, no caso uma EC2. É só clicar em
+serviço, no caso uma EC2. É só clicar em
+serviço, no caso uma EC2. É só clicar em
+next. E aí aqui a gente adiciona as
+next. E aí aqui a gente adiciona as
+next. E aí aqui a gente adiciona as
+póliices, que são as permissões. A gente
+póliices, que são as permissões. A gente
+póliices, que são as permissões. A gente
+tem as póliices que são criadas pela
+tem as póliices que são criadas pela
+tem as póliices que são criadas pela
+própria WS, que aparece aqui como AWS
+própria WS, que aparece aqui como AWS
+própria WS, que aparece aqui como AWS
+Managed. E a gente tem as políticas, né,
+Managed. E a gente tem as políticas, né,
+Managed. E a gente tem as políticas, né,
+as póliices que a gente pode criar por
+as póliices que a gente pode criar por
+as póliices que a gente pode criar por
+conta própria. Então a gente escreve lá
+conta própria. Então a gente escreve lá
+conta própria. Então a gente escreve lá
+e cria uma pollice personalizada. Mas no
+e cria uma pollice personalizada. Mas no
+e cria uma pollice personalizada. Mas no
+nosso caso, a gente vai utilizar uma
+nosso caso, a gente vai utilizar uma
+nosso caso, a gente vai utilizar uma
+política padrão. Então, se você olhar
+política padrão. Então, se você olhar
+política padrão. Então, se você olhar
+aqui, a gente tem a policy de
+aqui, a gente tem a policy de
+aqui, a gente tem a policy de
+administrator access, que nada mais é do
+administrator access, que nada mais é do
+administrator access, que nada mais é do
+que uma pollice que vai permitir acessar
+que uma pollice que vai permitir acessar
+que uma pollice que vai permitir acessar
+qualquer recurso e fazer qualquer ação.
+qualquer recurso e fazer qualquer ação.
+qualquer recurso e fazer qualquer ação.
+A gente tem, por exemplo, aqui PI
+A gente tem, por exemplo, aqui PI
+A gente tem, por exemplo, aqui PI
+Gateway Administrator, que é também um
+Gateway Administrator, que é também um
+Gateway Administrator, que é também um
+um acesso aí que você consegue fazer
+um acesso aí que você consegue fazer
+um acesso aí que você consegue fazer
+tudo, mas só com o recurso API Gate aí
+tudo, mas só com o recurso API Gate aí
+tudo, mas só com o recurso API Gate aí
+da WS. Então aqui pro nosso caso, a
+da WS. Então aqui pro nosso caso, a
+da WS. Então aqui pro nosso caso, a
+gente vai adicionar uma pollice que
+gente vai adicionar uma pollice que
+gente vai adicionar uma pollice que
+permita a leitura do ECR e somente isso.
+permita a leitura do ECR e somente isso.
+permita a leitura do ECR e somente isso.
+Então se eu pesquisar por registry aqui,
+Então se eu pesquisar por registry aqui,
+Então se eu pesquisar por registry aqui,
+a gente vai ter algumas políticas
+a gente vai ter algumas políticas
+a gente vai ter algumas políticas
+relacionadas ao ECR. Então no nosso
+relacionadas ao ECR. Então no nosso
+relacionadas ao ECR. Então no nosso
+caso, a gente vai escolher a Amazon
+caso, a gente vai escolher a Amazon
+caso, a gente vai escolher a Amazon
+Container Registry Read Only. E aqui tem
+Container Registry Read Only. E aqui tem
+Container Registry Read Only. E aqui tem
+a descrição, né, que fala que permite
+a descrição, né, que fala que permite
+a descrição, né, que fala que permite
+acesso apenas ao ECR. Então é só clicar
+acesso apenas ao ECR. Então é só clicar
+acesso apenas ao ECR. Então é só clicar
+em next. Aqui ele vai pedir para você
+em next. Aqui ele vai pedir para você
+em next. Aqui ele vai pedir para você
+revisar e para você dar um nome para
+revisar e para você dar um nome para
+revisar e para você dar um nome para
+essa RLE. No meu caso, eu vou colocar
+essa RLE. No meu caso, eu vou colocar
+essa RLE. No meu caso, eu vou colocar
+aqui e2
+aqui e2
+aqui e2
+RLE. Para poder identificar essa RLE, é
+RLE. Para poder identificar essa RLE, é
+RLE. Para poder identificar essa RLE, é
+só clicar em create role. Pronto, a
+só clicar em create role. Pronto, a
+só clicar em create role. Pronto, a
+gente criou o nosso crashar. Ah, Maria,
+gente criou o nosso crashar. Ah, Maria,
+gente criou o nosso crashar. Ah, Maria,
+mas por que que você não coloca um de
+mas por que que você não coloca um de
+mas por que que você não coloca um de
+administrador mesmo, né, que aí fica
+administrador mesmo, né, que aí fica
+administrador mesmo, né, que aí fica
+mais fácil. A gente não faz isso porque
+mais fácil. A gente não faz isso porque
+mais fácil. A gente não faz isso porque
+a gente tem que aplicar uma boa prática
+a gente tem que aplicar uma boa prática
+a gente tem que aplicar uma boa prática
+de segurança, que é aplicar o princípio
+de segurança, que é aplicar o princípio
+de segurança, que é aplicar o princípio
+do privilégio mínimo. Isso entra um
+do privilégio mínimo. Isso entra um
+do privilégio mínimo. Isso entra um
+pouco na parte de deve secs, que é a
+pouco na parte de deve secs, que é a
+pouco na parte de deve secs, que é a
+parte que cuida da da segurança das
+parte que cuida da da segurança das
+parte que cuida da da segurança das
+nossas aplicações, que basicamente é
+nossas aplicações, que basicamente é
+nossas aplicações, que basicamente é
+você conceder permissão apenas ao que
+você conceder permissão apenas ao que
+você conceder permissão apenas ao que
+aquela pessoa ou aquele serviço pode
+aquela pessoa ou aquele serviço pode
+aquela pessoa ou aquele serviço pode
+fazer. Porque, por exemplo, se essa
+fazer. Porque, por exemplo, se essa
+fazer. Porque, por exemplo, se essa
+role, né, essa credencial, ela vazar por
+role, né, essa credencial, ela vazar por
+role, né, essa credencial, ela vazar por
+algum motivo, os danos vão ser bem
+algum motivo, os danos vão ser bem
+algum motivo, os danos vão ser bem
+menores. Porque imagina se eu tivesse
+menores. Porque imagina se eu tivesse
+menores. Porque imagina se eu tivesse
+concedido o acesso de administrador para
+concedido o acesso de administrador para
+concedido o acesso de administrador para
+essa role e aí alguém, porventura
+essa role e aí alguém, porventura
+essa role e aí alguém, porventura
+consegue ter o acesso, a pessoa poderia
+consegue ter o acesso, a pessoa poderia
+consegue ter o acesso, a pessoa poderia
+fazer qualquer coisa na minha conta,
+fazer qualquer coisa na minha conta,
+fazer qualquer coisa na minha conta,
+desde deletar os recursos até criar
+desde deletar os recursos até criar
+desde deletar os recursos até criar
+novos recursos. E ela poderia fazer
+novos recursos. E ela poderia fazer
+novos recursos. E ela poderia fazer
+qualquer coisa na minha conta e isso é
+qualquer coisa na minha conta e isso é
+qualquer coisa na minha conta e isso é
+um problema grave de segurança, tá? Eu
+um problema grave de segurança, tá? Eu
+um problema grave de segurança, tá? Eu
+já criei o crachá, mas eu preciso falar
+já criei o crachá, mas eu preciso falar
+já criei o crachá, mas eu preciso falar
+pra WS que a minha instância S2 ela tem
+pra WS que a minha instância S2 ela tem
+pra WS que a minha instância S2 ela tem
+esse crachá. Então eu preciso conceder
+esse crachá. Então eu preciso conceder
+esse crachá. Então eu preciso conceder
+isso. Eu preciso conceder essa RLE à
+isso. Eu preciso conceder essa RLE à
+isso. Eu preciso conceder essa RLE à
+minha instância S2. E como que eu faço
+minha instância S2. E como que eu faço
+minha instância S2. E como que eu faço
+isso? Voltando aqui pro meu painel da
+isso? Voltando aqui pro meu painel da
+isso? Voltando aqui pro meu painel da
+EC2 em instâncias, eu vou clicar na
+EC2 em instâncias, eu vou clicar na
+EC2 em instâncias, eu vou clicar na
+minha instância que eu quero atribuir a
+minha instância que eu quero atribuir a
+minha instância que eu quero atribuir a
+role. Eu venho aqui em actions,
+role. Eu venho aqui em actions,
+role. Eu venho aqui em actions,
+security, modificar a role do IM. Tá
+security, modificar a role do IM. Tá
+security, modificar a role do IM. Tá
+vendo aí? Aqui é só eu escolher a RLE
+vendo aí? Aqui é só eu escolher a RLE
+vendo aí? Aqui é só eu escolher a RLE
+que eu criei. Eu vou dar o update agora.
+que eu criei. Eu vou dar o update agora.
+que eu criei. Eu vou dar o update agora.
+E pronto, a gente já concedeu essa role
+E pronto, a gente já concedeu essa role
+E pronto, a gente já concedeu essa role
+a essa S2. Aqui nas informações tem essa
+a essa S2. Aqui nas informações tem essa
+a essa S2. Aqui nas informações tem essa
+parte aqui, I am roll, tá vendo? E aí
+parte aqui, I am roll, tá vendo? E aí
+parte aqui, I am roll, tá vendo? E aí
+ele aparece, é o RLE que a gente acabou
+ele aparece, é o RLE que a gente acabou
+ele aparece, é o RLE que a gente acabou
+de criar. Voltando pro meu terminal, eu
+de criar. Voltando pro meu terminal, eu
+de criar. Voltando pro meu terminal, eu
+vou rodar o comando do login pra gente
+vou rodar o comando do login pra gente
+vou rodar o comando do login pra gente
+fazer o login nesse R. Vou trocar aqui a
+fazer o login nesse R. Vou trocar aqui a
+fazer o login nesse R. Vou trocar aqui a
+região e eu vou colocar qual que é a
+região e eu vou colocar qual que é a
+região e eu vou colocar qual que é a
+URL. Vou copiar a URL aqui. E beleza,
+URL. Vou copiar a URL aqui. E beleza,
+URL. Vou copiar a URL aqui. E beleza,
+ele fez o login e agora eu vou dar um
+ele fez o login e agora eu vou dar um
+ele fez o login e agora eu vou dar um
+docker pull. E aí eu vou baixar a imagem
+docker pull. E aí eu vou baixar a imagem
+docker pull. E aí eu vou baixar a imagem
+do meu então eu vou colar aqui a RL do
+do meu então eu vou colar aqui a RL do
+do meu então eu vou colar aqui a RL do
+meu se é o site Prod. Qual versão? Qual
+meu se é o site Prod. Qual versão? Qual
+meu se é o site Prod. Qual versão? Qual
+tag? A versão 1.0. Se eu der enter, ele
+tag? A versão 1.0. Se eu der enter, ele
+tag? A versão 1.0. Se eu der enter, ele
+já tá baixando a imagem. Agora, se eu
+já tá baixando a imagem. Agora, se eu
+já tá baixando a imagem. Agora, se eu
+der um docker images, ele vai aparecer
+der um docker images, ele vai aparecer
+der um docker images, ele vai aparecer
+aqui que eu tenho a minha imagem
+aqui que eu tenho a minha imagem
+aqui que eu tenho a minha imagem
+baixada. E agora, basicamente, a gente
+baixada. E agora, basicamente, a gente
+baixada. E agora, basicamente, a gente
+vai repetir o mesmo processo que a gente
+vai repetir o mesmo processo que a gente
+vai repetir o mesmo processo que a gente
+fez na nossa máquina local. Só que agora
+fez na nossa máquina local. Só que agora
+fez na nossa máquina local. Só que agora
+dentro da nossa instância C2. Então a
+dentro da nossa instância C2. Então a
+dentro da nossa instância C2. Então a
+gente vai dar um docker run. Eu vou dar
+gente vai dar um docker run. Eu vou dar
+gente vai dar um docker run. Eu vou dar
+o nome aqui de site container. O men d
+o nome aqui de site container. O men d
+o nome aqui de site container. O men d
+para poder não travar o nosso terminal.
+para poder não travar o nosso terminal.
+para poder não travar o nosso terminal.
+O men p para poder passar a porta de
+O men p para poder passar a porta de
+O men p para poder passar a porta de
+acesso. Aí aqui eu vou colocar a porta
+acesso. Aí aqui eu vou colocar a porta
+acesso. Aí aqui eu vou colocar a porta
+80 para a porta 80. Então a hora que eu
+80 para a porta 80. Então a hora que eu
+80 para a porta 80. Então a hora que eu
+abrir o meu navegador digital o IP da
+abrir o meu navegador digital o IP da
+abrir o meu navegador digital o IP da
+máquina, ele já cai na porta 80 padrão.
+máquina, ele já cai na porta 80 padrão.
+máquina, ele já cai na porta 80 padrão.
+Eu vou passar qual imagem que eu quero
+Eu vou passar qual imagem que eu quero
+Eu vou passar qual imagem que eu quero
+rodar esse contêiner. No caso é essa
+rodar esse contêiner. No caso é essa
+rodar esse contêiner. No caso é essa
+imagem aqui. Qual tag imagem? a versão
+imagem aqui. Qual tag imagem? a versão
+imagem aqui. Qual tag imagem? a versão
+1.0. E pronto. Se eu der um docker PS, a
+1.0. E pronto. Se eu der um docker PS, a
+1.0. E pronto. Se eu der um docker PS, a
+gente já vê que a nossa imagem está
+gente já vê que a nossa imagem está
+gente já vê que a nossa imagem está
+rodando aqui na porta 80. Como que eu
+rodando aqui na porta 80. Como que eu
+rodando aqui na porta 80. Como que eu
+confirmo isso? Eu vou abrir o meu
+confirmo isso? Eu vou abrir o meu
+confirmo isso? Eu vou abrir o meu
+navegador, eu vou copiar aqui na parte
+navegador, eu vou copiar aqui na parte
+navegador, eu vou copiar aqui na parte
+da instância, eu vou copiar o IP público
+da instância, eu vou copiar o IP público
+da instância, eu vou copiar o IP público
+dessa máquina e vou colar o IP aqui. E
+dessa máquina e vou colar o IP aqui. E
+dessa máquina e vou colar o IP aqui. E
+pronto, a gente acabou de subir o site
+pronto, a gente acabou de subir o site
+pronto, a gente acabou de subir o site
+na AWS. Então aqui a gente já completou
+na AWS. Então aqui a gente já completou
+na AWS. Então aqui a gente já completou
+todo o nosso fluxo. Importante que a
+todo o nosso fluxo. Importante que a
+todo o nosso fluxo. Importante que a
+gente exclua tudo que a gente criou aqui
+gente exclua tudo que a gente criou aqui
+gente exclua tudo que a gente criou aqui
+na WS para evitar qualquer cobrança
+na WS para evitar qualquer cobrança
+na WS para evitar qualquer cobrança
+indevida. Então eu vou vir aqui na minha
+indevida. Então eu vou vir aqui na minha
+indevida. Então eu vou vir aqui na minha
+instância S2 instance state, a gente dá
+instância S2 instance state, a gente dá
+instância S2 instance state, a gente dá
+um terminate nessa instância pode clicar
+um terminate nessa instância pode clicar
+um terminate nessa instância pode clicar
+em delete. Beleza, já está deletando
+em delete. Beleza, já está deletando
+em delete. Beleza, já está deletando
+aqui a instância. Eu vou vir no meu aqui
+aqui a instância. Eu vou vir no meu aqui
+aqui a instância. Eu vou vir no meu aqui
+no meu eu vou clicar dentro e apagar
+no meu eu vou clicar dentro e apagar
+no meu eu vou clicar dentro e apagar
+todas as imagens dentro do SR. Digitar
+todas as imagens dentro do SR. Digitar
+todas as imagens dentro do SR. Digitar
+delete. Beleza? Já deletei todas as
+delete. Beleza? Já deletei todas as
+delete. Beleza? Já deletei todas as
+imagens. Eu vou vir agora em
+imagens. Eu vou vir agora em
+imagens. Eu vou vir agora em
+repositórios, vou selecionar o
+repositórios, vou selecionar o
+repositórios, vou selecionar o
+repositório e também vou deletar o
+repositório e também vou deletar o
+repositório e também vou deletar o
+repositório. Agora, vindo aqui no Eam, a
+repositório. Agora, vindo aqui no Eam, a
+repositório. Agora, vindo aqui no Eam, a
+gente vai selecionar o RLE que a gente
+gente vai selecionar o RLE que a gente
+gente vai selecionar o RLE que a gente
+criou e vai clicar em delete também. Eu
+criou e vai clicar em delete também. Eu
+criou e vai clicar em delete também. Eu
+vou deletar essa role. Beleza, a gente
+vou deletar essa role. Beleza, a gente
+vou deletar essa role. Beleza, a gente
+já deletou todos os recursos que foram
+já deletou todos os recursos que foram
+já deletou todos os recursos que foram
+criados na AWS. É importante também que
+criados na AWS. É importante também que
+criados na AWS. É importante também que
+além, né, da instância você venha na
+além, né, da instância você venha na
+além, né, da instância você venha na
+Security Group aqui no canto, selecione
+Security Group aqui no canto, selecione
+Security Group aqui no canto, selecione
+a Security Group que foi criada. No meu
+a Security Group que foi criada. No meu
+a Security Group que foi criada. No meu
+caso, ela chama launch wizard 5. Se é a
+caso, ela chama launch wizard 5. Se é a
+caso, ela chama launch wizard 5. Se é a
+primeira que você tá criando, vai est
+primeira que você tá criando, vai est
+primeira que você tá criando, vai est
+um, provavelmente. Aí você seleciona e
+um, provavelmente. Aí você seleciona e
+um, provavelmente. Aí você seleciona e
+deleta também. Então, delete security
+deleta também. Então, delete security
+deleta também. Então, delete security
+group e beleza, tá tudo deletado para
+group e beleza, tá tudo deletado para
+group e beleza, tá tudo deletado para
+evitar aí qualquer cobrança indevida.
+evitar aí qualquer cobrança indevida.
+evitar aí qualquer cobrança indevida.
+Parabéns, você acabou de concluir o seu
+Parabéns, você acabou de concluir o seu
+Parabéns, você acabou de concluir o seu
+primeiro laboratório prático de devops.
+primeiro laboratório prático de devops.
+primeiro laboratório prático de devops.
+Nesse vídeo você aprendeu a usar o
+Nesse vídeo você aprendeu a usar o
+Nesse vídeo você aprendeu a usar o
+Docker, entendeu por e quando
+Docker, entendeu por e quando
+Docker, entendeu por e quando
+utilizá-lo, quais os problemas que ele
+utilizá-lo, quais os problemas que ele
+utilizá-lo, quais os problemas que ele
+resolve. Além disso, você fez o seu
+resolve. Além disso, você fez o seu
+resolve. Além disso, você fez o seu
+primeiro deploy de uma aplicação na AWS
+primeiro deploy de uma aplicação na AWS
+primeiro deploy de uma aplicação na AWS
+utilizando uma instância S2 e o Amazon
+utilizando uma instância S2 e o Amazon
+utilizando uma instância S2 e o Amazon
+Sr. Isso já é um grande passo para quem
+Sr. Isso já é um grande passo para quem
+Sr. Isso já é um grande passo para quem
+tá começando na área de devps. Você já
+tá começando na área de devps. Você já
+tá começando na área de devps. Você já
+tem um projeto prático e funcional para
+tem um projeto prático e funcional para
+tem um projeto prático e funcional para
+poder adicionar no seu portfólio. Agora
+poder adicionar no seu portfólio. Agora
+poder adicionar no seu portfólio. Agora
+imagina que seu chefe chega para você e
+imagina que seu chefe chega para você e
+imagina que seu chefe chega para você e
+fala: "Precisamos fazer o deploy desse
+fala: "Precisamos fazer o deploy desse
+fala: "Precisamos fazer o deploy desse
+site para 15 clientes, cada um com a sua
+site para 15 clientes, cada um com a sua
+site para 15 clientes, cada um com a sua
+própria infraestrutura.
+própria infraestrutura.
+própria infraestrutura.
+Imagina ter que provisionar 15
+Imagina ter que provisionar 15
+Imagina ter que provisionar 15
+estruturas como essa manualmente em um
+estruturas como essa manualmente em um
+estruturas como essa manualmente em um
+dia só. Fica praticamente impossível e
+dia só. Fica praticamente impossível e
+dia só. Fica praticamente impossível e
+totalmente inviável. É exatamente por
+totalmente inviável. É exatamente por
+totalmente inviável. É exatamente por
+isso que na próxima aula nós vamos
+isso que na próxima aula nós vamos
+isso que na próxima aula nós vamos
+aprender a resolver esse problema com o
+aprender a resolver esse problema com o
+aprender a resolver esse problema com o
+Terraform, uma ferramenta incrível de
+Terraform, uma ferramenta incrível de
+Terraform, uma ferramenta incrível de
+infraestrutura como código, que com ele
+infraestrutura como código, que com ele
+infraestrutura como código, que com ele
+a gente pode descrever a nossa
+a gente pode descrever a nossa
+a gente pode descrever a nossa
+infraestrutura em código e provisionar
+infraestrutura em código e provisionar
+infraestrutura em código e provisionar
+ambientes inteiros com apenas alguns
+ambientes inteiros com apenas alguns
+ambientes inteiros com apenas alguns
+comandos de forma totalmente escalável.
+comandos de forma totalmente escalável.
+comandos de forma totalmente escalável.
+E para você não perder nada dessa
+E para você não perder nada dessa
+E para você não perder nada dessa
+jornada e ainda, né, conseguir tirar
+jornada e ainda, né, conseguir tirar
+jornada e ainda, né, conseguir tirar
+suas dúvidas diretamente comigo e com a
+suas dúvidas diretamente comigo e com a
+suas dúvidas diretamente comigo e com a
+nossa comunidade, eu criei um grupo
+nossa comunidade, eu criei um grupo
+nossa comunidade, eu criei um grupo
+exclusivo no Discord. Lá eu vou separar
+exclusivo no Discord. Lá eu vou separar
+exclusivo no Discord. Lá eu vou separar
+por módulos, compartilhar materiais
+por módulos, compartilhar materiais
+por módulos, compartilhar materiais
+extras e a gente pode trocar muita ideia
+extras e a gente pode trocar muita ideia
+extras e a gente pode trocar muita ideia
+sobre o mundo de devotos. Se você se
+sobre o mundo de devotos. Se você se
+sobre o mundo de devotos. Se você se
+interessar, o link tá na descrição.
+interessar, o link tá na descrição.
+interessar, o link tá na descrição.
+Entra lá que vai ser um ótimo lugar para
+Entra lá que vai ser um ótimo lugar para
+Entra lá que vai ser um ótimo lugar para
+você construir um networking, se
+você construir um networking, se
+você construir um networking, se
+conectar com pessoas da área, tirar suas
+conectar com pessoas da área, tirar suas
+conectar com pessoas da área, tirar suas
+dúvidas, enfim. Se você gostou desse
+dúvidas, enfim. Se você gostou desse
+dúvidas, enfim. Se você gostou desse
+vídeo, não se esquece de deixar o seu
+vídeo, não se esquece de deixar o seu
+vídeo, não se esquece de deixar o seu
+like e se inscrever no canal para não
+like e se inscrever no canal para não
+like e se inscrever no canal para não
+perder as próximas fases desse projeto e
+perder as próximas fases desse projeto e
+perder as próximas fases desse projeto e
+compartilha com aquele amigo ou amiga
+compartilha com aquele amigo ou amiga
+compartilha com aquele amigo ou amiga
+que também quer entrar na área de
+que também quer entrar na área de
+que também quer entrar na área de
+devolves. A sua ajuda, ela é fundamental
+devolves. A sua ajuda, ela é fundamental
+devolves. A sua ajuda, ela é fundamental
+para que esse conteúdo chegue a mais
+para que esse conteúdo chegue a mais
+para que esse conteúdo chegue a mais
+pessoas. E eu quero aproveitar para
+pessoas. E eu quero aproveitar para
+pessoas. E eu quero aproveitar para
+agradecer que a gente bateu a marca de
+agradecer que a gente bateu a marca de
+agradecer que a gente bateu a marca de
+2.000 inscritos e isso é incrível. Muito
+2.000 inscritos e isso é incrível. Muito
+2.000 inscritos e isso é incrível. Muito
+obrigada pelo apoio de vocês e me conta
+obrigada pelo apoio de vocês e me conta
+obrigada pelo apoio de vocês e me conta
+aqui nos comentários o que que você
+aqui nos comentários o que que você
+aqui nos comentários o que que você
+achou dessa primeira fase do projeto e
+achou dessa primeira fase do projeto e
+achou dessa primeira fase do projeto e
+qual que é a sua maior dificuldade no
+qual que é a sua maior dificuldade no
+qual que é a sua maior dificuldade no
+mundo de deves. A sua opinião, ela é
+mundo de deves. A sua opinião, ela é
+mundo de deves. A sua opinião, ela é
+muito importante para mim, porque assim
+muito importante para mim, porque assim
+muito importante para mim, porque assim
+eu consigo direcionar o meu conteúdo
+eu consigo direcionar o meu conteúdo
+eu consigo direcionar o meu conteúdo
+para te ajudar ainda mais nessa jornada.
+para te ajudar ainda mais nessa jornada.
+para te ajudar ainda mais nessa jornada.
+Ah, e o link pro repositório com todo o
+Ah, e o link pro repositório com todo o
+Ah, e o link pro repositório com todo o
+código que a gente usou nesse vídeo vai
+código que a gente usou nesse vídeo vai
+código que a gente usou nesse vídeo vai
+estar na descrição para você conseguir
+estar na descrição para você conseguir
+estar na descrição para você conseguir
+clonar e praticar. Um grande abraço e
+clonar e praticar. Um grande abraço e
+clonar e praticar. Um grande abraço e
+até a próxima.
