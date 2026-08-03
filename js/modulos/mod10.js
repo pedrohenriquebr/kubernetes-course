@@ -241,7 +241,7 @@ LAB('O dia da entrega',
 '<li>Gere carga e veja o HPA escalar (com metrics-server instalado).</li>'+
 '<li>Simule um rollout ruim e faça o rollback instantâneo.</li>'+
 '<li>Audite: <code>kubectl auth can-i --list</code>, <code>kubectl get networkpolicy</code>, <code>kubectl get pdb</code> — tudo no lugar?</li></ol>')+
-NOTE('Parabéns por chegar até aqui! 🎉 Você agora domina o modelo mental agnóstico do Kubernetes (cobrindo TODAS as áreas da documentação de conceitos oficial) e sabe traduzi-lo para AKS, GKE ou EKS. Próximo passo sugerido: certificação <strong>CKAD</strong> — especialmente alinhada ao perfil de dev que este curso construiu (veja a lição m10l6).')},
+NOTE('Parabéns por chegar até aqui! <span class="mi" aria-hidden="true">celebration</span> Você agora domina o modelo mental agnóstico do Kubernetes (cobrindo TODAS as áreas da documentação de conceitos oficial) e sabe traduzi-lo para AKS, GKE ou EKS. Próximo passo sugerido: certificação <strong>CKAD</strong> — especialmente alinhada ao perfil de dev que este curso construiu (veja a lição m10l6).')},
 {id:'m10l5',title:'Operators na prática: Kubebuilder e controller-runtime',mins:14,body:
 '<p>A lição m10l1 mostrou o que é um operator por fora. Agora, o esqueleto de um de verdade — para você saber o que está por trás quando um dia precisar (ou para decidir conscientemente que não precisa).</p>'+
 '<h2>1. O esqueleto (Kubebuilder)</h2>'+

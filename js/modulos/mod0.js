@@ -11,14 +11,14 @@ const MOD0 = {id:'m0',num:'00',title:'Boas-vindas & Ambiente',level:'ini',lesson
 '<tr><td>Avançado</td><td>9–10</td><td>"Como os clouds gerenciam e como eu vou além?" — AKS×GKE×EKS a fundo, upgrades, CRDs/Operators e projeto final.</td></tr></table>'+
 '<h2>Como estudar (o método)</h2>'+
 '<ol><li><strong>Leia na ordem.</strong> Cada lição assume a anterior — pular quebra a base.</li>'+
-'<li><strong>Execute TUDO.</strong> Quase toda lição tem um laboratório <em>🧪 Mão na massa</em> com comandos para rodar no seu cluster local. Kubernetes só faz sentido com um cluster na frente (Módulo 0, lição 2). Se algo não rodar, <strong>não avance</strong>: investigue antes de seguir.</li>'+
+'<li><strong>Execute TUDO.</strong> Quase toda lição tem um laboratório <em><span class="mi" aria-hidden="true">science</span> Mão na massa</em> com comandos para rodar no seu cluster local. Kubernetes só faz sentido com um cluster na frente (Módulo 0, lição 2). Se algo não rodar, <strong>não avance</strong>: investigue antes de seguir.</li>'+
 '<li><strong>Responda os quick checks</strong> ao final das lições — eles testam decisão, não decoreba.</li>'+
 '<li><strong>Use a busca</strong> (<kbd style="font-family:var(--mono)">Ctrl K</kbd>) para revisar qualquer conceito a qualquer momento.</li>'+
-'<li><strong>Revise os Termos-chave</strong> (📌) de cada lição antes de começar a próxima — eles são o "resumo executivo".</li></ol>'+
+'<li><strong>Revise os Termos-chave</strong> (<span class="mi" aria-hidden="true">push_pin</span>) de cada lição antes de começar a próxima — eles são o "resumo executivo".</li></ol>'+
 '<h2>As caixas que você vai encontrar</h2>'+
-NOTE('<strong>Nota .NET →</strong> ponte direta entre o conceito agnóstico e o ecossistema .NET (ASP.NET Core, Workers, Azure.Identity, OpenTelemetry, GC do .NET...).')+
-'<div class="callout cloud"><b>☁️ Nos providers →</b> como o conceito se materializa em AKS, GKE e EKS — e o que muda entre eles.</div>'+
-'<div class="callout doc"><b>📘 Doc oficial →</b> a seção correspondente da documentação oficial do Kubernetes, usada como fonte primária de validação de todo o conteúdo.</div>'+
+NOTE('ponte direta entre o conceito agnóstico e o ecossistema .NET (ASP.NET Core, Workers, Azure.Identity, OpenTelemetry, GC do .NET...).')+
+CLOUD('como o conceito se materializa em AKS, GKE e EKS — e o que muda entre eles.')+
+DOC('a seção correspondente da documentação oficial do Kubernetes, usada como fonte primária de validação de todo o conteúdo.')+
 TIP('Não decore YAML. Decore <em>o modelo mental</em>: estado desejado + reconciliação + API declarativa. O YAML você sempre consulta com <code>kubectl explain</code> na hora.')+
 TERMS([['Estado desejado','O que você declara no YAML — o cluster trabalha para chegar lá'],['Reconciliação','Loop que compara estado atual × desejado e age para aproximá-los'],['Declarativo','Você diz O QUÊ (3 réplicas), nunca COMO (rode este script)'],['Provider-agnóstico','Conceitos idênticos em qualquer cluster; integrações específicas só no Módulo 9']])+
 QUIZ('Qual destes NÃO combina com o modelo do Kubernetes?',
@@ -147,9 +147,9 @@ QUIZ('Você já tem o cluster kind do curso rodando e quer testar o minikube. Co
 'Exato! Os dois vivem no mesmo kubeconfig; o contexto decide qual cluster o kubectl fala.')},
 {id:'m0l3',title:'Vídeos de referência e fontes do conteúdo',mins:7,body:
 '<p>Parte da sequência didática deste curso foi construída a partir das transcrições/roteiros dos vídeos abaixo e depois <strong>validada e ampliada</strong> contra a documentação oficial do Kubernetes e dos três grandes providers. Você <em>não precisa</em> assistir os vídeos para seguir o curso — eles são complemento.</p>'+
-'<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2T86xAtR6Fo"><div class="video-ico">▶</div><div><b>Complete Kubernetes Course — From BEGINNER to PRO</b><small>DevOps Directive (EN) · 14 seções: história/motivação, arquitetura, setup, resource types, Helm, app demo, CRDs/operators, tooling, dev experience, debugging, multi-env, upgrades e CI/CD — cobrimos TODAS elas neste curso.</small></div></a>'+
-'<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UEoxMU_l2xs"><div class="video-ico">▶</div><div><b>Seu Primeiro Projeto Prático DevOps COMPLETO: Docker, AWS, Terraform e CI/CD!</b><small>Maria Lazara (PT-BR) · base prática dos Módulos 0 e 6: Docker hands-on e pipeline CI/CD de ponta a ponta.</small></div></a>'+
-'<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MTHGoGUFpvE"><div class="video-ico">▶</div><div><b>Kubernetes Zero to Hero: The Complete Beginner\'s Guide (2025)</b><small>Curso completo de fundamentos (EN · 2h50): arquitetura, YAML, Pods, Services, Storage, NetworkPolicies — com analogias didáticas ótimas para começar.</small></div></a>'+
+'<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2T86xAtR6Fo"><div class="video-ico"><span class="mi" aria-hidden="true">play_arrow</span></div><div><b>Complete Kubernetes Course — From BEGINNER to PRO</b><small>DevOps Directive (EN) · 14 seções: história/motivação, arquitetura, setup, resource types, Helm, app demo, CRDs/operators, tooling, dev experience, debugging, multi-env, upgrades e CI/CD — cobrimos TODAS elas neste curso.</small></div></a>'+
+'<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UEoxMU_l2xs"><div class="video-ico"><span class="mi" aria-hidden="true">play_arrow</span></div><div><b>Seu Primeiro Projeto Prático DevOps COMPLETO: Docker, AWS, Terraform e CI/CD!</b><small>Maria Lazara (PT-BR) · base prática dos Módulos 0 e 6: Docker hands-on e pipeline CI/CD de ponta a ponta.</small></div></a>'+
+'<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MTHGoGUFpvE"><div class="video-ico"><span class="mi" aria-hidden="true">play_arrow</span></div><div><b>Kubernetes Zero to Hero: The Complete Beginner\'s Guide (2025)</b><small>Curso completo de fundamentos (EN · 2h50): arquitetura, YAML, Pods, Services, Storage, NetworkPolicies — com analogias didáticas ótimas para começar.</small></div></a>'+
 '<h2>Como usar os vídeos</h2>'+
 '<ul><li><strong>Antes</strong> de um módulo: assista a seção correspondente do DevOps Directive para ter a visão geral em vídeo.</li>'+
 '<li><strong>Depois</strong>: execute os labs do curso — é a execução que fixa o conceito.</li>'+

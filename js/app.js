@@ -9,7 +9,7 @@ function saveProgress(){ localStorage.setItem(LS_KEY, JSON.stringify(Array.from(
 
 function renderSidebar(){
   const sb=$('#sidebar');
-  sb.innerHTML = '<button class="side-home" id="sideHome">🏠 Visão geral do curso</button>' + COURSE.map(function(m){
+  sb.innerHTML = '<button class="side-home" id="sideHome"><span class="mi" aria-hidden="true">home</span> Visão geral do curso</button>' + COURSE.map(function(m){
     const doneCount = m.lessons.filter(l=>done.has(l.id)).length;
     return '<div class="mod" data-mod="'+m.id+'">'+
       '<button class="mod-head" type="button">'+
@@ -20,7 +20,7 @@ function renderSidebar(){
       '</button>'+
       '<div class="mod-body">'+m.lessons.map(function(l){
         return '<a class="les-link '+(done.has(l.id)?'done':'')+'" data-les="'+l.id+'" href="#/lesson/'+l.id+'">'+
-        '<span class="les-check">✓</span><span>'+l.title+'</span></a>';
+        '<span class="les-check"><span class="mi" aria-hidden="true">check</span></span><span>'+l.title+'</span></a>';
       }).join('')+'</div></div>';
   }).join('');
   sb.querySelectorAll('.mod-head').forEach(function(h){h.addEventListener('click',function(){h.parentElement.classList.toggle('open');});});
@@ -60,8 +60,8 @@ function renderHome(){
     '<div class="hero-overlay"><span class="hero-tag">Curso completo · Iniciante → Avançado · v2 aprofundada</span>'+
     '<h1>Kubernetes para <span>Devs .NET</span></h1>'+
     '<p>Do primeiro Pod ao multi-cluster: workloads completos, resiliência, Gateway API, segurança, GitOps e um comparativo profundo AKS × GKE × EKS — validado contra a documentação oficial do Kubernetes e dos providers.</p>'+
-    '<div class="hero-actions"><button class="btn btn-primary" id="startBtn">🚀 Começar pelo Módulo 0</button>'+
-    '<button class="btn btn-ghost" id="projBtn">🎯 Ir ao projeto final</button></div></div></div>'+
+    '<div class="hero-actions"><button class="btn btn-primary" id="startBtn"><span class="mi" aria-hidden="true">rocket_launch</span> Começar pelo Módulo 0</button>'+
+    '<button class="btn btn-ghost" id="projBtn"><span class="mi" aria-hidden="true">flag</span> Ir ao projeto final</button></div></div></div>'+
     '<div class="stats">'+
     '<div class="stat"><b>'+COURSE.length+'</b><span>módulos completos</span></div>'+
     '<div class="stat"><b>'+totalLessons+'</b><span>lições práticas</span></div>'+
@@ -78,9 +78,9 @@ function renderHome(){
     '<h2 class="sec-title">Vídeos de referência (transcrições base)</h2>'+vids+
     '<h2 class="sec-title">Validação de conteúdo</h2>'+
     '<div class="src-grid">'+
-    '<div class="src-card"><b>📘 Documentação oficial do Kubernetes</b><small>Todas as áreas de kubernetes.io/docs/concepts cobertas: Architecture, Containers, Workloads, Services/Networking, Storage, Configuration, Security, Policies, Scheduling/Eviction, Cluster Admin e Extending.</small></div>'+
-    '<div class="src-card"><b>🎬 DevOps Directive — Beginner to Pro</b><small>As 14 seções do curso (incl. debugging, multi-env, upgrades e developer experience) estão mapeadas neste curso.</small></div>'+
-    '<div class="src-card"><b>🎬 Maria Lazara — Projeto DevOps</b><small>Base prática de Docker e CI/CD dos módulos iniciais.</small></div>'+
+    '<div class="src-card"><b><span class="mi" aria-hidden="true">menu_book</span> Documentação oficial do Kubernetes</b><small>Todas as áreas de kubernetes.io/docs/concepts cobertas: Architecture, Containers, Workloads, Services/Networking, Storage, Configuration, Security, Policies, Scheduling/Eviction, Cluster Admin e Extending.</small></div>'+
+    '<div class="src-card"><b><span class="mi" aria-hidden="true">movie</span> DevOps Directive — Beginner to Pro</b><small>As 14 seções do curso (incl. debugging, multi-env, upgrades e developer experience) estão mapeadas neste curso.</small></div>'+
+    '<div class="src-card"><b><span class="mi" aria-hidden="true">movie</span> Maria Lazara — Projeto DevOps</b><small>Base prática de Docker e CI/CD dos módulos iniciais.</small></div>'+
     '<div class="src-card"><b>☁️ Docs oficiais dos providers</b><small>Pricing e integrações conferidos em: learn.microsoft.com/azure/aks · cloud.google.com/kubernetes-engine · eks.aws/docs.</small></div>'+
     '</div></div>';
   $('#startBtn').addEventListener('click',function(){location.hash='#/lesson/m0l1';});
@@ -98,9 +98,9 @@ function renderLesson(id){
   $('#main').innerHTML = '<div class="content lesson">'+
     '<div class="crumb">Módulo '+l.mod.num+' <span>▸</span> '+l.mod.title+'</div>'+
     '<h1>'+l.title+'</h1>'+
-    '<div class="meta"><span>⏱ ~'+l.mins+' min</span><span>·</span><span>'+(isDone?'✅ concluída':'📖 em andamento')+'</span></div>'+
+    '<div class="meta"><span><span class="mi" aria-hidden="true">schedule</span> ~'+l.mins+' min</span><span>·</span><span>'+(isDone?'<span class="mi" aria-hidden="true">check_circle</span> concluída':'<span class="mi" aria-hidden="true">book</span> em andamento')+'</span></div>'+
     l.body+
-    '<button class="done-btn '+(isDone?'is-done':'')+'" id="doneBtn">'+(isDone?'✓ Concluída — clicar p/ desmarcar':'Marcar como concluída ✓')+'</button>'+
+    '<button class="done-btn '+(isDone?'is-done':'')+'" id="doneBtn">'+(isDone?'<span class="mi" aria-hidden="true">check</span> Concluída — clicar p/ desmarcar':'Marcar como concluída <span class="mi" aria-hidden="true">check</span>')+'</button>'+
     '<div class="les-nav">'+
     (prev?'<a class="nav-card" href="#/lesson/'+prev.id+'"><small><span class="mi" aria-hidden="true">arrow_back</span> Anterior</small><b>'+prev.title+'</b></a>':'<a class="nav-card" href="#/home"><small><span class="mi" aria-hidden="true">arrow_back</span> Início</small><b>Visão geral</b></a>')+
     (next?'<a class="nav-card next" href="#/lesson/'+next.id+'"><small>Próxima <span class="mi" aria-hidden="true">arrow_forward</span></small><b>'+next.title+'</b></a>':'<a class="nav-card next" href="#/home"><small>Fim <span class="mi" aria-hidden="true">celebration</span></small><b>Voltar ao início</b></a>')+
@@ -162,7 +162,7 @@ $('#searchInput').addEventListener('input',function(e){
   const res=$('#searchResults');
   if(!q){res.innerHTML='<div class="sr-empty">Digite para buscar em todo o conteúdo do curso…</div>';return;}
   const hits=INDEX.filter(function(x){return x.text.indexOf(q)>=0;}).slice(0,12);
-  res.innerHTML = hits.length? hits.map(function(h){return '<a class="sr-item" href="#/lesson/'+h.id+'"><b>'+h.title+'</b><small>'+h.mod+'</small></a>';}).join('') : '<div class="sr-empty">Nada encontrado 😕 tente "ingress", "hpa", "secrets", "aks"…</div>';
+  res.innerHTML = hits.length? hits.map(function(h){return '<a class="sr-item" href="#/lesson/'+h.id+'"><b>'+h.title+'</b><small>'+h.mod+'</small></a>';}).join('') : '<div class="sr-empty"><span class="mi" aria-hidden="true">sentiment_dissatisfied</span> Nada encontrado — tente "ingress", "hpa", "secrets", "aks"…</div>';
   res.querySelectorAll('.sr-item').forEach(function(a){a.addEventListener('click',closeSearch);});
 });
 
