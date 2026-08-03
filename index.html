@@ -52,7 +52,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
 .layout{display:flex;padding-top:62px;min-height:100vh}
 #sidebar{width:330px;flex:0 0 330px;position:fixed;top:62px;bottom:0;left:0;overflow-y:auto;
   background:var(--bg2);border-right:1px solid var(--line);padding:18px 14px 60px}
-#main{flex:1;margin-left:330px;padding:34px clamp(18px,4vw,56px) 90px}
+#main{flex:1;min-width:0;margin-left:330px;padding:34px clamp(18px,4vw,56px) 90px}
 .content{max-width:940px;margin:0 auto;animation:fadeUp .45s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
@@ -159,7 +159,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
 .terms dt{font-family:var(--mono);font-size:12.5px;color:var(--cyan);font-weight:600;margin-bottom:2px}
 .terms dd{font-size:12.8px;color:#cbd5e1;margin:0}
 .callout p{margin:4px 0;color:inherit}
-table.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.3px;background:var(--panel);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+table.tbl{width:100%;max-width:100%;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;border-collapse:collapse;margin:16px 0;font-size:13.3px;background:var(--panel);border-radius:12px;border:1px solid var(--line)}
 .tbl th{background:#12294c;color:var(--cyan);text-align:left;padding:10px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.8px}
 .tbl td{padding:10px 12px;border-top:1px solid var(--line);color:#cbd5e1;vertical-align:top}
 .tbl tr:hover td{background:#0f2444}
@@ -172,7 +172,8 @@ table.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.3px;bac
 .copy-btn:hover{color:var(--cyan);border-color:var(--cyan)}
 .codeblock pre{margin:0!important;background:transparent!important;padding:14px 16px!important;font-size:12.8px!important;max-height:480px;overflow:auto}
 .codeblock code{font-family:var(--mono)!important;font-size:12.8px!important;line-height:1.65!important;text-shadow:none!important}
-p code,li code,td code{font-family:var(--mono);font-size:.88em;background:#132848;border:1px solid #1e3a5f;color:#7dd3fc;border-radius:6px;padding:1.5px 6px}
+code{overflow-wrap:anywhere;word-break:break-word}
+p code,li code,td code{font-family:var(--mono);font-size:.88em;background:#132848;border:1px solid #1e3a5f;color:#7dd3fc;border-radius:6px;padding:1.5px 6px;overflow-wrap:anywhere;word-break:break-word}
 
 .quiz{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--violet);border-radius:13px;padding:16px 18px;margin:20px 0}
 .quiz-q{font-weight:700;color:#f1f5f9;margin-bottom:12px;font-size:14.5px}
@@ -219,10 +220,36 @@ p code,li code,td code{font-family:var(--mono);font-size:.88em;background:#13284
 @media(max-width:1020px){
   #sidebar{transform:translateX(-100%);transition:transform .3s ease;z-index:70;width:300px}
   #sidebar.open{transform:none;box-shadow:30px 0 80px rgba(0,0,0,.5)}
-  #main{margin-left:0}
+  #main{margin-left:0;min-width:0}
   .burger{display:block}
-  .top-search{width:auto;flex:1}
+  .top-search{width:auto;flex:1;min-width:0}
   .progress-wrap{display:none}
+  .top-search span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+@media(max-width:640px){
+  .topbar{height:56px;gap:8px;padding:0 12px}
+  .layout{padding-top:56px}
+  #sidebar{top:56px}
+  .logo svg{width:28px;height:28px}
+  .logo b{display:none}
+  .logo small{display:none}
+  .top-search{padding:6px 10px;border-radius:9px}
+  .top-search kbd{display:none}
+  .burger{width:34px;height:34px;font-size:15px;flex:0 0 34px}
+  #main{padding:20px 14px 64px}
+  .hero img{height:200px}
+  .hero-overlay{padding:18px}
+  .hero h1{font-size:24px}
+  .hero p{font-size:13.5px}
+  .btn{padding:10px 16px;font-size:13px}
+  .stat b{font-size:20px}
+  .video-card{gap:10px;padding:12px}
+  .nav-card{min-width:150px;padding:12px 14px}
+  .codeblock pre{font-size:12px!important;padding:12px!important}
+  p code,li code,td code{font-size:.85em}
+  .quiz{padding:14px}
+  .callout{padding:12px 14px;font-size:13.5px}
+  .terms{grid-template-columns:1fr}
 }
 </style>
 </head>
