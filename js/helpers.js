@@ -1,15 +1,15 @@
 /* ============================================================ HELPERS */
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const C = (lang, code) => '<div class="codeblock"><div class="cb-head"><span>'+lang+'</span><button class="copy-btn" type="button">copiar</button></div><pre class="language-'+lang+'"><code class="language-'+lang+'">'+esc(code)+'</code></pre></div>';
+const C = (lang, code) => '<div class="codeblock"><div class="cb-head"><span>'+lang+'</span><button class="copy-btn" type="button"><span class="mi" aria-hidden="true">content_copy</span>copiar</button></div><pre class="language-'+lang+'"><code class="language-'+lang+'">'+esc(code)+'</code></pre></div>';
 const FIG = (src, cap) => '<img class="fig" src="'+src+'" alt="'+esc(cap)+'"><div class="figcap">'+cap+'</div>';
-const NOTE = h => '<div class="callout note"><b>💙 Nota .NET →</b> '+h+'</div>';
-const CLOUD = h => '<div class="callout cloud"><b>☁️ Nos providers →</b> '+h+'</div>';
-const WARN = h => '<div class="callout warn"><b>⚠️ Atenção →</b> '+h+'</div>';
-const DOC = h => '<div class="callout doc"><b>📘 Doc oficial →</b> '+h+'</div>';
-const QUIZ = (q, opts, correct, explain) => '<div class="quiz" data-correct="'+correct+'" data-explain="'+esc(explain)+'"><span class="quiz-tag">⚡ Quick check</span><p class="quiz-q">'+q+'</p>'+opts.map(function(o,i){return '<button class="quiz-opt" data-i="'+i+'" type="button">'+o+'</button>';}).join('')+'<p class="quiz-fb"></p></div>';
-const LAB = (t, html) => '<div class="callout lab"><b>🧪 Mão na massa — '+t+' →</b> '+html+'</div>';
-const TIP = h => '<div class="callout tip"><b>💡 Dica →</b> '+h+'</div>';
-const DEEP = h => '<div class="callout deep"><b>🔬 Aprofundamento →</b> '+h+'</div>';
+const NOTE = h => '<div class="callout note"><b><span class="mi" aria-hidden="true">code</span>Nota .NET</b> '+h+'</div>';
+const CLOUD = h => '<div class="callout cloud"><b><span class="mi" aria-hidden="true">cloud</span>Nos providers</b> '+h+'</div>';
+const WARN = h => '<div class="callout warn"><b><span class="mi" aria-hidden="true">warning</span>Atenção</b> '+h+'</div>';
+const DOC = h => '<div class="callout doc"><b><span class="mi" aria-hidden="true">menu_book</span>Doc oficial</b> '+h+'</div>';
+const QUIZ = (q, opts, correct, explain) => '<div class="quiz" data-correct="'+correct+'" data-explain="'+esc(explain)+'"><span class="quiz-tag"><span class="mi" aria-hidden="true">bolt</span>Quick check</span><p class="quiz-q">'+q+'</p>'+opts.map(function(o,i){return '<button class="quiz-opt" data-i="'+i+'" type="button">'+o+'</button>';}).join('')+'<p class="quiz-fb"></p></div>';
+const LAB = (t, html) => '<div class="callout lab"><b><span class="mi" aria-hidden="true">science</span>Mão na massa — '+t+'</b> '+html+'</div>';
+const TIP = h => '<div class="callout tip"><b><span class="mi" aria-hidden="true">lightbulb</span>Dica</b> '+h+'</div>';
+const DEEP = h => '<div class="callout deep"><b><span class="mi" aria-hidden="true">travel_explore</span>Aprofundamento</b> '+h+'</div>';
 const TERMS = arr => '<div class="terms">'+arr.map(function(t){return '<div><dt>'+t[0]+'</dt><dd>'+t[1]+'</dd></div>';}).join('')+'</div>';
 
 const IMG = {

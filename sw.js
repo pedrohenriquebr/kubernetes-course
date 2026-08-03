@@ -2,7 +2,7 @@
  * Estratégia: precache do shell + cache-first p/ assets locais,
  * network-first p/ navegação, stale-while-revalidate p/ CDN (fontes/imagens).
  * Ao publicar uma nova versão do curso, incremente CACHE_VERSION. */
-const CACHE_VERSION = 'k8sjourney-v2';
+const CACHE_VERSION = 'k8sjourney-v3';
 const CACHE = CACHE_VERSION;
 
 const PRECACHE = [
@@ -33,6 +33,8 @@ const PRECACHE = [
   'https://cdn.jsdelivr.net/npm/@fontsource/inter@5.1.0/800.css',
   'https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.1.0/400.css',
   'https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.1.0/600.css',
+  'https://cdn.jsdelivr.net/npm/@fontsource/material-icons@5.1.0/400.css',
+  'https://cdn.jsdelivr.net/npm/@fontsource/material-icons@5.1.0/files/material-icons-latin-400-normal.woff2',
   'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css',
   'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js',
   'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js',

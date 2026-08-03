@@ -16,7 +16,7 @@ function renderSidebar(){
       '<span class="mod-num">M'+m.num+'</span>'+
       '<span class="mod-title">'+m.title+'</span>'+
       '<span class="mod-count">'+doneCount+'/'+m.lessons.length+'</span>'+
-      '<span class="mod-chev">▶</span>'+
+      '<span class="mod-chev"><span class="mi" aria-hidden="true">chevron_right</span></span>'+
       '</button>'+
       '<div class="mod-body">'+m.lessons.map(function(l){
         return '<a class="les-link '+(done.has(l.id)?'done':'')+'" data-les="'+l.id+'" href="#/lesson/'+l.id+'">'+
@@ -52,9 +52,9 @@ function syncActive(){
 function renderHome(){
   currentLesson=null; syncActive();
   const vids =
-  '<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2T86xAtR6Fo"><div class="video-ico">▶</div><div><b>Complete Kubernetes Course — From BEGINNER to PRO</b><small>DevOps Directive (EN) · fundamentos dos Módulos 1–5</small></div></a>'+
-  '<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UEoxMU_l2xs"><div class="video-ico">▶</div><div><b>Seu Primeiro Projeto Prático DevOps COMPLETO: Docker, AWS, Terraform e CI/CD!</b><small>Maria Lazara (PT-BR) · prática de Docker/CI-CD dos Módulos 0 e 6</small></div></a>'+
-  '<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MTHGoGUFpvE"><div class="video-ico">▶</div><div><b>Kubernetes Zero to Hero: The Complete Beginner\'s Guide (2025)</b><small>Fundamentos completos (EN · 2h50) — analogias didáticas citadas no Módulo 1</small></div></a>';
+  '<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2T86xAtR6Fo"><div class="video-ico"><span class="mi" aria-hidden="true">play_arrow</span></div><div><b>Complete Kubernetes Course — From BEGINNER to PRO</b><small>DevOps Directive (EN) · fundamentos dos Módulos 1–5</small></div></a>'+
+  '<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UEoxMU_l2xs"><div class="video-ico"><span class="mi" aria-hidden="true">play_arrow</span></div><div><b>Seu Primeiro Projeto Prático DevOps COMPLETO: Docker, AWS, Terraform e CI/CD!</b><small>Maria Lazara (PT-BR) · prática de Docker/CI-CD dos Módulos 0 e 6</small></div></a>'+
+  '<a class="video-card" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MTHGoGUFpvE"><div class="video-ico"><span class="mi" aria-hidden="true">play_arrow</span></div><div><b>Kubernetes Zero to Hero: The Complete Beginner\'s Guide (2025)</b><small>Fundamentos completos (EN · 2h50) — analogias didáticas citadas no Módulo 1</small></div></a>';
   $('#main').innerHTML = '<div class="content">'+
     '<div class="hero"><img src="'+IMG.hero+'" alt="Nave de containers Kubernetes">'+
     '<div class="hero-overlay"><span class="hero-tag">Curso completo · Iniciante → Avançado · v2 aprofundada</span>'+
@@ -102,8 +102,8 @@ function renderLesson(id){
     l.body+
     '<button class="done-btn '+(isDone?'is-done':'')+'" id="doneBtn">'+(isDone?'✓ Concluída — clicar p/ desmarcar':'Marcar como concluída ✓')+'</button>'+
     '<div class="les-nav">'+
-    (prev?'<a class="nav-card" href="#/lesson/'+prev.id+'"><small>← Anterior</small><b>'+prev.title+'</b></a>':'<a class="nav-card" href="#/home"><small>← Início</small><b>Visão geral</b></a>')+
-    (next?'<a class="nav-card next" href="#/lesson/'+next.id+'"><small>Próxima →</small><b>'+next.title+'</b></a>':'<a class="nav-card next" href="#/home"><small>Fim 🎉</small><b>Voltar ao início</b></a>')+
+    (prev?'<a class="nav-card" href="#/lesson/'+prev.id+'"><small><span class="mi" aria-hidden="true">arrow_back</span> Anterior</small><b>'+prev.title+'</b></a>':'<a class="nav-card" href="#/home"><small><span class="mi" aria-hidden="true">arrow_back</span> Início</small><b>Visão geral</b></a>')+
+    (next?'<a class="nav-card next" href="#/lesson/'+next.id+'"><small>Próxima <span class="mi" aria-hidden="true">arrow_forward</span></small><b>'+next.title+'</b></a>':'<a class="nav-card next" href="#/home"><small>Fim <span class="mi" aria-hidden="true">celebration</span></small><b>Voltar ao início</b></a>')+
     '</div></div>';
   $('#doneBtn').addEventListener('click',function(){ done.has(id)?done.delete(id):done.add(id); saveProgress(); renderSidebar(); updateProgress(); renderLesson(id); });
   try{ if(window.Prism) Prism.highlightAllUnder($('#main')); }catch(e){}
@@ -141,7 +141,7 @@ $('#main').addEventListener('click',function(e){
   const cp=e.target.closest('.copy-btn');
   if(cp){
     const code=cp.closest('.codeblock').querySelector('code').innerText;
-    navigator.clipboard.writeText(code).then(function(){cp.textContent='copiado!';setTimeout(function(){cp.textContent='copiar';},1400);});
+    navigator.clipboard.writeText(code).then(function(){cp.innerHTML='<span class="mi" aria-hidden="true">check</span>copiado!';setTimeout(function(){cp.innerHTML='<span class="mi" aria-hidden="true">content_copy</span>copiar';},1400);});
   }
 });
 
